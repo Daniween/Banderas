@@ -1,0 +1,33 @@
+/* ProgressBar.css */
+.progress-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.score {
+    font-weight: bold;
+    color: #00f2fe;
+}
+
+.bar-bg {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    transition: width 0.5s ease-out;
+    border-radius: 4px;
+}

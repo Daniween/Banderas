@@ -1,0 +1,160 @@
+/* App.css */
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: -2px;
+    background: linear-gradient(90deg, #fff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.home-btn,
+.reset-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 0.8rem;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+}
+
+.home-btn:hover,
+.reset-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.reset-btn:hover {
+    transform: rotate(-90deg);
+}
+
+.loading,
+.error,
+.celebration,
+.game-area,
+.main-menu {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 4rem;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #4facfe;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.celebration {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.celebration h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #4facfe;
+}
+
+.score-display {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    margin: 2rem 0;
+}
+
+.restart-btn {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: #4facfe;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.skip-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.skip-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.reveal-btn {
+    color: #4facfe;
+    border-color: rgba(79, 172, 254, 0.3);
+}
+
+.reveal-btn:hover {
+    background: rgba(79, 172, 254, 0.1);
+    color: #fff;
+    border-color: #4facfe;
+}
+
+.skip-btn:hover {
+    color: white;
+    border-color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

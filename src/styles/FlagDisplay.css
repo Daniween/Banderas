@@ -1,0 +1,22 @@
+/* FlagDisplay.css */
+.flag-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: #f0f0f0;
+    display: flex;
+}
+
+.flag-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.flag-img:hover {
+    transform: scale(1.02);
+}

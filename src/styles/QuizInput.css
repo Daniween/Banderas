@@ -1,0 +1,78 @@
+/* QuizInput.css */
+.input-wrapper {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    color: white;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4facfe;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+}
+
+button {
+    padding: 0 2rem;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+    font-size: 1rem;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+    border-color: #ff4b4b;
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
