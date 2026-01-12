@@ -68,7 +68,7 @@ const handleReveal = () => {
 
     <!-- GAME FINISHED -->
     <div v-else-if="gameStatus === 'finished'" class="celebration">
-      <h2>🎉 Félicitations ! 🎉</h2>
+      <h2>Félicitations !</h2>
       <p>Vous avez terminé cette session.</p>
       <div class="score-display">Score final : {{ score }} / {{ total }}</div>
       <button @click="returnToMenu" class="restart-btn">Retour au Menu</button>
