@@ -11,6 +11,7 @@ const {
   loading, 
   error, 
   score, 
+  visitedCount,
   total,
   fetchCountries,
   checkAnswer,
@@ -84,7 +85,7 @@ const handleReveal = () => {
         </button>
       </header>
 
-      <ProgressBar :score="score" :total="total" />
+      <ProgressBar :score="score" :visited="visitedCount" :total="total" />
 
       <main v-if="currentCountry">
         <FlagDisplay 

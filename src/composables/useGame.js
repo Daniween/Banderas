@@ -1,10 +1,12 @@
 import { ref, computed, onMounted } from 'vue'
 
 const STORAGE_KEY = 'banderas-known-countries'
+const VISITED_KEY = 'banderas-visited-countries'
 
 export function useGame() {
     const countries = ref([])
     const knownCountries = ref(new Set())
+    const visitedCountries = ref(new Set())
     const loading = ref(true)
     const error = ref(null)
     const currentCountry = ref(null)
@@ -35,6 +37,22 @@ export function useGame() {
         return total.value ? Math.round((knownCountries.value.size / total.value) * 100) : 0
     })
 
+    const visitedCount = computed(() => {
+        if (gameMode.value === 'survival') {
+            return sessionTotal.value - sessionQueue.value.length
+        }
+        return visitedCountries.value.size
+    })
+
+    const progressVisited = computed(() => {
+        if (gameMode.value === 'survival') {
+            // In survival, visited is just how many we've gone through (total - remaining)
+            const played = sessionTotal.value - sessionQueue.value.length
+            return sessionTotal.value ? Math.round((played / sessionTotal.value) * 100) : 0
+        }
+        return total.value ? Math.round((visitedCountries.value.size / total.value) * 100) : 0
+    })
+
     // Fetch DATA
     const fetchCountries = async () => {
         loading.value = true
@@ -42,6 +60,14 @@ export function useGame() {
             const savedKnown = localStorage.getItem(STORAGE_KEY)
             if (savedKnown) {
                 knownCountries.value = new Set(JSON.parse(savedKnown))
+            }
+
+            const savedVisited = localStorage.getItem(VISITED_KEY)
+            if (savedVisited) {
+                visitedCountries.value = new Set(JSON.parse(savedVisited))
+            } else {
+                // Backwards compatibility: if no visited history, assume known are visited
+                visitedCountries.value = new Set(JSON.parse(savedKnown || '[]'))
             }
 
             const res = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,cca3,unMember,translations,region')
@@ -129,6 +155,7 @@ export function useGame() {
         if (names.includes(guess)) {
             if (gameMode.value === 'learning') {
                 registerCorrect()
+                registerVisited()
                 if (onResult) onResult(true)
             } else {
                 sessionScore.value++
@@ -139,9 +166,11 @@ export function useGame() {
         }
 
         if (onResult) onResult(false)
+        registerVisited()
     }
 
     const skipCountry = () => {
+        registerVisited()
         pickNextCountry()
     }
 
@@ -155,10 +184,18 @@ export function useGame() {
         pickNextCountry()
     }
 
+    const registerVisited = () => {
+        if (!currentCountry.value) return
+        visitedCountries.value.add(currentCountry.value.cca3)
+        localStorage.setItem(VISITED_KEY, JSON.stringify([...visitedCountries.value]))
+    }
+
     const resetProgress = () => {
         if (!confirm('Voulez-vous vraiment réinitialiser votre progression ?')) return
         knownCountries.value.clear()
+        visitedCountries.value.clear()
         localStorage.removeItem(STORAGE_KEY)
+        localStorage.removeItem(VISITED_KEY)
         if (gameStatus.value === 'playing') pickNextCountry()
     }
 
@@ -166,11 +203,14 @@ export function useGame() {
         countries,
         currentCountry,
         knownCountries,
+        visitedCountries,
         loading,
         error,
         score,
         total,
         progress,
+        visitedCount,
+        progressVisited,
         gameStatus,
         gameMode,
         fetchCountries,
