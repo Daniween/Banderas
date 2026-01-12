@@ -20,7 +20,7 @@ const toggleContinents = () => {
 <template>
   <div class="main-menu">
     <h1 class="title">Banderas Quiz</h1>
-    <p class="subtitle">Maîtrisez les 197 drapeaux de l'ONU</p>
+    <p class="subtitle">Maîtrisez les 196 drapeaux de l'ONU</p>
 
     <div class="menu-buttons">
       <button @click="$emit('start', 'learning', null)" class="menu-btn primary">

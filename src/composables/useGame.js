@@ -47,7 +47,7 @@ export function useGame() {
             const res = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,cca3,unMember,translations,region')
             const data = await res.json()
 
-            // Filter for 197 countries: UN Members + Observers + Kosovo + Taiwan
+            // Filter for 196 countries: UN Members + Observers + Kosovo + Taiwan
             const extraCodes = ['VAT', 'PSE', 'UNK', 'TWN']
             countries.value = data.filter(c => c.unMember || extraCodes.includes(c.cca3))
         } catch (e) {

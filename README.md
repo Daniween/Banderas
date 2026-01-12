@@ -1,12 +1,12 @@
 # 🏳️ Banderas Quiz
 
-Bienvenue sur **Banderas Quiz**, une application web interactive conçue pour relever un défi personnel et ludique : **maîtriser les drapeaux des 197 pays reconnus par l'ONU.**
+Bienvenue sur **Banderas Quiz**, une application web interactive conçue pour relever un défi personnel et ludique : **maîtriser les drapeaux des 196 pays reconnus par l'ONU.**
 
 Ce projet est né de ma volonté personnelle d'apprendre à identifier tous les pays du monde.
 
 ## Objectifs
 
-- **Apprendre** : Identifier les 197 drapeaux (Membres ONU + Observateurs + Kosovo + Taïwan).
+- **Apprendre** : Identifier les 196 drapeaux (Membres ONU + Observateurs + Kosovo + Taïwan).
 - **Progresser** : Suivre ses connaissances grâce à une persistance locale.
 - **S'amuser** : Trois modes de jeu (Apprentissage infini, Survie "One-pass", et par Continent).
 
@@ -36,14 +36,17 @@ Vous avez deux méthodes pour lancer l'application :
 Idéal pour le développement local.
 
 1. **Installer les dépendances** :
+
    ```bash
    npm install
    ```
 
 2. **Lancer le serveur de développement** :
+
    ```bash
    npm run dev
    ```
+
    L'application sera accessible sur `http://localhost:5173`.
 
 3. **Compiler pour la production** :
@@ -58,6 +61,7 @@ Idéal pour le développement local.
 Idéal pour lancer l'application dans un environnement isolé et propre (conteneur Nginx).
 
 1. **Construire l'image Docker** :
+
    ```bash
    docker build -t banderas-quiz .
    ```
