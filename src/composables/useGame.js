@@ -20,32 +20,32 @@ export function useGame() {
     const sessionTotal = ref(0)
 
     const score = computed(() => {
-        if (gameMode.value === 'survival') return sessionScore.value
+        if (gameMode.value === 'survival' || gameMode.value === 'capital') return sessionScore.value
         return knownCountries.value.size
     })
 
     const total = computed(() => {
-        if (gameMode.value === 'survival') return sessionTotal.value
+        if (gameMode.value === 'survival' || gameMode.value === 'capital') return sessionTotal.value
         if (regionFilter.value) return countries.value.filter(c => c.region === regionFilter.value).length
         return countries.value.length
     })
 
     const progress = computed(() => {
-        if (gameMode.value === 'survival') {
+        if (gameMode.value === 'survival' || gameMode.value === 'capital') {
             return sessionTotal.value ? Math.round((sessionScore.value / sessionTotal.value) * 100) : 0
         }
         return total.value ? Math.round((knownCountries.value.size / total.value) * 100) : 0
     })
 
     const visitedCount = computed(() => {
-        if (gameMode.value === 'survival') {
+        if (gameMode.value === 'survival' || gameMode.value === 'capital') {
             return sessionTotal.value - sessionQueue.value.length
         }
         return visitedCountries.value.size
     })
 
     const progressVisited = computed(() => {
-        if (gameMode.value === 'survival') {
+        if (gameMode.value === 'survival' || gameMode.value === 'capital') {
             // In survival, visited is just how many we've gone through (total - remaining)
             const played = sessionTotal.value - sessionQueue.value.length
             return sessionTotal.value ? Math.round((played / sessionTotal.value) * 100) : 0
@@ -70,7 +70,7 @@ export function useGame() {
                 visitedCountries.value = new Set(JSON.parse(savedKnown || '[]'))
             }
 
-            const res = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,cca3,unMember,translations,region')
+            const res = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,cca3,unMember,translations,region,capital')
             const data = await res.json()
 
             // Filter for 196 countries: UN Members + Observers + Kosovo + Taiwan
@@ -95,7 +95,7 @@ export function useGame() {
             pool = pool.filter(c => c.region === region)
         }
 
-        if (mode === 'survival') {
+        if (mode === 'survival' || mode === 'capital') {
             // Shuffle pool
             sessionQueue.value = [...pool].sort(() => Math.random() - 0.5)
             sessionTotal.value = sessionQueue.value.length
@@ -111,7 +111,7 @@ export function useGame() {
 
     // Choose next country
     const pickNextCountry = () => {
-        if (gameMode.value === 'survival') {
+        if (gameMode.value === 'survival' || gameMode.value === 'capital') {
             if (sessionQueue.value.length === 0) {
                 gameStatus.value = 'finished'
                 currentCountry.value = null
@@ -152,7 +152,16 @@ export function useGame() {
             ...(currentCountry.value.translations?.fra ? [currentCountry.value.translations.fra.common, currentCountry.value.translations.fra.official] : [])
         ].map(normalize)
 
-        if (names.includes(guess)) {
+        if (gameMode.value === 'capital') {
+            const capitals = (currentCountry.value.capital || []).map(normalize)
+            if (capitals.includes(guess)) {
+                sessionScore.value++
+                registerVisited()
+                if (onResult) onResult(true)
+                pickNextCountry()
+                return
+            }
+        } else if (names.includes(guess)) {
             if (gameMode.value === 'learning') {
                 registerCorrect()
                 registerVisited()
@@ -175,7 +184,11 @@ export function useGame() {
     }
 
     const revealAnswer = () => {
-        return currentCountry.value ? currentCountry.value.name.common : ''
+        if (!currentCountry.value) return ''
+        if (gameMode.value === 'capital') {
+            return (currentCountry.value.capital || [])[0] || 'N/A'
+        }
+        return currentCountry.value.translations?.fra?.common || currentCountry.value.name.common
     }
 
     const registerCorrect = () => {
@@ -197,7 +210,7 @@ export function useGame() {
         localStorage.removeItem(STORAGE_KEY)
         localStorage.removeItem(VISITED_KEY)
         if (gameStatus.value === 'playing') {
-            if (gameMode.value === 'survival') {
+            if (gameMode.value === 'survival' || gameMode.value === 'capital') {
                 startGame(gameMode.value, regionFilter.value)
             } else {
                 pickNextCountry()

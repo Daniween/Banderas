@@ -21,6 +21,7 @@ h1 {
     letter-spacing: -2px;
     background: linear-gradient(90deg, #fff, #a5b4fc);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 0;
     flex: 1;
@@ -139,6 +140,14 @@ h1 {
     color: white;
     border-color: white;
     background: rgba(255, 255, 255, 0.1);
+}
+
+.country-name-hint {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #e2e8f0;
+    margin: 1rem 0 2rem;
+    font-weight: 600;
 }
 
 @keyframes spin {

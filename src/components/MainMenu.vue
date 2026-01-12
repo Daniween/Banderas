@@ -31,6 +31,10 @@ const toggleContinents = () => {
         <span class="icon">⏱️</span> Mode one-pass (Survie)
       </button>
 
+      <button @click="$emit('start', 'capital', null)" class="menu-btn primary capital-mode">
+        <span class="icon">🏛️</span> Mode Capitales
+      </button>
+
       <div class="continent-section">
         <button @click="toggleContinents" class="menu-btn tertiary">
           <span class="icon">🌍</span> Par Continent

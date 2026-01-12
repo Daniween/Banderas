@@ -94,6 +94,10 @@ const handleReveal = () => {
           :alt="currentCountry.name.common"
         />        
         
+        <h2 v-if="gameMode === 'capital'" class="country-name-hint">
+          {{ currentCountry.translations?.fra?.common || currentCountry.name.common }}
+        </h2>
+        
         <QuizInput ref="quizInputRef" @submit="handleCheck" />
 
         <div class="skip-container">
