@@ -196,7 +196,13 @@ export function useGame() {
         visitedCountries.value.clear()
         localStorage.removeItem(STORAGE_KEY)
         localStorage.removeItem(VISITED_KEY)
-        if (gameStatus.value === 'playing') pickNextCountry()
+        if (gameStatus.value === 'playing') {
+            if (gameMode.value === 'survival') {
+                startGame(gameMode.value, regionFilter.value)
+            } else {
+                pickNextCountry()
+            }
+        }
     }
 
     return {
