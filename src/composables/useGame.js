@@ -142,14 +142,36 @@ export function useGame() {
         if (!currentCountry.value) return
 
         // Normalize input and names
-        const normalize = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()
+        const normalize = (str) => {
+            if (!str) return ""
+            return str
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "") // Remove accents
+                .toLowerCase()
+                .replace(/[^a-z0-9]/g, " ") // Replace non-alphanumeric with spaces
+                .replace(/\s+/g, " ")       // Collapse spaces
+                .trim()
+        }
+
         const guess = normalize(input)
+
+        const customAliases = {
+            'COD': ['congo', 'rdc', 'zaire'],
+            'GBR': ['uk', 'gb', 'royaume uni', 'angleterre'],
+            'USA': ['usa', 'etats unis', 'us'],
+            'ARE': ['uae', 'emirats arabes unis'],
+            'CAF': ['rca', 'republique centrafricaine']
+        }
+
+        const countryCode = currentCountry.value.cca3
+        const aliases = customAliases[countryCode] || []
 
         const names = [
             currentCountry.value.name.common,
             currentCountry.value.name.official,
             ...(currentCountry.value.altSpellings || []),
-            ...(currentCountry.value.translations?.fra ? [currentCountry.value.translations.fra.common, currentCountry.value.translations.fra.official] : [])
+            ...(currentCountry.value.translations?.fra ? [currentCountry.value.translations.fra.common, currentCountry.value.translations.fra.official] : []),
+            ...aliases
         ].map(normalize)
 
         if (gameMode.value === 'capital') {
