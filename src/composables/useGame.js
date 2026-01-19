@@ -15,38 +15,39 @@ export function useGame() {
     const regionFilter = ref(null)
     const sessionQueue = ref([])
     const sessionScore = ref(0)
-    const gameStatus = ref('menu') // 'menu' | 'playing' | 'finished'
+    const gameStatus = ref('menu') // 'menu' | 'playing' | 'finished' | 'selecting'
+    const selectedCodes = ref(new Set())
 
     const sessionTotal = ref(0)
 
     const score = computed(() => {
-        if (gameMode.value === 'survival' || gameMode.value === 'capital') return sessionScore.value
+        if (['survival', 'capital', 'custom'].includes(gameMode.value)) return sessionScore.value
         return knownCountries.value.size
     })
 
     const total = computed(() => {
-        if (gameMode.value === 'survival' || gameMode.value === 'capital') return sessionTotal.value
+        if (['survival', 'capital', 'custom'].includes(gameMode.value)) return sessionTotal.value
         if (regionFilter.value) return countries.value.filter(c => c.region === regionFilter.value).length
         return countries.value.length
     })
 
     const progress = computed(() => {
-        if (gameMode.value === 'survival' || gameMode.value === 'capital') {
+        if (['survival', 'capital', 'custom'].includes(gameMode.value)) {
             return sessionTotal.value ? Math.round((sessionScore.value / sessionTotal.value) * 100) : 0
         }
         return total.value ? Math.round((knownCountries.value.size / total.value) * 100) : 0
     })
 
     const visitedCount = computed(() => {
-        if (gameMode.value === 'survival' || gameMode.value === 'capital') {
+        if (['survival', 'capital', 'custom'].includes(gameMode.value)) {
             return sessionTotal.value - sessionQueue.value.length
         }
         return visitedCountries.value.size
     })
 
     const progressVisited = computed(() => {
-        if (gameMode.value === 'survival' || gameMode.value === 'capital') {
-            // In survival, visited is just how many we've gone through (total - remaining)
+        if (['survival', 'capital', 'custom'].includes(gameMode.value)) {
+            // In survival/custom, visited is just how many we've gone through (total - remaining)
             const played = sessionTotal.value - sessionQueue.value.length
             return sessionTotal.value ? Math.round((played / sessionTotal.value) * 100) : 0
         }
@@ -90,6 +91,10 @@ export function useGame() {
         gameStatus.value = 'playing'
         sessionScore.value = 0
 
+        // Reset visited for the new session
+        visitedCountries.value = new Set()
+        localStorage.removeItem(VISITED_KEY)
+
         let pool = countries.value
         if (region) {
             pool = pool.filter(c => c.region === region)
@@ -97,6 +102,10 @@ export function useGame() {
 
         if (mode === 'survival' || mode === 'capital') {
             // Shuffle pool
+            sessionQueue.value = [...pool].sort(() => Math.random() - 0.5)
+            sessionTotal.value = sessionQueue.value.length
+        } else if (mode === 'custom') {
+            pool = pool.filter(c => selectedCodes.value.has(c.cca3))
             sessionQueue.value = [...pool].sort(() => Math.random() - 0.5)
             sessionTotal.value = sessionQueue.value.length
         }
@@ -111,7 +120,7 @@ export function useGame() {
 
     // Choose next country
     const pickNextCountry = () => {
-        if (gameMode.value === 'survival' || gameMode.value === 'capital') {
+        if (['survival', 'capital', 'custom'].includes(gameMode.value)) {
             if (sessionQueue.value.length === 0) {
                 gameStatus.value = 'finished'
                 currentCountry.value = null
@@ -214,25 +223,29 @@ export function useGame() {
     }
 
     const registerCorrect = () => {
-        knownCountries.value.add(currentCountry.value.cca3)
+        const nextSet = new Set(knownCountries.value)
+        nextSet.add(currentCountry.value.cca3)
+        knownCountries.value = nextSet
         localStorage.setItem(STORAGE_KEY, JSON.stringify([...knownCountries.value]))
         pickNextCountry()
     }
 
     const registerVisited = () => {
         if (!currentCountry.value) return
-        visitedCountries.value.add(currentCountry.value.cca3)
+        const nextSet = new Set(visitedCountries.value)
+        nextSet.add(currentCountry.value.cca3)
+        visitedCountries.value = nextSet
         localStorage.setItem(VISITED_KEY, JSON.stringify([...visitedCountries.value]))
     }
 
     const resetProgress = () => {
         if (!confirm('Voulez-vous vraiment réinitialiser votre progression ?')) return
-        knownCountries.value.clear()
-        visitedCountries.value.clear()
+        knownCountries.value = new Set()
+        visitedCountries.value = new Set()
         localStorage.removeItem(STORAGE_KEY)
         localStorage.removeItem(VISITED_KEY)
         if (gameStatus.value === 'playing') {
-            if (gameMode.value === 'survival' || gameMode.value === 'capital') {
+            if (gameMode.value === 'survival' || gameMode.value === 'capital' || gameMode.value === 'custom') {
                 startGame(gameMode.value, regionFilter.value)
             } else {
                 pickNextCountry()
@@ -254,6 +267,7 @@ export function useGame() {
         progressVisited,
         gameStatus,
         gameMode,
+        selectedCodes,
         fetchCountries,
         checkAnswer,
         skipCountry,

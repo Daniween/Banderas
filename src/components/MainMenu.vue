@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const emit = defineEmits(['start'])
+const emit = defineEmits(['start', 'select-custom'])
 
 const showContinents = ref(false)
 const continents = [
@@ -33,6 +33,10 @@ const toggleContinents = () => {
 
       <button @click="$emit('start', 'capital', null)" class="menu-btn primary capital-mode">
         <span class="icon">🏛️</span> Mode Capitales
+      </button>
+
+      <button @click="$emit('select-custom')" class="menu-btn secondary custom-mode">
+        <span class="icon">🎯</span> Entraînement Personnalisé
       </button>
 
       <div class="continent-section">

@@ -4,6 +4,7 @@ import FlagDisplay from './components/FlagDisplay.vue'
 import QuizInput from './components/QuizInput.vue'
 import ProgressBar from './components/ProgressBar.vue'
 import MainMenu from './components/MainMenu.vue'
+import CountrySelector from './components/CountrySelector.vue'
 import { useGame } from './composables/useGame'
 
 const { 
@@ -13,6 +14,8 @@ const {
   score, 
   visitedCount,
   total,
+  countries,
+  selectedCodes,
   fetchCountries,
   checkAnswer,
   skipCountry,
@@ -64,7 +67,16 @@ const handleReveal = () => {
     </div>
 
     <!-- MAIN MENU -->
-    <MainMenu v-else-if="gameStatus === 'menu'" @start="startGame" />
+    <MainMenu v-else-if="gameStatus === 'menu'" @start="startGame" @select-custom="gameStatus = 'selecting'" />
+
+    <!-- COUNTRY SELECTOR -->
+    <CountrySelector 
+      v-else-if="gameStatus === 'selecting'" 
+      :countries="countries" 
+      v-model:selectedCodes="selectedCodes"
+      @start="startGame('custom')"
+      @back="returnToMenu"
+    />
 
     <!-- GAME FINISHED -->
     <div v-else-if="gameStatus === 'finished'" class="celebration">
