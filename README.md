@@ -8,7 +8,7 @@ Ce projet est né de ma volonté personnelle d'apprendre à identifier tous les 
 
 - **Apprendre** : Identifier les 196 drapeaux (Membres ONU + Observateurs + Kosovo + Taïwan).
 - **Progresser** : Suivre ses connaissances grâce à une persistance locale.
-- **S'amuser** : Trois modes de jeu (Apprentissage infini, Survie "One-pass", et par Continent).
+- **S'amuser** : Plusieurs modes de jeu (Apprentissage infini, Survie "One-pass", par Continent, etc.).
 
 ## Stack Technique
 
