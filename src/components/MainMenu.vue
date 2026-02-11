@@ -1,7 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 
-const emit = defineEmits(['start', 'select-custom'])
+const props = defineProps({
+  showCapitals: Boolean
+})
+const emit = defineEmits(['start', 'select-custom', 'toggle-capitals'])
 
 const showContinents = ref(false)
 const continents = [
@@ -55,6 +58,14 @@ const toggleContinents = () => {
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="settings-footer">
+      <label class="toggle-container">
+        <input type="checkbox" :checked="showCapitals" @change="$emit('toggle-capitals')">
+        <span class="slider"></span>
+        <span class="label-text">Afficher les capitales (Aide)</span>
+      </label>
     </div>
   </div>
 </template>

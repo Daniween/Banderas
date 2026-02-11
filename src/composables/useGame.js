@@ -2,6 +2,7 @@ import { ref, computed, onMounted } from 'vue'
 
 const STORAGE_KEY = 'banderas-known-countries'
 const VISITED_KEY = 'banderas-visited-countries'
+const SETTINGS_KEY = 'banderas-settings'
 
 export function useGame() {
     const countries = ref([])
@@ -10,8 +11,9 @@ export function useGame() {
     const loading = ref(true)
     const error = ref(null)
     const currentCountry = ref(null)
+    const showCapitals = ref(false)
 
-    const gameMode = ref('learning') // 'learning' | 'survival'
+    const gameMode = ref('learning') // 'learning' | 'survival' | 'capital' | 'custom'
     const regionFilter = ref(null)
     const sessionQueue = ref([])
     const sessionScore = ref(0)
@@ -69,6 +71,12 @@ export function useGame() {
             } else {
                 // Backwards compatibility: if no visited history, assume known are visited
                 visitedCountries.value = new Set(JSON.parse(savedKnown || '[]'))
+            }
+
+            const savedSettings = localStorage.getItem(SETTINGS_KEY)
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings)
+                showCapitals.value = !!settings.showCapitals
             }
 
             const res = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,cca3,unMember,translations,region,capital')
@@ -165,9 +173,9 @@ export function useGame() {
         const guess = normalize(input)
 
         const customAliases = {
-            'COD': ['congo', 'rdc', 'zaire'],
-            'GBR': ['uk', 'gb', 'royaume uni', 'angleterre'],
-            'USA': ['usa', 'etats unis', 'us'],
+            'COD': ['rd congo', 'rdc'],
+            'GBR': ['uk', 'royaume uni', 'angleterre'],
+            'USA': ['usa', 'etats unis'],
             'ARE': ['uae', 'emirats arabes unis'],
             'CAF': ['rca', 'republique centrafricaine']
         }
@@ -238,6 +246,11 @@ export function useGame() {
         localStorage.setItem(VISITED_KEY, JSON.stringify([...visitedCountries.value]))
     }
 
+    const toggleCapitals = () => {
+        showCapitals.value = !showCapitals.value
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify({ showCapitals: showCapitals.value }))
+    }
+
     const resetProgress = () => {
         if (!confirm('Voulez-vous vraiment réinitialiser votre progression ?')) return
         knownCountries.value = new Set()
@@ -268,12 +281,14 @@ export function useGame() {
         gameStatus,
         gameMode,
         selectedCodes,
+        showCapitals,
         fetchCountries,
         checkAnswer,
         skipCountry,
         revealAnswer,
         resetProgress,
         startGame,
-        returnToMenu
+        returnToMenu,
+        toggleCapitals
     }
 }
