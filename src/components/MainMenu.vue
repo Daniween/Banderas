@@ -27,18 +27,22 @@ const toggleContinents = () => {
 
     <div class="menu-buttons">
       <button @click="$emit('start', 'learning', null)" class="menu-btn primary">
-        <span class="icon">🎓</span> Apprentissage (Aléatoire)
+        <span class="icon">🎓</span> Apprentissage - Aléatoire
       </button>
 
       <button @click="$emit('start', 'survival', null)" class="menu-btn secondary">
-        <span class="icon">⏱️</span> Mode one-pass (Survie)
+        <span class="icon">⏱️</span> Mode survie one-pass
       </button>
 
       <button @click="$emit('start', 'capital', null)" class="menu-btn primary capital-mode">
         <span class="icon">🏛️</span> Mode Capitales
       </button>
 
-      <button @click="$emit('select-custom')" class="menu-btn secondary custom-mode">
+      <button @click="$emit('start', 'map', null)" class="menu-btn secondary map-mode">
+        <span class="icon">🗺️</span> Mode Carte
+      </button>
+
+      <button @click="$emit('select-custom')" class="menu-btn primary custom-mode">
         <span class="icon">🎯</span> Entraînement Personnalisé
       </button>
 

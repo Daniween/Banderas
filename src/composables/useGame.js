@@ -19,37 +19,40 @@ export function useGame() {
     const sessionScore = ref(0)
     const gameStatus = ref('menu') // 'menu' | 'playing' | 'finished' | 'selecting'
     const selectedCodes = ref(new Set())
+    const correctSessionCountries = ref(new Set())
+    const revealedSessionCountries = ref(new Set())
+    const redSessionCountry = ref(null)
 
     const sessionTotal = ref(0)
 
     const score = computed(() => {
-        if (['survival', 'capital', 'custom'].includes(gameMode.value)) return sessionScore.value
+        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) return sessionScore.value
         return knownCountries.value.size
     })
 
     const total = computed(() => {
-        if (['survival', 'capital', 'custom'].includes(gameMode.value)) return sessionTotal.value
+        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) return sessionTotal.value
         if (regionFilter.value) return countries.value.filter(c => c.region === regionFilter.value).length
         return countries.value.length
     })
 
     const progress = computed(() => {
-        if (['survival', 'capital', 'custom'].includes(gameMode.value)) {
+        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
             return sessionTotal.value ? Math.round((sessionScore.value / sessionTotal.value) * 100) : 0
         }
         return total.value ? Math.round((knownCountries.value.size / total.value) * 100) : 0
     })
 
     const visitedCount = computed(() => {
-        if (['survival', 'capital', 'custom'].includes(gameMode.value)) {
+        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
             return sessionTotal.value - sessionQueue.value.length
         }
         return visitedCountries.value.size
     })
 
     const progressVisited = computed(() => {
-        if (['survival', 'capital', 'custom'].includes(gameMode.value)) {
-            // In survival/custom, visited is just how many we've gone through (total - remaining)
+        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
+            // In survival/custom/map, visited is just how many we've gone through (total - remaining)
             const played = sessionTotal.value - sessionQueue.value.length
             return sessionTotal.value ? Math.round((played / sessionTotal.value) * 100) : 0
         }
@@ -79,7 +82,7 @@ export function useGame() {
                 showCapitals.value = !!settings.showCapitals
             }
 
-            const res = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,cca3,unMember,translations,region,capital')
+            const res = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,cca3,unMember,translations,region,capital,latlng')
             const data = await res.json()
 
             // Filter for 196 countries: UN Members + Observers + Kosovo + Taiwan
@@ -98,6 +101,9 @@ export function useGame() {
         regionFilter.value = region
         gameStatus.value = 'playing'
         sessionScore.value = 0
+        correctSessionCountries.value = new Set()
+        revealedSessionCountries.value = new Set()
+        redSessionCountry.value = null
 
         // Reset visited for the new session
         visitedCountries.value = new Set()
@@ -108,7 +114,7 @@ export function useGame() {
             pool = pool.filter(c => c.region === region)
         }
 
-        if (mode === 'survival' || mode === 'capital') {
+        if (mode === 'survival' || mode === 'capital' || mode === 'map') {
             // Shuffle pool
             sessionQueue.value = [...pool].sort(() => Math.random() - 0.5)
             sessionTotal.value = sessionQueue.value.length
@@ -124,11 +130,12 @@ export function useGame() {
     const returnToMenu = () => {
         gameStatus.value = 'menu'
         currentCountry.value = null
+        redSessionCountry.value = null
     }
 
     // Choose next country
     const pickNextCountry = () => {
-        if (['survival', 'capital', 'custom'].includes(gameMode.value)) {
+        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
             if (sessionQueue.value.length === 0) {
                 gameStatus.value = 'finished'
                 currentCountry.value = null
@@ -157,6 +164,30 @@ export function useGame() {
 
     const checkAnswer = (input, onResult) => {
         if (!currentCountry.value) return
+
+        if (gameMode.value === 'map') {
+            if (input === currentCountry.value.cca3) {
+                sessionScore.value++
+
+                // Move previous red to orange if it exists
+                if (redSessionCountry.value) {
+                    const nextRevealed = new Set(revealedSessionCountries.value)
+                    nextRevealed.add(redSessionCountry.value)
+                    revealedSessionCountries.value = nextRevealed
+                    redSessionCountry.value = null
+                }
+
+                const nextCorrect = new Set(correctSessionCountries.value)
+                nextCorrect.add(currentCountry.value.cca3)
+                correctSessionCountries.value = nextCorrect
+                if (onResult) onResult(true)
+                pickNextCountry()
+            } else {
+                if (onResult) onResult(false)
+                registerVisited()
+            }
+            return
+        }
 
         // Normalize input and names
         const normalize = (str) => {
@@ -207,6 +238,9 @@ export function useGame() {
                 if (onResult) onResult(true)
             } else {
                 sessionScore.value++
+                const nextCorrect = new Set(correctSessionCountries.value)
+                nextCorrect.add(currentCountry.value.cca3)
+                correctSessionCountries.value = nextCorrect
                 if (onResult) onResult(true)
                 pickNextCountry()
             }
@@ -281,6 +315,9 @@ export function useGame() {
         gameStatus,
         gameMode,
         selectedCodes,
+        correctSessionCountries,
+        revealedSessionCountries,
+        redSessionCountry,
         showCapitals,
         fetchCountries,
         checkAnswer,

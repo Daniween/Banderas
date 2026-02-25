@@ -20,6 +20,16 @@ Ce projet est né de ma volonté personnelle d'apprendre à identifier tous les 
 
 ---
 
+## Modes de jeux
+- Mode apprentissage : Les pays passent un par un jusqu'à ce que vous les connaissiez tous.
+- Mode survie one-pass : Les pays passent un par un sans revenir en arrière.
+- Mode capitale : Deviner la capitale du pays.
+- Mode carte : Placer les pays sur la carte du monde.
+- Mode entrainement : Entrainer vous sur les drapeaux que vous ne connaissez pas.
+- Mode continent : Apprendre les drapeaux par continent.
+
+---
+
 ## Installation et Lancement
 
 Pour commencer, clonez ce dépôt sur votre machine :

@@ -5,6 +5,7 @@ import QuizInput from './components/QuizInput.vue'
 import ProgressBar from './components/ProgressBar.vue'
 import MainMenu from './components/MainMenu.vue'
 import CountrySelector from './components/CountrySelector.vue'
+import MapDisplay from './components/MapDisplay.vue'
 import { useGame } from './composables/useGame'
 
 const { 
@@ -23,6 +24,9 @@ const {
   resetProgress,
   gameStatus,
   gameMode,
+  correctSessionCountries,
+  revealedSessionCountries,
+  redSessionCountry,
   startGame,
   returnToMenu,
   showCapitals,
@@ -51,6 +55,13 @@ const handleSkip = () => {
 }
 
 const handleReveal = () => {
+  if (gameMode.value === 'map' && currentCountry.value) {
+    // If there was already a red country, it's now old. Move to orange.
+    if (redSessionCountry.value) {
+      revealedSessionCountries.value.add(redSessionCountry.value)
+    }
+    redSessionCountry.value = currentCountry.value.cca3
+  }
   const answer = revealAnswer()
   alert(`La réponse est : ${answer}`)
   handleSkip()
@@ -58,7 +69,7 @@ const handleReveal = () => {
 </script>
 
 <template>
-  <div class="app-container">
+  <div :class="['app-container', { 'map-layout': gameMode === 'map' }]">
     <div v-if="loading" class="loading">
       <div class="spinner"></div>
       <p>Chargement des drapeaux...</p>
@@ -119,10 +130,11 @@ const handleReveal = () => {
 
       <ProgressBar :score="score" :visited="visitedCount" :total="total" />
 
-      <main v-if="currentCountry">
+      <main v-if="currentCountry" :class="{ 'map-mode-main': gameMode === 'map' }">
         <FlagDisplay 
           :flagUrl="currentCountry.flags.svg" 
           :alt="currentCountry.name.common"
+          :class="{ 'map-flag': gameMode === 'map' }"
         />        
         
         <h2 v-if="gameMode === 'capital'" class="country-name-hint">
@@ -133,7 +145,19 @@ const handleReveal = () => {
           Capitale : <span>{{ currentCountry.capital[0] }}</span>
         </div>
         
-        <QuizInput ref="quizInputRef" @submit="handleCheck" />
+        <template v-if="gameMode === 'map'">
+          <MapDisplay 
+            :currentCountry="currentCountry" 
+            :countries="countries"
+            :correctSessionCountries="correctSessionCountries"
+            :revealedSessionCountries="revealedSessionCountries"
+            :redSessionCountry="redSessionCountry"
+            @submit="(code) => handleCheck(code)" 
+          />
+        </template>
+        <template v-else>
+          <QuizInput ref="quizInputRef" @submit="handleCheck" />
+        </template>
 
         <div class="skip-container">
           <button @click="handleSkip" class="skip-btn">Passer ce drapeau</button>
