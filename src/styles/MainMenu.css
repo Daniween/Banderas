@@ -64,6 +64,10 @@
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
+.map-mode {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
 .secondary {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
