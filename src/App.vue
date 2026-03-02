@@ -28,15 +28,28 @@ const {
   revealedSessionCountries,
   redSessionCountry,
   startGame,
-  returnToMenu,
+  returnToMenu: baseReturnToMenu,
   showCapitals,
   toggleCapitals
 } = useGame()
 
 const quizInputRef = ref(null)
+const showScoreModal = ref(true)
 
 onMounted(() => {
   fetchCountries()
+})
+
+const returnToMenu = () => {
+  showScoreModal.value = true
+  baseReturnToMenu()
+}
+
+// Watch gameStatus to reset modal state
+watch(gameStatus, (newStatus) => {
+  if (newStatus === 'playing') {
+    showScoreModal.value = true
+  }
 })
 
 const handleCheck = (input, callback) => {
@@ -97,16 +110,29 @@ const handleReveal = () => {
       @back="returnToMenu"
     />
 
-    <!-- GAME FINISHED -->
-    <div v-else-if="gameStatus === 'finished'" class="celebration">
+    <!-- GAME FINISHED (Other modes) -->
+    <div v-else-if="gameStatus === 'finished' && gameMode !== 'map'" class="celebration">
       <h2>Félicitations !</h2>
       <p>Vous avez terminé cette session.</p>
       <div class="score-display">Score final : {{ score }} / {{ total }}</div>
       <button @click="returnToMenu" class="restart-btn">Retour au Menu</button>
     </div>
 
-    <!-- GAME PLAYING -->
+    <!-- GAME AREA -->
     <div v-else class="game-area">
+      <!-- Modal Score for Map Mode -->
+      <div v-if="gameStatus === 'finished' && gameMode === 'map' && showScoreModal" class="modal-overlay">
+        <div class="modal-content">
+          <h2>Session terminée !</h2>
+          <div class="modal-score">Score : {{ score }} / {{ total }}</div>
+          <p>Vous pouvez maintenant explorer la carte.</p>
+          <div class="modal-actions">
+            <button @click="showScoreModal = false" class="modal-explore-btn">Explorer la carte</button>
+            <button @click="returnToMenu" class="modal-close-btn">Retour au Menu</button>
+          </div>
+        </div>
+      </div>
+
       <header>
         <button @click="returnToMenu" class="home-btn" title="Retour au menu">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -130,18 +156,19 @@ const handleReveal = () => {
 
       <ProgressBar :score="score" :visited="visitedCount" :total="total" />
 
-      <main v-if="currentCountry" :class="{ 'map-mode-main': gameMode === 'map' }">
+      <main v-if="currentCountry || (gameStatus === 'finished' && gameMode === 'map')" :class="{ 'map-mode-main': gameMode === 'map' }">
         <FlagDisplay 
+          v-if="currentCountry"
           :flagUrl="currentCountry.flags.svg" 
           :alt="currentCountry.name.common"
           :class="{ 'map-flag': gameMode === 'map' }"
         />        
         
-        <h2 v-if="gameMode === 'capital'" class="country-name-hint">
+        <h2 v-if="currentCountry && gameMode === 'capital'" class="country-name-hint">
           {{ currentCountry.translations?.fra?.common || currentCountry.name.common }}
         </h2>
 
-        <div v-else-if="showCapitals && currentCountry.capital" class="capital-hint">
+        <div v-else-if="currentCountry && showCapitals && currentCountry.capital" class="capital-hint">
           Capitale : <span>{{ currentCountry.capital[0] }}</span>
         </div>
         
@@ -152,6 +179,7 @@ const handleReveal = () => {
             :correctSessionCountries="correctSessionCountries"
             :revealedSessionCountries="revealedSessionCountries"
             :redSessionCountry="redSessionCountry"
+            :isFinished="gameStatus === 'finished'"
             @submit="(code) => handleCheck(code)" 
           />
         </template>
@@ -159,7 +187,7 @@ const handleReveal = () => {
           <QuizInput ref="quizInputRef" @submit="handleCheck" />
         </template>
 
-        <div class="skip-container">
+        <div v-if="currentCountry" class="skip-container">
           <button @click="handleSkip" class="skip-btn">Passer ce drapeau</button>
           <button @click="handleReveal" class="skip-btn reveal-btn">Voir la réponse</button>
         </div>
