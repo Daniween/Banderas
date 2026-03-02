@@ -14,7 +14,11 @@ const props = defineProps({
     type: Object,
     default: () => new Set()
   },
-  redSessionCountry: String
+  redSessionCountry: String,
+  isFinished: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const emit = defineEmits(['submit'])
@@ -28,6 +32,24 @@ const GEOJSON_URL = 'https://raw.githubusercontent.com/johan/world.geo.json/mast
 const getCountryStyle = (feature) => {
   const code = feature.id || feature.properties.id || feature.properties.iso_a3 || feature.properties.ISO_A3 || feature.properties.cca3 || feature.properties.CCA3
   
+  if (props.isFinished) {
+    if (props.correctSessionCountries.has(code)) {
+      return {
+        fillColor: '#27ae60', // Vert (trouvé)
+        fillOpacity: 0.6,
+        weight: 1,
+        color: '#ffffff'
+      }
+    } else {
+      return {
+        fillColor: '#e67e22', // Orange (non trouvé)
+        fillOpacity: 0.6,
+        weight: 1,
+        color: '#ffffff'
+      }
+    }
+  }
+
   if (code === props.redSessionCountry) {
     return {
       fillColor: '#e74c3c', // Rouge
@@ -68,7 +90,8 @@ const getCountryStyle = (feature) => {
 watch([
   () => props.correctSessionCountries, 
   () => props.revealedSessionCountries,
-  () => props.redSessionCountry
+  () => props.redSessionCountry,
+  () => props.isFinished
 ], () => {
   if (geojsonLayer) {
     geojsonLayer.setStyle(getCountryStyle)
@@ -107,8 +130,8 @@ onMounted(async () => {
           mouseover: (e) => {
             const l = e.target
             
-            // Show tooltip ONLY if country is discovered (correct, revealed or red)
-            if (props.correctSessionCountries.has(code) || props.revealedSessionCountries.has(code) || code === props.redSessionCountry) {
+            // Show tooltip ALWAYS if finished, otherwise only if discovered
+            if (props.isFinished || props.correctSessionCountries.has(code) || props.revealedSessionCountries.has(code) || code === props.redSessionCountry) {
               l.bindTooltip(countryName, { sticky: true, className: 'map-tooltip' }).openTooltip()
             }
 
@@ -123,6 +146,8 @@ onMounted(async () => {
             geojsonLayer.resetStyle(l)
           },
           click: (e) => {
+            if (props.isFinished) return
+
             const code = feature.id || propsData.id || propsData.iso_a3 || propsData.ISO_A3 || propsData.cca3 || propsData.CCA3
             
             // Visual feedback
