@@ -30,7 +30,8 @@ const {
   startGame,
   returnToMenu: baseReturnToMenu,
   showCapitals,
-  toggleCapitals
+  toggleCapitals,
+  finishGame
 } = useGame()
 
 const quizInputRef = ref(null)
@@ -43,6 +44,12 @@ onMounted(() => {
 const returnToMenu = () => {
   showScoreModal.value = true
   baseReturnToMenu()
+}
+
+const handleFinishMap = () => {
+  if (confirm('Voulez-vous afficher toutes les réponses et arrêter le chrono ?')) {
+    finishGame()
+  }
 }
 
 // Watch gameStatus to reset modal state
@@ -190,6 +197,7 @@ const handleReveal = () => {
         <div v-if="currentCountry" class="skip-container">
           <button @click="handleSkip" class="skip-btn">Passer ce drapeau</button>
           <button @click="handleReveal" class="skip-btn reveal-btn">Voir la réponse</button>
+          <button v-if="gameMode === 'map'" @click="handleFinishMap" class="skip-btn finish-btn">Voir toutes les réponses</button>
         </div>
       </main>
     </div>
