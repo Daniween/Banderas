@@ -300,6 +300,11 @@ export function useGame() {
         }
     }
 
+    const finishGame = () => {
+        gameStatus.value = 'finished'
+        currentCountry.value = null
+    }
+
     return {
         countries,
         currentCountry,
@@ -326,6 +331,7 @@ export function useGame() {
         resetProgress,
         startGame,
         returnToMenu,
-        toggleCapitals
+        toggleCapitals,
+        finishGame
     }
 }
