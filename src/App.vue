@@ -107,7 +107,7 @@ const handleReveal = () => {
 </script>
 
 <template>
-  <div :class="['app-container', { 'map-layout': gameMode === 'map' }]">
+  <div :class="['app-container', { 'map-layout': gameMode === 'map', 'is-finished': gameStatus === 'finished' }]">
     <div v-if="loading" class="loading">
       <div class="spinner"></div>
       <p>Chargement des drapeaux...</p>

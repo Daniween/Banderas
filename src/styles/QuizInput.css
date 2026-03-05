@@ -1,4 +1,4 @@
-/* QuizInput.css */
+/* QuizInput.css - Glassmorphism Redesign */
 .input-wrapper {
     display: flex;
     gap: 1rem;
@@ -9,48 +9,54 @@
 
 input {
     flex: 1;
-    padding: 1rem 1.5rem;
+    padding: 1.25rem 1.5rem;
     font-size: 1.1rem;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
     color: white;
     transition: all 0.3s ease;
     font-family: inherit;
+    outline: none;
 }
 
 input:focus {
-    outline: none;
-    border-color: #4facfe;
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(79, 172, 254, 0.5);
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.2);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 button {
     padding: 0 2rem;
     border: none;
-    border-radius: 12px;
+    border-radius: 15px;
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s;
     font-size: 1rem;
 }
 
 button:hover:not(:disabled) {
     transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
 }
 
 button:disabled {
-    opacity: 0.5;
+    opacity: 0.3;
     cursor: not-allowed;
 }
 
 .shake {
     animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
-    border-color: #ff4b4b;
+    border-color: rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.05);
 }
 
 @keyframes shake {

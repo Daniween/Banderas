@@ -262,16 +262,16 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   position: relative;
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .map-container {
   width: 100%;
   height: 100%;
-  background: #f0f0f0;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .map-hint {
@@ -280,22 +280,24 @@ onUnmounted(() => {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 12px;
   font-size: 0.9rem;
   pointer-events: none;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 :deep(.map-tooltip) {
-  background: rgba(0, 0, 0, 0.8);
-  border: none;
-  color: white;
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border-radius: 8px !important;
   font-weight: 500;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
 }
 
 :deep(.map-tooltip::before) {
@@ -310,7 +312,7 @@ onUnmounted(() => {
 }
 
 .info-icon {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   width: 32px;
   height: 32px;
@@ -319,9 +321,9 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   cursor: help;
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .map-info-note:hover .info-icon {
@@ -334,17 +336,18 @@ onUnmounted(() => {
   top: 100%;
   right: 0;
   margin-top: 10px;
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: white;
-  padding: 15px;
-  border-radius: 12px;
+  padding: 1.5rem;
+  border-radius: 18px;
   width: 300px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  transform: translateY(10px);
   pointer-events: none;
 }
 
@@ -358,21 +361,22 @@ onUnmounted(() => {
   margin: 0 0 8px 0;
   color: #4facfe;
   font-size: 1rem;
+  font-weight: 700;
 }
 
 .info-tooltip p {
   margin: 0 0 10px 0;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .countries-list {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.9);
-  max-height: 150px;
+  max-height: 200px;
   overflow-y: auto;
-  line-height: 1.5;
+  line-height: 1.6;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }

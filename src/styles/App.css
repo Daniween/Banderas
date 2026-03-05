@@ -1,4 +1,4 @@
-/* App.css */
+/* App.css - Glassmorphism Redesign */
 .app-container {
     max-width: 800px;
     margin: 0 auto;
@@ -11,14 +11,22 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     position: relative;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    /* Prevent wrapping icons */
 }
 
 h1 {
     font-weight: 800;
-    font-size: 2.5rem;
-    letter-spacing: -2px;
+    font-size: 1.8rem;
+    letter-spacing: -1px;
     background: linear-gradient(90deg, #fff, #a5b4fc);
     -webkit-background-clip: text;
     background-clip: text;
@@ -29,57 +37,43 @@ h1 {
 }
 
 .home-btn,
-.reset-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    padding: 0.8rem;
+.reset-btn,
+.settings-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.6rem;
     border-radius: 50%;
     color: white;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .home-btn:hover,
 .reset-btn:hover,
 .settings-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
-}
-
-.reset-btn:hover {
-    transform: rotate(-90deg);
-}
-
-.header-actions {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.settings-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    padding: 0.8rem;
-    border-radius: 50%;
-    color: rgba(255, 255, 255, 0.6);
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-    height: 45px;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .settings-btn.active {
     color: #4facfe;
     background: rgba(79, 172, 254, 0.2);
-    box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+    border-color: rgba(79, 172, 254, 0.4);
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.2);
 }
 
 .loading,
@@ -88,14 +82,6 @@ h1 {
 .game-area,
 .main-menu {
     animation: fadeIn 0.5s ease-out;
-}
-
-.loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 4rem;
 }
 
 .spinner {
@@ -110,95 +96,104 @@ h1 {
 .celebration {
     text-align: center;
     margin-top: 4rem;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .celebration h2 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: #4facfe;
+    color: white;
+    text-shadow: 0 0 20px rgba(79, 172, 254, 0.5);
 }
 
 .score-display {
-    font-size: 2rem;
+    font-size: 4rem;
     font-weight: bold;
     color: white;
     margin: 2rem 0;
 }
 
 .restart-btn {
-    padding: 1rem 2rem;
+    padding: 1rem 2.5rem;
     font-size: 1.2rem;
-    background: #4facfe;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: 15px;
+    font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+    transition: all 0.3s;
+}
+
+.restart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(79, 172, 254, 0.4);
 }
 
 .skip-container {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .skip-btn {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s;
-    font-size: 0.9rem;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    backdrop-filter: blur(5px);
+    box-sizing: border-box;
+}
+
+.skip-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .reveal-btn {
     color: #4facfe;
-    border-color: rgba(79, 172, 254, 0.3);
+    border-color: rgba(79, 172, 254, 0.2);
 }
 
 .reveal-btn:hover {
     background: rgba(79, 172, 254, 0.1);
-    color: #fff;
-    border-color: #4facfe;
-}
-
-.skip-btn:hover {
-    color: white;
-    border-color: white;
-    background: rgba(255, 255, 255, 0.1);
 }
 
 .finish-btn {
-    color: #e67e22;
-    border-color: rgba(230, 126, 34, 0.3);
-}
-
-.finish-btn:hover {
-    background: rgba(230, 126, 34, 0.1);
-    color: #ff9f43;
-    border-color: #e67e22;
+    color: #f1c40f;
+    border-color: rgba(241, 196, 15, 0.2);
 }
 
 .country-name-hint {
     text-align: center;
-    font-size: 1.8rem;
-    color: #e2e8f0;
+    font-size: 2rem;
+    color: white;
     margin: 1rem 0 2rem;
-    font-weight: 600;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .capital-hint {
     text-align: center;
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.7);
-    margin: 1rem 0 2rem;
+    margin-bottom: 1rem;
 }
 
 .capital-hint span {
     color: #4facfe;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 @keyframes spin {
@@ -219,220 +214,185 @@ h1 {
     }
 }
 
-/* Map Mode layout */
+/* Map Mode Full Layout */
 .app-container.map-layout {
     max-width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 1rem 2rem;
+    padding: 1rem;
+    box-sizing: border-box;
     overflow: hidden;
 }
 
 .map-layout .game-area {
     display: flex;
     flex-direction: column;
+    height: 100%;
     flex: 1;
-    overflow: hidden;
+    min-height: 0;
 }
 
 .map-mode-main {
     display: grid;
     grid-template-columns: 280px 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
     gap: 1.5rem;
     flex: 1;
-    overflow: hidden;
-    align-items: start;
+    min-height: 0;
+    height: 100%;
 }
 
+/* Sidebar Elements */
 .map-flag {
+    grid-column: 1;
+    grid-row: 1;
     width: 100% !important;
     max-width: 280px !important;
     margin: 0 !important;
 }
 
-.map-flag :deep(.flag-img) {
-    max-height: 180px;
-    object-fit: contain;
-}
-
-.map-layout .skip-container {
-    grid-column: 1;
-    grid-row: 2;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 0;
-}
-
-.map-layout .skip-btn {
-    width: 100%;
-}
-
-:deep(.map-wrapper) {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    height: 100% !important;
-    margin: 0 !important;
-}
-
-.map-layout header {
-    margin-bottom: 0.5rem;
-}
-
-.map-layout .progress-container {
-    margin-bottom: 1rem;
-}
-
-/* Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    animation: fadeIn 0.3s ease-out;
-}
-
-.modal-content {
-    background: rgba(30, 41, 59, 0.85);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 3rem;
-    border-radius: 24px;
-    text-align: center;
-    max-width: 450px;
-    width: 90%;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-.modal-content h2 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-    color: #4facfe;
-    font-weight: 800;
-}
-
-.modal-score {
-    font-size: 3rem;
-    font-weight: 900;
-    color: white;
-    margin: 1.5rem 0;
-    text-shadow: 0 0 20px rgba(79, 172, 254, 0.4);
-}
-
-.modal-content p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-}
-
-.modal-close-btn {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-}
-
-.modal-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.modal-explore-btn {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.modal-explore-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-.modal-close-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-}
-
-.modal-close-btn:active {
-    transform: translateY(0);
-}
-
-/* Search Bar for Map Mode Exploration */
-.map-search-container {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 1.5rem;
-    grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    backdrop-filter: blur(10px);
-}
-
-.map-search-container h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 600;
-}
-
+/* SEARCH BAR ALIGNMENT */
 .search-input-wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+    line-height: 0;
+    display: flex;
+}
+
+.map-search-container {
+    grid-column: 1;
+    grid-row: 2;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-sizing: border-box;
 }
 
 .search-input {
     width: 100%;
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.8rem 1rem 0.8rem 2.8rem;
-    border-radius: 10px;
+    padding: 0.8rem 1.2rem 0.8rem 2.8rem;
+    border-radius: 12px;
     color: white;
     font-size: 1rem;
     outline: none;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 .search-input:focus {
     border-color: #2ecc71;
-    background: rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+    background: rgba(0, 0, 0, 0.35);
 }
 
-.search-icon {
-    position: absolute;
-    left: 1rem;
-    color: rgba(255, 255, 255, 0.4);
-    pointer-events: none;
-}
-
-.search-no-result {
-    font-size: 0.85rem;
-    color: #e74c3c;
+.map-layout .skip-container {
+    grid-column: 1;
+    grid-row: 4;
+    display: flex;
+    flex-direction: column;
+    /* Stack vertically in sidebar */
+    gap: 0.75rem;
     margin: 0;
-    padding: 0 0.5rem;
+    width: 100%;
+}
+
+.map-layout .skip-btn {
+    width: 100%;
+    margin: 0;
+}
+
+/* Map takes full vertical height */
+.map-layout :deep(.map-wrapper) {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    height: 100% !important;
+    margin: 0 !important;
+    min-height: 0;
+    width: 100%;
+    transition: all 0.5s ease;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 3.5rem;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: white;
+    font-weight: 800;
+}
+
+.modal-score {
+    font-size: 4rem;
+    font-weight: 900;
+    color: white;
+    margin: 1.5rem 0;
+    text-shadow: 0 0 20px rgba(79, 172, 254, 0.5);
+}
+
+.modal-close-btn,
+.modal-explore-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-close-btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+}
+
+.modal-explore-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-right: 1rem;
+}
+
+.modal-explore-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
