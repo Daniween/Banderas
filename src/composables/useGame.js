@@ -331,11 +331,8 @@ export function useGame() {
         localStorage.removeItem(STORAGE_KEY)
         localStorage.removeItem(VISITED_KEY)
         if (gameStatus.value === 'playing') {
-            if (gameMode.value === 'survival' || gameMode.value === 'capital' || gameMode.value === 'custom') {
-                startGame(gameMode.value, regionFilter.value)
-            } else {
-                pickNextCountry()
-            }
+            // Restart the current game session (this will reset the timer and score)
+            startGame(gameMode.value, regionFilter.value)
         }
     }
 
