@@ -22,7 +22,7 @@ const toggleContinents = () => {
 
 <template>
   <div class="main-menu">
-    <h1 class="title">Banderas Quiz</h1>
+    <h1 class="title">Banderas</h1>
     <p class="subtitle">Maîtrisez les 197 drapeaux de l'ONU</p>
 
     <div class="menu-buttons">
@@ -38,7 +38,7 @@ const toggleContinents = () => {
         Mode Capitales
       </button>
 
-      <button @click="$emit('start', 'map', null)" class="menu-btn secondary map-mode">
+      <button @click="$emit('start', 'map', null)" class="menu-btn map-mode">
         Mode Carte
       </button>
 
