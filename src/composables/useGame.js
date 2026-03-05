@@ -12,6 +12,7 @@ export function useGame() {
     const error = ref(null)
     const currentCountry = ref(null)
     const showCapitals = ref(false)
+    const mapClickableCodes = ref(new Set())
 
     const gameMode = ref('learning') // 'learning' | 'survival' | 'capital' | 'custom'
     const regionFilter = ref(null)
@@ -22,6 +23,8 @@ export function useGame() {
     const correctSessionCountries = ref(new Set())
     const revealedSessionCountries = ref(new Set())
     const redSessionCountry = ref(null)
+    const timerSeconds = ref(0)
+    let timerInterval = null
 
     const sessionTotal = ref(0)
 
@@ -41,6 +44,12 @@ export function useGame() {
             return sessionTotal.value ? Math.round((sessionScore.value / sessionTotal.value) * 100) : 0
         }
         return total.value ? Math.round((knownCountries.value.size / total.value) * 100) : 0
+    })
+
+    const formattedTime = computed(() => {
+        const mins = Math.floor(timerSeconds.value / 60)
+        const secs = timerSeconds.value % 60
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
     })
 
     const visitedCount = computed(() => {
@@ -88,6 +97,28 @@ export function useGame() {
             // Filter for 197 countries: UN Members + Observers + Kosovo + Taiwan + GNB (fix for API)
             const extraCodes = ['VAT', 'PSE', 'UNK', 'TWN', 'GNB']
             countries.value = data.filter(c => c.unMember || extraCodes.includes(c.cca3))
+
+            // Fetch Map GeoJSON to know which countries are clickable
+            try {
+                const mapRes = await fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
+                const mapData = await mapRes.json()
+                const codes = new Set()
+                const CODE_MAPPING = { 'UNK': 'CS-KM', 'PSE': 'PS' }
+
+                mapData.features.forEach(f => {
+                    const id = f.id || f.properties.id || f.properties.iso_a3 || f.properties.ISO_A3 || f.properties.cca3
+                    codes.add(id)
+                })
+
+                // Add the API codes that map to these GeoJSON codes
+                Object.entries(CODE_MAPPING).forEach(([apiCode, geoCode]) => {
+                    if (codes.has(geoCode)) codes.add(apiCode)
+                })
+
+                mapClickableCodes.value = codes
+            } catch (err) {
+                console.warn("Could not load Map GeoJSON for filtering:", err)
+            }
         } catch (e) {
             error.value = "Failed to load countries. Please refresh."
             console.error(e)
@@ -105,6 +136,10 @@ export function useGame() {
         revealedSessionCountries.value = new Set()
         redSessionCountry.value = null
 
+        // Timer logic
+        resetTimer()
+        startTimer()
+
         // Reset visited for the new session
         visitedCountries.value = new Set()
         localStorage.removeItem(VISITED_KEY)
@@ -115,6 +150,9 @@ export function useGame() {
         }
 
         if (mode === 'survival' || mode === 'capital' || mode === 'map') {
+            if (mode === 'map' && mapClickableCodes.value.size > 0) {
+                pool = pool.filter(c => mapClickableCodes.value.has(c.cca3))
+            }
             // Shuffle pool
             sessionQueue.value = [...pool].sort(() => Math.random() - 0.5)
             sessionTotal.value = sessionQueue.value.length
@@ -131,14 +169,15 @@ export function useGame() {
         gameStatus.value = 'menu'
         currentCountry.value = null
         redSessionCountry.value = null
+        stopTimer()
+        timerSeconds.value = 0
     }
 
     // Choose next country
     const pickNextCountry = () => {
         if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
             if (sessionQueue.value.length === 0) {
-                gameStatus.value = 'finished'
-                currentCountry.value = null
+                finishGame()
                 return
             }
             currentCountry.value = sessionQueue.value.shift()
@@ -303,6 +342,27 @@ export function useGame() {
     const finishGame = () => {
         gameStatus.value = 'finished'
         currentCountry.value = null
+        stopTimer()
+    }
+
+    const startTimer = () => {
+        if (timerInterval) clearInterval(timerInterval)
+        timerSeconds.value = 0
+        timerInterval = setInterval(() => {
+            timerSeconds.value++
+        }, 1000)
+    }
+
+    const stopTimer = () => {
+        if (timerInterval) {
+            clearInterval(timerInterval)
+            timerInterval = null
+        }
+    }
+
+    const resetTimer = () => {
+        stopTimer()
+        timerSeconds.value = 0
     }
 
     return {
@@ -324,6 +384,8 @@ export function useGame() {
         revealedSessionCountries,
         redSessionCountry,
         showCapitals,
+        timerSeconds,
+        formattedTime,
         fetchCountries,
         checkAnswer,
         skipCountry,

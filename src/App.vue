@@ -31,7 +31,8 @@ const {
   returnToMenu: baseReturnToMenu,
   showCapitals,
   toggleCapitals,
-  finishGame
+  finishGame,
+  formattedTime
 } = useGame()
 
 const quizInputRef = ref(null)
@@ -107,7 +108,7 @@ const handleReveal = () => {
 </script>
 
 <template>
-  <div :class="['app-container', { 'map-layout': gameMode === 'map' }]">
+  <div :class="['app-container', { 'map-layout': gameMode === 'map', 'is-finished': gameStatus === 'finished' }]">
     <div v-if="loading" class="loading">
       <div class="spinner"></div>
       <p>Chargement des drapeaux...</p>
@@ -140,6 +141,7 @@ const handleReveal = () => {
       <h2>Félicitations !</h2>
       <p>Vous avez terminé cette session.</p>
       <div class="score-display">Score final : {{ score }} / {{ total }}</div>
+      <div class="time-display">Temps total : {{ formattedTime }}</div>
       <button @click="returnToMenu" class="restart-btn">Retour au Menu</button>
     </div>
 
@@ -150,6 +152,7 @@ const handleReveal = () => {
         <div class="modal-content">
           <h2>Session terminée !</h2>
           <div class="modal-score">Score : {{ score }} / {{ total }}</div>
+          <div class="modal-time">Temps : {{ formattedTime }}</div>
           <p>Vous pouvez maintenant explorer la carte.</p>
           <div class="modal-actions">
             <button @click="showScoreModal = false" class="modal-explore-btn">Explorer la carte</button>
@@ -162,7 +165,13 @@ const handleReveal = () => {
         <button @click="returnToMenu" class="home-btn" title="Retour au menu">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
         </button>
-        <h1>BANDERAS</h1>
+        <div class="header-title-area">
+          <h1>BANDERAS</h1>
+          <div v-if="gameStatus === 'playing'" class="timer-pill">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            {{ formattedTime }}
+          </div>
+        </div>
         <div class="header-actions">
           <button 
             @click="toggleCapitals" 

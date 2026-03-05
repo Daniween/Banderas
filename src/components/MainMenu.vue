@@ -22,33 +22,33 @@ const toggleContinents = () => {
 
 <template>
   <div class="main-menu">
-    <h1 class="title">Banderas Quiz</h1>
+    <h1 class="title">Banderas</h1>
     <p class="subtitle">Maîtrisez les 197 drapeaux de l'ONU</p>
 
     <div class="menu-buttons">
       <button @click="$emit('start', 'learning', null)" class="menu-btn primary">
-        <span class="icon">🎓</span> Apprentissage - Aléatoire
+        Apprentissage - Aléatoire
       </button>
 
       <button @click="$emit('start', 'survival', null)" class="menu-btn secondary">
-        <span class="icon">⏱️</span> Mode survie one-pass
+        Mode survie one-pass
       </button>
 
       <button @click="$emit('start', 'capital', null)" class="menu-btn primary capital-mode">
-        <span class="icon">🏛️</span> Mode Capitales
+        Mode Capitales
       </button>
 
-      <button @click="$emit('start', 'map', null)" class="menu-btn secondary map-mode">
-        <span class="icon">🗺️</span> Mode Carte
+      <button @click="$emit('start', 'map', null)" class="menu-btn map-mode">
+        Mode Carte
       </button>
 
       <button @click="$emit('select-custom')" class="menu-btn primary custom-mode">
-        <span class="icon">🎯</span> Entraînement Personnalisé
+        Entraînement Personnalisé
       </button>
 
       <div class="continent-section">
         <button @click="toggleContinents" class="menu-btn tertiary">
-          <span class="icon">🌍</span> Par Continent
+          Par Continent
         </button>
         
         <div v-if="showContinents" class="continent-list">

@@ -5,13 +5,16 @@
     line-height: 1.5;
     font-weight: 400;
     color-scheme: dark;
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 body {
     margin: 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1f4068 100%);
+    /* Dégradé riche pour faire ressortir le flou */
+    background: radial-gradient(circle at top right, #2a2a4e, #16213e),
+        radial-gradient(circle at bottom left, #1f4068, #16213e);
+    background-attachment: fixed;
     overflow-x: hidden;
 }
 

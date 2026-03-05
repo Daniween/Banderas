@@ -1,21 +1,28 @@
-/* FlagDisplay.css */
+/* FlagDisplay.css - Glassmorphism Redesign */
 .flag-container {
     width: 100%;
     max-width: 400px;
-    margin: 0 auto 2rem;
-    border-radius: 12px;
+    margin: 0 auto 1rem;
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .flag-img {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.3s ease;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+    border-radius: 12px;
+    transition: transform 0.5s ease;
 }
 
-.flag-img:hover {
+.flag-container:hover .flag-img {
     transform: scale(1.02);
 }
