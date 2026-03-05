@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, watch, ref } from 'vue'
+import { onMounted, watch, ref, computed } from 'vue'
 import FlagDisplay from './components/FlagDisplay.vue'
 import QuizInput from './components/QuizInput.vue'
 import ProgressBar from './components/ProgressBar.vue'
@@ -36,6 +36,24 @@ const {
 
 const quizInputRef = ref(null)
 const showScoreModal = ref(true)
+const searchQuery = ref('')
+
+const searchedCountryCode = computed(() => {
+  if (!searchQuery.value || searchQuery.value.length < 2) return null
+  
+  const q = searchQuery.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  const found = countries.value.find(c => {
+    const names = [
+      c.name.common,
+      c.translations?.fra?.common || '',
+      c.cca3
+    ].map(n => n.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
+    
+    return names.some(n => n.includes(q))
+  })
+  
+  return found?.cca3 || null
+})
 
 onMounted(() => {
   fetchCountries()
@@ -152,7 +170,8 @@ const handleReveal = () => {
             :title="showCapitals ? 'Cacher les capitales' : 'Afficher les capitales'"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 21h18" /><path d="M3 7v1a3 3 0 0 0 6 0V7" /><path d="M9 17H4a1 1 0 0 1-1-1V7" /><path d="M15 17h5a1 1 0 0 0 1-1V7" /><path d="M15 7v1a3 3 0 0 1 6 0V7" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /><path d="M9 7h6v10H9z" />
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
             </svg>
           </button>
           <button @click="handleReset" class="reset-btn" title="Réinitialiser">
@@ -171,6 +190,24 @@ const handleReveal = () => {
           :class="{ 'map-flag': gameMode === 'map' }"
         />        
         
+        <div v-if="gameStatus === 'finished' && gameMode === 'map'" class="map-search-container">
+          <h3>Rechercher un pays</h3>
+          <div class="search-input-wrapper">
+            <input 
+              v-model="searchQuery" 
+              type="text" 
+              placeholder="Ex: France, Espagne..."
+              class="search-input"
+            />
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <p v-if="searchQuery && searchQuery.length >= 2 && !searchedCountryCode" class="search-no-result">
+            {{ countries.find(c => (c.name.common.toLowerCase().includes(searchQuery.toLowerCase()) || (c.translations?.fra?.common || '').toLowerCase().includes(searchQuery.toLowerCase()))) 
+               ? 'Ce pays est trop petit pour être cliquable sur cette carte' 
+               : 'Pays non trouvé' }}
+          </p>
+        </div>
+
         <h2 v-if="currentCountry && gameMode === 'capital'" class="country-name-hint">
           {{ currentCountry.translations?.fra?.common || currentCountry.name.common }}
         </h2>
@@ -186,6 +223,7 @@ const handleReveal = () => {
             :correctSessionCountries="correctSessionCountries"
             :revealedSessionCountries="revealedSessionCountries"
             :redSessionCountry="redSessionCountry"
+            :highlightedCountryCode="searchedCountryCode"
             :isFinished="gameStatus === 'finished'"
             @submit="(code) => handleCheck(code)" 
           />

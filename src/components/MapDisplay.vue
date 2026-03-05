@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, watch, computed } from 'vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
@@ -15,6 +15,7 @@ const props = defineProps({
     default: () => new Set()
   },
   redSessionCountry: String,
+  highlightedCountryCode: String,
   isFinished: {
     type: Boolean,
     default: false
@@ -24,14 +25,48 @@ const props = defineProps({
 const emit = defineEmits(['submit'])
 
 const mapContainer = ref(null)
+const geoCodes = ref(new Set())
 let map = null
 let geojsonLayer = null
 
+// Map codes that differ between API (REST Countries) and GeoJSON
+const CODE_MAPPING = {
+  'UNK': 'CS-KM', // Kosovo
+  'PSE': 'PS',    // Palestine (Some GeoJSON use 'PS', others 'PSE')
+}
+
+// Helper to get consistent code for comparison
+const getNormalizedCode = (feature) => {
+  const code = feature.id || feature.properties.id || feature.properties.iso_a3 || feature.properties.ISO_A3 || feature.properties.cca3 || feature.properties.CCA3
+  // Reverse lookup: find if this GeoJSON code corresponds to an API code we use
+  for (const [apiCode, geoCode] of Object.entries(CODE_MAPPING)) {
+    if (code === geoCode) return apiCode
+  }
+  return code
+}
+
 const GEOJSON_URL = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json'
 
+const nonClickableCountries = computed(() => {
+  if (!props.countries || !geoCodes.value.size) return []
+  return props.countries
+    .filter(c => !geoCodes.value.has(c.cca3))
+    .map(c => c.translations?.fra?.common || c.name.common)
+    .sort((a, b) => a.localeCompare(b))
+})
+
 const getCountryStyle = (feature) => {
-  const code = feature.id || feature.properties.id || feature.properties.iso_a3 || feature.properties.ISO_A3 || feature.properties.cca3 || feature.properties.CCA3
-  
+  const code = getNormalizedCode(feature)
+  if (code === props.highlightedCountryCode) {
+    return {
+      fillColor: '#2ecc71', // Vert émeraude brillant
+      fillOpacity: 0.9,
+      weight: 3,
+      color: '#ffffff',
+      dashArray: ''
+    }
+  }
+
   if (props.isFinished) {
     if (props.correctSessionCountries.has(code)) {
       return {
@@ -91,12 +126,32 @@ watch([
   () => props.correctSessionCountries, 
   () => props.revealedSessionCountries,
   () => props.redSessionCountry,
+  () => props.highlightedCountryCode,
   () => props.isFinished
 ], () => {
   if (geojsonLayer) {
     geojsonLayer.setStyle(getCountryStyle)
   }
 }, { deep: true })
+
+// Auto-zoom and pan to highlighted country
+watch(() => props.highlightedCountryCode, (newCode) => {
+  if (!newCode || !geojsonLayer || !map) return
+
+  geojsonLayer.eachLayer(layer => {
+    const feature = layer.feature
+    const code = getNormalizedCode(feature)
+    
+    if (code === newCode) {
+      const bounds = layer.getBounds()
+      map.flyToBounds(bounds, {
+        padding: [100, 100],
+        maxZoom: 6,
+        duration: 1.5
+      })
+    }
+  })
+})
 
 onMounted(async () => {
   map = L.map(mapContainer.value, {
@@ -116,11 +171,16 @@ onMounted(async () => {
     const response = await fetch(GEOJSON_URL)
     const data = await response.json()
 
+    // Collect all available codes in the GeoJSON
+    const codes = new Set()
+    data.features.forEach(f => codes.add(getNormalizedCode(f)))
+    geoCodes.value = codes
+
     geojsonLayer = L.geoJSON(data, {
       style: getCountryStyle,
       onEachFeature: (feature, layer) => {
         const propsData = feature.properties
-        const code = feature.id || propsData.id || propsData.iso_a3 || propsData.ISO_A3 || propsData.cca3 || propsData.CCA3
+        const code = getNormalizedCode(feature)
         
         // Find French name from API data
         const countryData = (props.countries || []).find(c => c.cca3 === code)
@@ -148,7 +208,7 @@ onMounted(async () => {
           click: (e) => {
             if (props.isFinished) return
 
-            const code = feature.id || propsData.id || propsData.iso_a3 || propsData.ISO_A3 || propsData.cca3 || propsData.CCA3
+            const code = getNormalizedCode(feature)
             
             // Visual feedback
             const l = e.target
@@ -180,6 +240,20 @@ onUnmounted(() => {
   <div class="map-wrapper">
     <div ref="mapContainer" class="map-container"></div>
     <div class="map-hint">Cliquez sur le pays correspondant au drapeau</div>
+    
+    <!-- Info Note for non-clickable countries -->
+    <div class="map-info-note" v-if="nonClickableCountries.length > 0">
+      <div class="info-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      </div>
+      <div class="info-tooltip">
+        <h4>{{ nonClickableCountries.length }} pays non cliquables</h4>
+        <p>Ces pays sont trop petits pour la carte actuelle (amélioration en cours) :</p>
+        <div class="countries-list">
+          {{ nonClickableCountries.join(', ') }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -226,5 +300,80 @@ onUnmounted(() => {
 
 :deep(.map-tooltip::before) {
   display: none;
+}
+
+.map-info-note {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+}
+
+.info-icon {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s;
+}
+
+.map-info-note:hover .info-icon {
+  background: #4facfe;
+  transform: scale(1.1);
+}
+
+.info-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  width: 300px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.map-info-note:hover .info-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.info-tooltip h4 {
+  margin: 0 0 8px 0;
+  color: #4facfe;
+  font-size: 1rem;
+}
+
+.info-tooltip p {
+  margin: 0 0 10px 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.countries-list {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-height: 150px;
+  overflow-y: auto;
+  line-height: 1.5;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 </style>
