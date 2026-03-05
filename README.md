@@ -1,12 +1,12 @@
 # 🏳️ Banderas Quiz
 
-Bienvenue sur **Banderas Quiz**, une application web interactive conçue pour relever un défi personnel et ludique : **maîtriser les drapeaux des 196 pays reconnus par l'ONU.**
+Bienvenue sur **Banderas Quiz**, une application web interactive conçue pour relever un défi personnel et ludique : **maîtriser les drapeaux des 197 pays reconnus par l'ONU.**
 
 Ce projet est né de ma volonté personnelle d'apprendre à identifier tous les pays du monde.
 
 ## Objectifs
 
-- **Apprendre** : Identifier les 196 drapeaux (Membres ONU + Observateurs + Kosovo + Taïwan).
+- **Apprendre** : Identifier les 197 drapeaux (Membres ONU + Observateurs + Kosovo + Taïwan).
 - **Progresser** : Suivre ses connaissances grâce à une persistance locale.
 - **S'amuser** : Plusieurs modes de jeu (Apprentissage infini, Survie "One-pass", par Continent, etc.).
 
