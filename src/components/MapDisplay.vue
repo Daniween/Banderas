@@ -243,8 +243,8 @@ onUnmounted(() => {
     
     <!-- Info Note for non-clickable countries -->
     <div class="map-info-note" v-if="nonClickableCountries.length > 0">
-      <div class="info-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      <div class="info-icon" title="Pourquoi certains pays ne sont pas cliquables ?">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
       </div>
       <div class="info-tooltip">
         <h4>{{ nonClickableCountries.length }} pays non cliquables</h4>
@@ -257,127 +257,4 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style scoped>
-.map-wrapper {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.map-container {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.map-hint {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  pointer-events: none;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-:deep(.map-tooltip) {
-  background: rgba(0, 0, 0, 0.6) !important;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: white !important;
-  border-radius: 8px !important;
-  font-weight: 500;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
-}
-
-:deep(.map-tooltip::before) {
-  display: none;
-}
-
-.map-info-note {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  z-index: 1000;
-}
-
-.info-icon {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: help;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.map-info-note:hover .info-icon {
-  background: #4facfe;
-  transform: scale(1.1);
-}
-
-.info-tooltip {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: white;
-  padding: 1.5rem;
-  border-radius: 18px;
-  width: 300px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  transform: translateY(10px);
-  pointer-events: none;
-}
-
-.map-info-note:hover .info-tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.info-tooltip h4 {
-  margin: 0 0 8px 0;
-  color: #4facfe;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.info-tooltip p {
-  margin: 0 0 10px 0;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.5;
-}
-
-.countries-list {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.9);
-  max-height: 200px;
-  overflow-y: auto;
-  line-height: 1.6;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-}
-</style>
+<style scoped src="../styles/MapDisplay.css"></style>

@@ -7,6 +7,9 @@ import MainMenu from './components/MainMenu.vue'
 import CountrySelector from './components/CountrySelector.vue'
 import MapDisplay from './components/MapDisplay.vue'
 import { useGame } from './composables/useGame'
+import { useAuth } from './composables/useAuth'
+import Leaderboard from './components/Leaderboard.vue'
+import UserProfile from './components/UserProfile.vue'
 
 const { 
   currentCountry, 
@@ -34,6 +37,8 @@ const {
   finishGame,
   formattedTime
 } = useGame()
+
+const { user, loginWithGoogle, loginWithEmail, registerWithEmail, logout, updatePseudo, updateProfilePhoto, loadingAuth } = useAuth()
 
 const quizInputRef = ref(null)
 const showScoreModal = ref(true)
@@ -65,14 +70,18 @@ const returnToMenu = () => {
   baseReturnToMenu()
 }
 
-const handleFinishMap = () => {
+const handleFinishMap = async () => {
   if (confirm('Voulez-vous afficher toutes les réponses et arrêter le chrono ?')) {
-    finishGame()
+    await finishGame(user.value)
   }
 }
 
-// Watch gameStatus to reset modal state
+// Watch gameStatus pour sauvegarder le score automatiquement et gérer la modale
 watch(gameStatus, (newStatus) => {
+  if (newStatus === 'finished') {
+    // On appelle finishGame avec l'utilisateur pour enregistrer le score
+    finishGame(user.value)
+  }
   if (newStatus === 'playing') {
     showScoreModal.value = true
   }
@@ -125,6 +134,47 @@ const handleReveal = () => {
       @select-custom="gameStatus = 'selecting'"
       :showCapitals="showCapitals"
       @toggle-capitals="toggleCapitals"
+      :user="user"
+      :loadingAuth="loadingAuth"
+      @login="loginWithGoogle"
+      @login-email="loginWithEmail"
+      @register-email="registerWithEmail"
+      @logout="logout"
+      @update-pseudo="updatePseudo"
+      @show-leaderboard="gameStatus = 'leaderboard'"
+      @show-profile="gameStatus = 'profile'"
+    />
+
+    <!-- LEADERBOARD VIEW -->
+    <div v-else-if="gameStatus === 'leaderboard'" class="dedicated-leaderboard-view">
+      <header>
+        <button @click="gameStatus = 'menu'" class="home-btn" title="Retour au menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </button>
+        <h1>CLASSEMENT MONDIAL</h1>
+        <div style="width: 38px;"></div> <!-- Spacer -->
+      </header>
+      
+      <div class="leaderboard-container glass-panel">
+        <div class="lb-tabs-dedicated">
+          <button @click="searchQuery = 'survival'" :class="{ active: searchQuery === 'survival' || !['capital', 'map'].includes(searchQuery) }">Survie</button>
+          <button @click="searchQuery = 'capital'" :class="{ active: searchQuery === 'capital' }">Capitales</button>
+          <button @click="searchQuery = 'map'" :class="{ active: searchQuery === 'map' }">Carte</button>
+        </div>
+        
+        <Leaderboard :mode="['survival', 'capital', 'map'].includes(searchQuery) ? searchQuery : 'survival'" :key="searchQuery" />
+      </div>
+
+      <button @click="gameStatus = 'menu'" class="back-menu-btn">Retour au Menu</button>
+    </div>
+
+    <!-- USER PROFILE VIEW -->
+    <UserProfile 
+      v-else-if="gameStatus === 'profile'"
+      :user="user"
+      @back="gameStatus = 'menu'"
+      @update-pseudo="updatePseudo"
+      @update-photo="updateProfilePhoto"
     />
 
     <!-- COUNTRY SELECTOR -->
@@ -142,6 +192,7 @@ const handleReveal = () => {
       <p>Vous avez terminé cette session.</p>
       <div class="score-display">Score final : {{ score }} / {{ total }}</div>
       <div class="time-display">Temps total : {{ formattedTime }}</div>
+      <p v-if="user" class="saved-hint">Score enregistré sur votre compte !</p>
       <button @click="returnToMenu" class="restart-btn">Retour au Menu</button>
     </div>
 

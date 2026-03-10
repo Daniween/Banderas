@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  banderas-quiz:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    container_name: banderas-quiz

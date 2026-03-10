@@ -1,0 +1,170 @@
+import { ref, onMounted } from 'vue'
+import {
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+    updateProfile
+} from 'firebase/auth'
+import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from 'firebase/firestore'
+import { auth, googleProvider, db } from '../firebase'
+
+const user = ref(null)
+const loadingAuth = ref(true)
+
+export function useAuth() {
+
+    // Initialise l'utilisateur à la montée de l'app
+    onMounted(() => {
+        console.log("Initialisation useAuth...");
+
+        // Sécurité : Si Firebase ne répond pas en 3 secondes, on force l'affichage
+        const timeout = setTimeout(() => {
+            if (loadingAuth.value) {
+                console.warn("Timeout Firebase (3s) : Forçage du chargement");
+                loadingAuth.value = false;
+            }
+        }, 3000);
+
+        onAuthStateChanged(auth, async (firebaseUser) => {
+            clearTimeout(timeout);
+            console.log("Auth state changed:", firebaseUser ? "Connecté" : "Déconnecté");
+            if (firebaseUser) {
+                try {
+                    // Récupère ou crée les infos supplémentaires en base
+                    const userRef = doc(db, 'users', firebaseUser.uid)
+                    const userSnap = await getDoc(userRef)
+
+                    if (!userSnap.exists()) {
+                        const newUser = {
+                            uid: firebaseUser.uid,
+                            email: firebaseUser.email,
+                            displayName: firebaseUser.displayName,
+                            photoURL: firebaseUser.photoURL,
+                            pseudo: firebaseUser.displayName || 'Explorateur',
+                            createdAt: serverTimestamp(),
+                            lastLogin: serverTimestamp(),
+                            stats: { totalGames: 0, highScores: {} }
+                        }
+                        await setDoc(userRef, newUser)
+                        user.value = newUser
+                    } else {
+                        await updateDoc(userRef, { lastLogin: serverTimestamp() })
+                        user.value = userSnap.data()
+                    }
+                } catch (e) {
+                    console.error("Erreur Firestore lors du chargement de l'utilisateur:", e)
+                    // On définit tout de même un profil minimum pour ne pas bloquer l'UI
+                    user.value = {
+                        uid: firebaseUser.uid,
+                        email: firebaseUser.email,
+                        displayName: firebaseUser.displayName,
+                        photoURL: firebaseUser.photoURL,
+                        pseudo: firebaseUser.displayName || 'Utilisateur'
+                    }
+                }
+            } else {
+                user.value = null
+            }
+            loadingAuth.value = false
+        })
+    })
+
+    const loginWithGoogle = async () => {
+        try {
+            await setPersistence(auth, browserLocalPersistence)
+            await signInWithPopup(auth, googleProvider)
+        } catch (error) {
+            console.error("Erreur de connexion Google:", error)
+            throw error
+        }
+    }
+
+    const loginWithEmail = async (email, password) => {
+        try {
+            await setPersistence(auth, browserLocalPersistence)
+            await signInWithEmailAndPassword(auth, email, password)
+        } catch (error) {
+            console.error("Erreur de connexion Email:", error)
+            throw error
+        }
+    }
+
+    const registerWithEmail = async (email, password, pseudo) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+            await sendEmailVerification(userCredential.user)
+
+            // Créer le profil initial
+            const userRef = doc(db, 'users', userCredential.user.uid)
+            const newUser = {
+                uid: userCredential.user.uid,
+                email: email,
+                displayName: pseudo,
+                photoURL: `https://ui-avatars.com/api/?name=${pseudo}&background=random`,
+                pseudo: pseudo,
+                createdAt: serverTimestamp(),
+                lastLogin: serverTimestamp(),
+                stats: { totalGames: 0, highScores: {} }
+            }
+            await setDoc(userRef, newUser)
+            user.value = newUser
+
+            return userCredential.user
+        } catch (error) {
+            console.error("Erreur d'inscription:", error)
+            throw error
+        }
+    }
+
+    const logout = async () => {
+        try {
+            await signOut(auth)
+            user.value = null
+        } catch (error) {
+            console.error("Erreur de déconnexion :", error)
+        }
+    }
+
+    const updatePseudo = async (newPseudo) => {
+        if (!user.value) return
+        try {
+            const userRef = doc(db, 'users', user.value.uid)
+            await updateDoc(userRef, { pseudo: newPseudo })
+            user.value.pseudo = newPseudo
+        } catch (error) {
+            console.error("Erreur mise à jour pseudo :", error)
+        }
+    }
+
+    const updateProfilePhoto = async (newPhotoURL) => {
+        if (!auth.currentUser) return
+        try {
+            await updateProfile(auth.currentUser, { photoURL: newPhotoURL })
+            const userRef = doc(db, 'users', auth.currentUser.uid)
+            await updateDoc(userRef, { photoURL: newPhotoURL })
+
+            if (user.value) {
+                user.value = { ...user.value, photoURL: newPhotoURL }
+            }
+        } catch (err) {
+            console.error("Erreur mise à jour photo:", err)
+            throw err
+        }
+    }
+
+    return {
+        user,
+        loadingAuth,
+        loginWithGoogle,
+        loginWithEmail,
+        registerWithEmail,
+        logout,
+        updatePseudo,
+        updateProfilePhoto
+    }
+}
