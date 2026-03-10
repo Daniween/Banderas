@@ -14,7 +14,6 @@
     font-size: 4rem;
     margin-bottom: 0.5rem;
     text-align: center;
-    /* High-end metallic gradient */
     background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -33,6 +32,121 @@
     text-transform: uppercase;
 }
 
+/* TOP-RIGHT AUTH CORNER */
+.auth-corner {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.login-corner-btn {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.login-corner-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.user-profile-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.4rem 0.4rem 0.4rem 1rem;
+    border-radius: 50px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.user-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+}
+
+.user-avatar-mini {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-pseudo-mini {
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.logout-icon-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logout-icon-btn:hover {
+    background: rgba(255, 77, 77, 0.1);
+    color: #ff4d4d;
+}
+
+.auth-loader {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.pseudo-edit-mini {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pseudo-input-mini {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    width: 100px;
+    outline: none;
+}
+
+.pseudo-edit-mini button {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* MENU BUTTONS */
 .menu-buttons {
     display: flex;
     flex-direction: column;
@@ -53,7 +167,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Space for arrow/icon */
     font-weight: 500;
     width: 100%;
     color: rgba(255, 255, 255, 0.9);
@@ -82,7 +195,6 @@
     transform: translateX(0);
 }
 
-/* Cohesive highlights instead of distinct colors */
 .primary {
     border-left: 2px solid rgba(43, 99, 148, 0.5);
 }
@@ -117,7 +229,6 @@
 
 .custom-mode {
     border-left: 2px solid rgba(255, 171, 79, 0.5);
-    /* Orange accent */
 }
 
 .menu-btn:hover.custom-mode {
@@ -215,8 +326,55 @@ input:checked+.slider::after {
     background: #ffffff;
 }
 
-input {
+.toggle-container input {
     display: none;
+}
+
+/* LEADERBOARD SECTION */
+.ranking-btn {
+    border-left: 2px solid #f1c40f !important;
+}
+
+.leaderboard-section {
+    width: 100%;
+    margin-top: 1rem;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.lb-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.lb-tabs button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.lb-tabs button.active {
+    background: #4facfe;
+    color: white;
+    border-color: #4facfe;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes slideDown {

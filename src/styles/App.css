@@ -167,8 +167,16 @@ h1 {
 .time-display {
     font-size: 1.5rem;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     font-weight: 500;
+}
+
+.saved-hint {
+    color: #2ecc71;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .restart-btn {
@@ -456,4 +464,82 @@ h1 {
 
 .modal-explore-btn:hover {
     background: rgba(255, 255, 255, 0.15);
+}
+
+/* Dedicated Leaderboard View */
+.dedicated-leaderboard-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dedicated-leaderboard-view header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.leaderboard-container {
+    width: 100%;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.lb-tabs-dedicated {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.lb-tabs-dedicated button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.lb-tabs-dedicated button.active {
+    background: #4facfe;
+    color: white;
+    border-color: #4facfe;
+    box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+}
+
+.back-menu-btn {
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: fit-content;
+    align-self: center;
+}
+
+.back-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
 }

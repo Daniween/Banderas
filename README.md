@@ -41,6 +41,23 @@ cd banderas-quiz
 
 Vous avez deux méthodes pour lancer l'application :
 
+### Configuration (Firebase)
+
+Pour faire fonctionner l'authentification et le classement, vous devez configurer vos identifiants Firebase :
+
+1.  Créez un fichier `.env` à la racine du projet.
+2.  Copiez le contenu de `.env.example` dans votre nouveau fichier `.env`.
+3.  Remplacez les valeurs par vos propres identifiants (disponibles dans la console Firebase > Paramètres du projet).
+
+```env
+VITE_FIREBASE_API_KEY=votre_cle
+VITE_FIREBASE_AUTH_DOMAIN=votre_domaine
+...
+```
+
+> [!IMPORTANT]
+> Ne partagez jamais votre fichier `.env`. Le projet est déjà configuré pour l'ignorer lors des commits (via `.gitignore`).
+
 ### Méthode 1 : Via NPM (Node.js)
 
 Idéal pour le développement local.

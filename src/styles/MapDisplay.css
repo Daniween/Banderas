@@ -52,38 +52,38 @@
 }
 
 .info-icon {
-    background: rgba(255, 255, 255, 0.1);
+    background: #4facfe;
     color: white;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: help;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .map-info-note:hover .info-icon {
-    background: #4facfe;
-    transform: scale(1.1);
+    background: #00f2fe;
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
 }
 
 .info-tooltip {
     position: absolute;
-    top: 100%;
+    top: 50px;
     right: 0;
-    margin-top: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     padding: 1.5rem;
-    border-radius: 18px;
-    width: 300px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    width: 320px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
