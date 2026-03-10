@@ -1,4 +1,6 @@
 import { ref, computed, onMounted } from 'vue'
+import { collection, addDoc, serverTimestamp, doc, updateDoc, increment } from 'firebase/firestore'
+import { db } from '../firebase'
 
 const STORAGE_KEY = 'banderas-known-countries'
 const VISITED_KEY = 'banderas-visited-countries'
@@ -135,6 +137,7 @@ export function useGame() {
         correctSessionCountries.value = new Set()
         revealedSessionCountries.value = new Set()
         redSessionCountry.value = null
+        hasSaved.value = false
 
         // Timer logic
         resetTimer()
@@ -336,10 +339,40 @@ export function useGame() {
         }
     }
 
-    const finishGame = () => {
+    const hasSaved = ref(false)
+
+    const finishGame = async (user = null) => {
         gameStatus.value = 'finished'
         currentCountry.value = null
         stopTimer()
+
+        // Si l'utilisateur est connecté et qu'on n'a pas encore sauvé ce tour
+        if (user && user.uid && sessionTotal.value > 0 && !hasSaved.value) {
+            console.log("Saving game...", { score: sessionScore.value, time: timerSeconds.value });
+            hasSaved.value = true
+            try {
+                await addDoc(collection(db, 'scores'), {
+                    userId: user.uid,
+                    pseudo: user.pseudo || user.displayName,
+                    mode: gameMode.value,
+                    region: regionFilter.value || 'world',
+                    score: sessionScore.value,
+                    total: sessionTotal.value,
+                    timeSeconds: timerSeconds.value,
+                    formattedTime: formattedTime.value,
+                    timestamp: serverTimestamp()
+                })
+
+                // Mettre à jour les stats de l'utilisateur (cumul)
+                const userRef = doc(db, 'users', user.uid)
+                await updateDoc(userRef, {
+                    "stats.totalGames": increment(1),
+                    "stats.totalPlayTime": increment(timerSeconds.value)
+                })
+            } catch (err) {
+                console.error("Erreur lors de l'enregistrement du score:", err)
+            }
+        }
     }
 
     const startTimer = () => {
