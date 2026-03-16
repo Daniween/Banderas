@@ -84,11 +84,49 @@ export function useAuth() {
         }
     }
 
+    const checkRateLimit = () => {
+        const attemptsData = localStorage.getItem('banderas-login-attempts')
+        if (attemptsData) {
+            const data = JSON.parse(attemptsData)
+            const now = Date.now()
+            if (data.blockedUntil && now < data.blockedUntil) {
+                const minutesLeft = Math.ceil((data.blockedUntil - now) / 60000)
+                throw new Error(`Trop de tentatives. Veuillez réessayer dans ${minutesLeft} minutes.`)
+            }
+            if (data.blockedUntil && now >= data.blockedUntil) {
+                localStorage.removeItem('banderas-login-attempts')
+            }
+        }
+    }
+
+    const recordFailedAttempt = () => {
+        const attemptsData = localStorage.getItem('banderas-login-attempts')
+        const now = Date.now()
+        let data = attemptsData ? JSON.parse(attemptsData) : { count: 0, blockedUntil: null }
+        if (!data.blockedUntil || now >= data.blockedUntil) {
+            data.count += 1
+            if (data.count >= 5) {
+                data.blockedUntil = now + (5 * 60 * 1000) // 5 minutes
+            }
+            localStorage.setItem('banderas-login-attempts', JSON.stringify(data))
+        }
+    }
+
+    const clearLoginAttempts = () => {
+        localStorage.removeItem('banderas-login-attempts')
+    }
+
     const loginWithEmail = async (email, password) => {
+        checkRateLimit()
         try {
             await setPersistence(auth, browserLocalPersistence)
             await signInWithEmailAndPassword(auth, email, password)
+            clearLoginAttempts()
         } catch (error) {
+            // Si l'erreur est notre Error custom de checkRateLimit on la throw direct
+            if (error.message.includes('Trop de tentatives')) throw error;
+
+            recordFailedAttempt()
             console.error("Erreur de connexion Email:", error)
             throw error
         }

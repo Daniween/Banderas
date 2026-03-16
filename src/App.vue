@@ -40,6 +40,34 @@ const {
 
 const { user, loginWithGoogle, loginWithEmail, registerWithEmail, logout, updatePseudo, updateProfilePhoto, loadingAuth } = useAuth()
 
+const appAuthError = ref('')
+
+const handleLoginEmail = async (email, password) => {
+  appAuthError.value = ''
+  try {
+    await loginWithEmail(email, password)
+  } catch (err) {
+    if (err.message && err.message.includes('Trop de tentatives')) {
+      appAuthError.value = err.message
+    } else if (err.code === 'auth/too-many-requests') {
+      appAuthError.value = "Trop de tentatives échouées. Par sécurité, ce compte a été temporairement bloqué par le serveur. Veuillez réessayer plus tard ou réinitialiser votre mot de passe."
+    } else if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+      appAuthError.value = "Identifiant ou mot de passe incorrect."
+    } else {
+      appAuthError.value = "Erreur: " + (err.message || "Échec de l'opération")
+    }
+  }
+}
+
+const handleRegisterEmail = async (email, password, pseudo) => {
+  appAuthError.value = ''
+  try {
+    await registerWithEmail(email, password, pseudo)
+  } catch (err) {
+    appAuthError.value = "Erreur: " + (err.message || "Échec de l'inscription")
+  }
+}
+
 const quizInputRef = ref(null)
 const showScoreModal = ref(true)
 const searchQuery = ref('')
@@ -136,9 +164,10 @@ const handleReveal = () => {
       @toggle-capitals="toggleCapitals"
       :user="user"
       :loadingAuth="loadingAuth"
+      :authError="appAuthError"
       @login="loginWithGoogle"
-      @login-email="loginWithEmail"
-      @register-email="registerWithEmail"
+      @login-email="handleLoginEmail"
+      @register-email="handleRegisterEmail"
       @logout="logout"
       @update-pseudo="updatePseudo"
       @show-leaderboard="gameStatus = 'leaderboard'"

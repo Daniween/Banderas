@@ -13,19 +13,11 @@ const authMode = ref('login') // 'login' | 'register'
 const email = ref('')
 const password = ref('')
 const registerPseudo = ref('')
-const localError = ref('')
-
-const handleEmailAuth = async () => {
-  localError.value = ''
-  try {
-    if (authMode.value === 'login') {
-      await emit('login-email', email.value, password.value)
-    } else {
-      await emit('register-email', email.value, password.value, registerPseudo.value)
-    }
-    emit('close')
-  } catch (err) {
-    localError.value = "Erreur: " + (err.message || "Échec de l'opération")
+const handleEmailAuth = () => {
+  if (authMode.value === 'login') {
+    emit('login-email', email.value, password.value)
+  } else {
+    emit('register-email', email.value, password.value, registerPseudo.value)
   }
 }
 </script>
@@ -53,9 +45,9 @@ const handleEmailAuth = async () => {
         <form @submit.prevent="handleEmailAuth" class="email-form">
           <input v-model="email" type="email" placeholder="Email" required class="auth-input">
           <input v-model="password" type="password" placeholder="Mot de passe" required class="auth-input">
-          <input v-if="authMode === 'register'" v-model="registerPseudo" type="text" placeholder="Pseudo" required class="auth-input">
+          <input v-if="authMode === 'register'" v-model="registerPseudo" type="text" placeholder="Pseudo" maxlength="20" required class="auth-input">
           
-          <p v-if="localError || authError" class="auth-error">{{ localError || authError }}</p>
+          <p v-if="authError" class="auth-error">{{ authError }}</p>
 
           <button type="submit" class="auth-submit-btn">
             {{ authMode === 'login' ? 'Se connecter' : "S'inscrire" }}
