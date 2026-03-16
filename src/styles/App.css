@@ -314,6 +314,27 @@ h1 {
     margin: 0 !important;
 }
 
+/* CHANCES INDICATOR */
+.map-chances-indicator {
+    grid-column: 1;
+    grid-row: 2;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0.8rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-chances-indicator strong {
+    color: #f1c40f;
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+}
+
 /* SEARCH BAR ALIGNMENT */
 .search-input-wrapper {
     position: relative;

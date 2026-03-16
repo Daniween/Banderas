@@ -30,6 +30,7 @@ const {
   correctSessionCountries,
   revealedSessionCountries,
   redSessionCountry,
+  mapFailures,
   startGame,
   returnToMenu: baseReturnToMenu,
   showCapitals,
@@ -278,6 +279,10 @@ const handleReveal = () => {
           :alt="currentCountry.name.common"
           :class="{ 'map-flag': gameMode === 'map' }"
         />        
+
+        <div v-if="gameMode === 'map' && gameStatus !== 'finished'" class="map-chances-indicator">
+          Chances restantes : <strong>{{ 3 - mapFailures }}</strong>
+        </div>
         
         <div v-if="gameStatus === 'finished' && gameMode === 'map'" class="map-search-container">
           <h3>Rechercher un pays</h3>
