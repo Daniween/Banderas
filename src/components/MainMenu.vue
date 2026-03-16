@@ -3,12 +3,14 @@ import { ref, watch } from 'vue'
 import Leaderboard from './Leaderboard.vue'
 import AuthModal from './AuthModal.vue'
 
+const emit = defineEmits(['start', 'select-custom', 'toggle-capitals', 'login', 'login-email', 'register-email', 'logout', 'update-pseudo', 'show-leaderboard', 'show-profile'])
+
 const props = defineProps({
   showCapitals: Boolean,
   user: Object,
-  loadingAuth: Boolean
+  loadingAuth: Boolean,
+  authError: String
 })
-const emit = defineEmits(['start', 'select-custom', 'toggle-capitals', 'login', 'login-email', 'register-email', 'logout', 'update-pseudo', 'show-leaderboard', 'show-profile'])
 
 const showContinents = ref(false)
 const continents = [
@@ -26,28 +28,6 @@ const toggleContinents = () => {
 
 
 // Auth Form State
-const authMode = ref('none') // 'none' | 'login' | 'register'
-const email = ref('')
-const password = ref('')
-const registerPseudo = ref('')
-const authError = ref('')
-
-const handleEmailAuth = async () => {
-  authError.value = ''
-  try {
-    if (authMode.value === 'login') {
-      await emit('login-email', email.value, password.value)
-    } else {
-      await emit('register-email', email.value, password.value, registerPseudo.value)
-      alert("Inscription réussie ! Un email de vérification a été envoyé.")
-    }
-    authMode.value = 'none'
-    showAuthModal.value = false // Ferme la modale manuellement après succès e-mail
-  } catch (err) {
-    authError.value = "Erreur: " + (err.message || "Échec de l'opération")
-  }
-}
-
 const showAuthModal = ref(false)
 
 // Fermer la modale automatiquement quand l'utilisateur est connecté
@@ -85,7 +65,7 @@ watch(() => props.user, (newUser) => {
     <!-- AUTH MODAL -->
     <AuthModal 
       v-if="showAuthModal" 
-      :authError="authError"
+      :authError="props.authError"
       @close="showAuthModal = false"
       @login-google="$emit('login')"
       @login-email="(e, p) => $emit('login-email', e, p)"

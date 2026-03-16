@@ -114,7 +114,7 @@ onMounted(fetchPersonalStats)
         <div class="pseudo-container">
           <h2 v-if="!isEditingPseudo">{{ user.pseudo }}</h2>
           <div v-else class="edit-field">
-            <input v-model="newPseudo" class="profile-input">
+            <input v-model="newPseudo" maxlength="20" class="profile-input">
             <button @click="handleUpdatePseudo" class="save-btn small">OK</button>
           </div>
           <button @click="isEditingPseudo = !isEditingPseudo" class="icon-btn-subtle" title="Modifier le pseudo">
