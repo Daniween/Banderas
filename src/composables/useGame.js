@@ -170,6 +170,7 @@ export function useGame() {
 
     const returnToMenu = () => {
         gameStatus.value = 'menu'
+        gameMode.value = 'learning'
         currentCountry.value = null
         redSessionCountry.value = null
         stopTimer()

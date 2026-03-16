@@ -1,0 +1,34 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Règles pour les profils utilisateurs
+    match /users/{userId} {
+      // Lecture : Un utilisateur ne peut lire que son propre profil
+      allow read: if request.auth != null && request.auth.uid == userId;
+      
+      // Écriture : Création et modification de son propre profil
+      // On valide également que le pseudo ne dépasse pas 20 caractères
+      allow write: if request.auth != null && request.auth.uid == userId
+                   && (!request.resource.data.keys().hasAll(['pseudo']) 
+                       || request.resource.data.pseudo.size() <= 20);
+    }
+    
+    // Règles pour les scores
+    match /scores/{scoreId} {
+      // Lecture : Tout le monde peut lire les scores (pour le classement mondial public)
+      allow read: if true;
+      
+      // Création : Seulement si authentifié et si le score est assigné à son propre UID, 
+      // tout en vérifiant que le pseudo de la ressource limite la taille.
+      allow create: if request.auth != null 
+                    && request.resource.data.userId == request.auth.uid
+                    && (!request.resource.data.keys().hasAll(['pseudo']) 
+                        || request.resource.data.pseudo.size() <= 20);
+      
+      // Modification/Suppression : On restreint aux propres scores
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+  }
+}
