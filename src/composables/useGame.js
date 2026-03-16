@@ -26,6 +26,7 @@ export function useGame() {
     const revealedSessionCountries = ref(new Set())
     const redSessionCountry = ref(null)
     const timerSeconds = ref(0)
+    const mapFailures = ref(0)
     let timerInterval = null
 
     const sessionTotal = ref(0)
@@ -138,6 +139,7 @@ export function useGame() {
         revealedSessionCountries.value = new Set()
         redSessionCountry.value = null
         hasSaved.value = false
+        mapFailures.value = 0
 
         // Timer logic
         resetTimer()
@@ -179,6 +181,7 @@ export function useGame() {
 
     // Choose next country
     const pickNextCountry = () => {
+        mapFailures.value = 0
         if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
             if (sessionQueue.value.length === 0) {
                 finishGame()
@@ -226,8 +229,21 @@ export function useGame() {
                 if (onResult) onResult(true)
                 pickNextCountry()
             } else {
-                if (onResult) onResult(false)
-                registerVisited()
+                mapFailures.value++
+                if (mapFailures.value >= 3) {
+                    if (onResult) onResult(false)
+                    registerVisited()
+                    
+                    if (redSessionCountry.value) {
+                        const nextRevealed = new Set(revealedSessionCountries.value)
+                        nextRevealed.add(redSessionCountry.value)
+                        revealedSessionCountries.value = nextRevealed
+                    }
+                    redSessionCountry.value = currentCountry.value.cca3
+                    pickNextCountry()
+                } else {
+                    if (onResult) onResult(false)
+                }
             }
             return
         }
@@ -415,6 +431,7 @@ export function useGame() {
         revealedSessionCountries,
         redSessionCountry,
         showCapitals,
+        mapFailures,
         timerSeconds,
         formattedTime,
         fetchCountries,
