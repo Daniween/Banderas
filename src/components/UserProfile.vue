@@ -7,12 +7,10 @@ const props = defineProps({
   user: Object
 })
 
-const emit = defineEmits(['back', 'update-pseudo', 'update-photo'])
+const emit = defineEmits(['back', 'update-pseudo'])
 
 const newPseudo = ref(props.user?.pseudo || '')
-const newPhotoURL = ref(props.user?.photoURL || '')
 const isEditingPseudo = ref(false)
-const isEditingPhoto = ref(false)
 const personalRecords = ref([])
 const loadingStats = ref(true)
 
@@ -76,13 +74,6 @@ const handleUpdatePseudo = async () => {
   }
 }
 
-const handleUpdatePhoto = async () => {
-  if (newPhotoURL.value.trim() && newPhotoURL.value !== props.user.photoURL) {
-    await emit('update-photo', newPhotoURL.value)
-    isEditingPhoto.value = false
-  }
-}
-
 onMounted(fetchPersonalStats)
 </script>
 
@@ -101,14 +92,6 @@ onMounted(fetchPersonalStats)
       <section class="identity-section">
         <div class="avatar-container">
           <img :src="user.photoURL || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + user.uid" alt="Avatar" class="profile-avatar-large">
-          <button @click="isEditingPhoto = !isEditingPhoto" class="edit-photo-btn" title="Modifier la photo">
-             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          </button>
-        </div>
-
-        <div v-if="isEditingPhoto" class="edit-field anim-slide-down">
-          <input v-model="newPhotoURL" placeholder="URL de l'image..." class="profile-input">
-          <button @click="handleUpdatePhoto" class="save-btn small">OK</button>
         </div>
 
         <div class="pseudo-container">
@@ -162,254 +145,5 @@ onMounted(fetchPersonalStats)
   </div>
 </template>
 
-<style scoped>
-.user-profile-view {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 1rem;
-}
+<style scoped src="../styles/UserProfile.css"></style>
 
-.profile-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.profile-header h1 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin: 0;
-}
-
-.back-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.back-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.profile-content {
-    width: 100%;
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-}
-
-.identity-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2.5rem;
-    text-align: center;
-}
-
-.avatar-container {
-    position: relative;
-    margin-bottom: 1.5rem;
-}
-
-.profile-avatar-large {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid #4facfe;
-    padding: 3px;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.edit-photo-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: #4facfe;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.pseudo-container {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.pseudo-container h2 {
-    font-size: 1.8rem;
-    margin: 0;
-}
-
-.user-email {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.9rem;
-    margin-top: 0.3rem;
-}
-
-.edit-field {
-    display: flex;
-    gap: 10px;
-    margin: 0.5rem 0;
-}
-
-.profile-input {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    color: white;
-    padding: 0.4rem 1rem;
-    outline: none;
-    width: 200px;
-}
-
-.save-btn.small {
-    background: #2ecc71;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0 1rem;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.stats-overview {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
-}
-
-.stat-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.stat-value {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #4facfe;
-}
-
-.stat-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.personal-records h3 {
-    font-size: 1.1rem;
-    color: white;
-    margin-bottom: 1.2rem;
-    text-align: left;
-}
-
-.records-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.record-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: rgba(255, 255, 255, 0.02);
-    padding: 1rem;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.record-icon {
-    width: 10px;
-    height: 40px;
-    border-radius: 4px;
-}
-
-.record-icon.survival { background: #4facfe; }
-.record-icon.capital { background: #f093fb; }
-.record-icon.map { background: #43e97b; }
-
-.record-info {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.mode-label {
-    font-weight: 700;
-}
-
-.record-values {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.record-values .score {
-    font-weight: 800;
-    color: white;
-}
-
-.record-values .time {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.profile-back-btn {
-    padding: 1rem 2.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    border-radius: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.icon-btn-subtle {
-    background: none;
-    border: none;
-    color: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    padding: 5px;
-}
-
-.icon-btn-subtle:hover {
-    color: white;
-}
-
-.anim-fade-in { animation: fadeIn 0.5s ease-out; }
-.anim-slide-down { animation: slideDown 0.3s ease-out; }
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-</style>
