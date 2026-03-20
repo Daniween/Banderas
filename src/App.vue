@@ -40,7 +40,7 @@ const {
   formattedTime
 } = useGame()
 
-const { user, loginWithGoogle, loginWithEmail, registerWithEmail, logout, updatePseudo, updateProfilePhoto, loadingAuth } = useAuth()
+const { user, loginWithGoogle, loginWithEmail, registerWithEmail, logout, updatePseudo, loadingAuth } = useAuth()
 
 const appAuthError = ref('')
 
@@ -206,7 +206,6 @@ const handleReveal = () => {
       :user="user"
       @back="gameStatus = 'menu'"
       @update-pseudo="updatePseudo"
-      @update-photo="updateProfilePhoto"
     />
 
     <!-- CGU PAGE VIEW -->

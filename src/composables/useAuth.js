@@ -179,22 +179,6 @@ export function useAuth() {
         }
     }
 
-    const updateProfilePhoto = async (newPhotoURL) => {
-        if (!auth.currentUser) return
-        try {
-            await updateProfile(auth.currentUser, { photoURL: newPhotoURL })
-            const userRef = doc(db, 'users', auth.currentUser.uid)
-            await updateDoc(userRef, { photoURL: newPhotoURL })
-
-            if (user.value) {
-                user.value = { ...user.value, photoURL: newPhotoURL }
-            }
-        } catch (err) {
-            console.error("Erreur mise à jour photo:", err)
-            throw err
-        }
-    }
-
     return {
         user,
         loadingAuth,
@@ -202,7 +186,6 @@ export function useAuth() {
         loginWithEmail,
         registerWithEmail,
         logout,
-        updatePseudo,
-        updateProfilePhoto
+        updatePseudo
     }
 }
