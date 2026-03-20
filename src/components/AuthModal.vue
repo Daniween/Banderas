@@ -7,7 +7,7 @@ const props = defineProps({
   loadingAuth: Boolean
 })
 
-const emit = defineEmits(['login-google', 'login-email', 'register-email', 'close', 'update-pseudo'])
+const emit = defineEmits(['login-google', 'login-email', 'register-email', 'close', 'update-pseudo', 'show-cgu'])
 
 const authMode = ref('login') // 'login' | 'register'
 const email = ref('')
@@ -47,6 +47,13 @@ const handleEmailAuth = () => {
           <input v-model="password" type="password" placeholder="Mot de passe" required class="auth-input">
           <input v-if="authMode === 'register'" v-model="registerPseudo" type="text" placeholder="Pseudo" maxlength="20" required class="auth-input">
           
+          <div v-if="authMode === 'register'" class="cgu-checkbox-container">
+            <input type="checkbox" id="cgu-checkbox" required class="cgu-checkbox">
+            <label for="cgu-checkbox" class="cgu-label">
+              J'accepte les <a href="#" @click.prevent="$emit('show-cgu')" class="cgu-link">CGU et Politique de Confidentialité</a>
+            </label>
+          </div>
+
           <p v-if="authError" class="auth-error">{{ authError }}</p>
 
           <button type="submit" class="auth-submit-btn">
@@ -219,6 +226,37 @@ const handleEmailAuth = () => {
 .auth-submit-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(79, 172, 254, 0.35);
+}
+
+.cgu-checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.cgu-checkbox {
+  margin-top: 0.25rem;
+  accent-color: #4facfe;
+  cursor: pointer;
+}
+
+.cgu-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.cgu-link {
+  color: #4facfe;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.cgu-link:hover {
+  color: #00f2fe;
 }
 
 .auth-error {

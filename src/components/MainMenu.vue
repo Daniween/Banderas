@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 import Leaderboard from './Leaderboard.vue'
 import AuthModal from './AuthModal.vue'
 
-const emit = defineEmits(['start', 'select-custom', 'toggle-capitals', 'login', 'login-email', 'register-email', 'logout', 'update-pseudo', 'show-leaderboard', 'show-profile'])
+const emit = defineEmits(['start', 'select-custom', 'toggle-capitals', 'login', 'login-email', 'register-email', 'logout', 'update-pseudo', 'show-leaderboard', 'show-profile', 'show-cgu'])
 
 const props = defineProps({
   showCapitals: Boolean,
@@ -70,6 +70,7 @@ watch(() => props.user, (newUser) => {
       @login-google="$emit('login')"
       @login-email="(e, p) => $emit('login-email', e, p)"
       @register-email="(e, p, ps) => $emit('register-email', e, p, ps)"
+      @show-cgu="$emit('show-cgu')"
     />
 
     <div class="menu-buttons">

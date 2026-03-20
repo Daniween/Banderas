@@ -10,6 +10,7 @@ import { useGame } from './composables/useGame'
 import { useAuth } from './composables/useAuth'
 import Leaderboard from './components/Leaderboard.vue'
 import UserProfile from './components/UserProfile.vue'
+import CguPage from './components/CguPage.vue'
 
 const { 
   currentCountry, 
@@ -173,6 +174,7 @@ const handleReveal = () => {
       @update-pseudo="updatePseudo"
       @show-leaderboard="gameStatus = 'leaderboard'"
       @show-profile="gameStatus = 'profile'"
+      @show-cgu="gameStatus = 'cgu'"
     />
 
     <!-- LEADERBOARD VIEW -->
@@ -205,6 +207,12 @@ const handleReveal = () => {
       @back="gameStatus = 'menu'"
       @update-pseudo="updatePseudo"
       @update-photo="updateProfilePhoto"
+    />
+
+    <!-- CGU PAGE VIEW -->
+    <CguPage
+      v-else-if="gameStatus === 'cgu'"
+      @back="gameStatus = 'menu'"
     />
 
     <!-- COUNTRY SELECTOR -->
@@ -325,7 +333,6 @@ const handleReveal = () => {
         <template v-else>
           <QuizInput ref="quizInputRef" @submit="handleCheck" />
         </template>
-
         <div v-if="currentCountry" class="skip-container">
           <button @click="handleSkip" class="skip-btn">Passer ce drapeau</button>
           <button @click="handleReveal" class="skip-btn reveal-btn">Voir la réponse</button>
@@ -333,7 +340,38 @@ const handleReveal = () => {
         </div>
       </main>
     </div>
+
+    <!-- GLOBAL FOOTER -->
+    <footer v-if="['menu', 'cgu', 'leaderboard', 'profile'].includes(gameStatus)" class="app-footer">
+      <p>
+        © 2026 Banderas. Tous droits réservés. - 
+        <button @click="gameStatus = 'cgu'" class="cgu-link-footer">Conditions d'Utilisation & Confidentialité</button>
+      </p>
+    </footer>
   </div>
 </template>
 
 <style scoped src="./styles/App.css"></style>
+<style scoped>
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  margin-top: auto;
+  width: 100%;
+}
+.cgu-link-footer {
+  background: none;
+  border: none;
+  color: #4facfe;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: inherit;
+  transition: color 0.3s;
+}
+.cgu-link-footer:hover {
+  color: #00f2fe;
+}
+</style>
