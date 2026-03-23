@@ -1,5 +1,20 @@
 # 🏳️ Banderas Quiz
 
+<div align="center">
+
+[![Vercel Deployment](https://img.shields.io/badge/vercel-deploy-black?style=for-the-badge&logo=vercel)](https://banderas-quiz.vercel.app/)
+[![Codacy Badge](https://img.shields.io/codacy/grade/07270428cd5b42558667a46973160a2c?style=for-the-badge&logo=codacy)](https://www.codacy.com/gh/Daniween/Banderas/dashboard)
+[![CI Build](https://img.shields.io/github/actions/workflow/status/Daniween/Banderas/main.yml?branch=main&style=for-the-badge&logo=github-actions)](https://github.com/Daniween/Banderas/actions)
+<br>
+[![Issues](https://img.shields.io/github/issues/Daniween/Banderas?style=for-the-badge)](https://github.com/Daniween/Banderas/issues)
+[![GitHub stars](https://img.shields.io/github/stars/Daniween/Banderas?style=for-the-badge)](https://github.com/Daniween/Banderas/stargazers)
+<br>
+[![Vue.js](https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)](https://vuejs.org/)
+[![Vite](https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+
+</div>
+
+
 Bienvenue sur **Banderas Quiz**, une application web interactive conçue pour relever un défi personnel et ludique : **maîtriser les drapeaux des 197 pays reconnus par l'ONU.**
 
 Ce projet est né de ma volonté personnelle d'apprendre à identifier tous les pays du monde.
@@ -35,8 +50,8 @@ Ce projet est né de ma volonté personnelle d'apprendre à identifier tous les 
 Pour commencer, clonez ce dépôt sur votre machine :
 
 ```bash
-git clone https://github.com/votre-user/banderas-quiz.git
-cd banderas-quiz
+git clone https://github.com/Daniween/Banderas.git
+cd Banderas
 ```
 
 Vous avez deux méthodes pour lancer l'application :
