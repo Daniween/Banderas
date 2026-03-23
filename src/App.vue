@@ -65,6 +65,7 @@ const handleRegisterEmail = async (email, password, pseudo) => {
   appAuthError.value = ''
   try {
     await registerWithEmail(email, password, pseudo)
+    alert("Inscription réussie ! Un email de confirmation a été envoyé.\nVeuillez vérifier votre boîte de réception (et vos dossiers de spams) pour valider votre compte.")
   } catch (err) {
     appAuthError.value = "Erreur: " + (err.message || "Échec de l'inscription")
   }
@@ -73,6 +74,8 @@ const handleRegisterEmail = async (email, password, pseudo) => {
 const quizInputRef = ref(null)
 const showScoreModal = ref(true)
 const searchQuery = ref('')
+const showAnswerModal = ref(false)
+const revealedAnswer = ref(null)
 
 const searchedCountryCode = computed(() => {
   if (!searchQuery.value || searchQuery.value.length < 2) return null
@@ -140,8 +143,13 @@ const handleReveal = () => {
     }
     redSessionCountry.value = currentCountry.value.cca3
   }
-  const answer = revealAnswer()
-  alert(`La réponse est : ${answer}`)
+  revealedAnswer.value = revealAnswer()
+  showAnswerModal.value = true
+}
+
+const closeAnswerModal = () => {
+  showAnswerModal.value = false
+  revealedAnswer.value = null
   handleSkip()
 }
 </script>
@@ -245,6 +253,17 @@ const handleReveal = () => {
           <div class="modal-actions">
             <button @click="showScoreModal = false" class="modal-explore-btn">Explorer la carte</button>
             <button @click="returnToMenu" class="modal-close-btn">Retour au Menu</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Reveal Answer -->
+      <div v-if="showAnswerModal" class="modal-overlay">
+        <div class="modal-content answer-modal">
+          <h2>Réponse</h2>
+          <p class="answer-text">{{ revealedAnswer }}</p>
+          <div class="modal-actions">
+            <button @click="closeAnswerModal" class="modal-explore-btn">Continuer</button>
           </div>
         </div>
       </div>
@@ -372,5 +391,18 @@ const handleReveal = () => {
 }
 .cgu-link-footer:hover {
   color: #00f2fe;
+}
+
+.answer-text {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 1.5rem 0;
+  text-transform: capitalize;
+  text-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+.answer-modal {
+  text-align: center;
+  min-width: 320px;
 }
 </style>

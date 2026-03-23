@@ -34,6 +34,14 @@ export function useAuth() {
             clearTimeout(timeout);
             console.log("Auth state changed:", firebaseUser ? "Connecté" : "Déconnecté");
             if (firebaseUser) {
+                if (!firebaseUser.emailVerified && firebaseUser.providerData?.some(p => p.providerId === 'password')) {
+                    console.warn("Utilisateur non vérifié, déconnexion forcée");
+                    await signOut(auth);
+                    user.value = null;
+                    loadingAuth.value = false;
+                    return;
+                }
+
                 try {
                     // Récupère ou crée les infos supplémentaires en base
                     const userRef = doc(db, 'users', firebaseUser.uid)
@@ -120,7 +128,13 @@ export function useAuth() {
         checkRateLimit()
         try {
             await setPersistence(auth, browserLocalPersistence)
-            await signInWithEmailAndPassword(auth, email, password)
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+            
+            // Vérification email pour les comptes classiques (RGPD & sécurité)
+            if (!userCredential.user.emailVerified) {
+                await signOut(auth)
+                throw new Error("Veuillez vérifier votre adresse e-mail avant de vous connecter (un lien vous a été envoyé). Vérifiez vos spams.")
+            }
             clearLoginAttempts()
         } catch (error) {
             // Si l'erreur est notre Error custom de checkRateLimit on la throw direct
@@ -135,9 +149,14 @@ export function useAuth() {
     const registerWithEmail = async (email, password, pseudo) => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-            await sendEmailVerification(userCredential.user)
+            auth.languageCode = 'fr';
+            const actionCodeSettings = {
+                url: window.location.origin, // Return to current origin
+                handleCodeInApp: false
+            };
+            await sendEmailVerification(userCredential.user, actionCodeSettings)
 
-            // Créer le profil initial
+            // Créer le profil initial avec traçage RGPD
             const userRef = doc(db, 'users', userCredential.user.uid)
             const newUser = {
                 uid: userCredential.user.uid,
@@ -145,12 +164,16 @@ export function useAuth() {
                 displayName: pseudo,
                 photoURL: `https://ui-avatars.com/api/?name=${pseudo}&background=random`,
                 pseudo: pseudo,
+                cguAccepted: true,
+                cguAcceptedAt: serverTimestamp(),
                 createdAt: serverTimestamp(),
                 lastLogin: serverTimestamp(),
                 stats: { totalGames: 0, highScores: {} }
             }
             await setDoc(userRef, newUser)
-            user.value = newUser
+            // On déconnecte directement l'utilisateur pour le forcer à valider son email
+            await signOut(auth)
+            user.value = null
 
             return userCredential.user
         } catch (error) {

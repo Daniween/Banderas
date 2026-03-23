@@ -1,4 +1,4 @@
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { collection, addDoc, serverTimestamp, doc, updateDoc, increment } from 'firebase/firestore'
 import { db } from '../firebase'
 
@@ -69,6 +69,22 @@ export function useGame() {
             return sessionTotal.value ? Math.round((played / sessionTotal.value) * 100) : 0
         }
         return total.value ? Math.round((visitedCountries.value.size / total.value) * 100) : 0
+    })
+
+    // Sécurité: Empêcher la fermeture accidentelle de la page en pleine partie
+    const handleBeforeUnload = (e) => {
+        if (gameStatus.value === 'playing') {
+            e.preventDefault()
+            e.returnValue = '' // Trigger browser's default prompt
+        }
+    }
+
+    onMounted(() => {
+        window.addEventListener('beforeunload', handleBeforeUnload)
+    })
+
+    onUnmounted(() => {
+        window.removeEventListener('beforeunload', handleBeforeUnload)
     })
 
     // Fetch DATA
