@@ -65,6 +65,7 @@ const handleRegisterEmail = async (email, password, pseudo) => {
   appAuthError.value = ''
   try {
     await registerWithEmail(email, password, pseudo)
+    alert("Inscription réussie ! Un email de confirmation a été envoyé.\nVeuillez vérifier votre boîte de réception (et vos dossiers de spams) pour valider votre compte.")
   } catch (err) {
     appAuthError.value = "Erreur: " + (err.message || "Échec de l'inscription")
   }
