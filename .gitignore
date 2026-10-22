@@ -31,3 +31,6 @@ dist-ssr
 # Firebase CLI
 .firebase/
 firebase-debug.log
+
+# Notes personnelles (non versionnées)
+CONFIG_EMAIL.md
