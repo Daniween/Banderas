@@ -133,6 +133,16 @@ npm run data
 
 Régénère `src/data/countries.json` et `src/data/world.geo.json` depuis les sources (à committer ensuite).
 
+### E-mail de bienvenue personnalisé
+
+À l'inscription, l'app appelle la fonction serverless `api/send-verification.js` (Vercel), qui envoie un e-mail de validation aux couleurs de Banderas (modèle : `emails/verification.js`). Si la fonction n'est pas configurée, l'e-mail standard de Firebase est envoyé à la place.
+
+Variables à définir dans Vercel (Settings > Environment Variables) — voir `.env.example` :
+
+- `FIREBASE_SERVICE_ACCOUNT` : JSON du compte de service (console Firebase > Paramètres du projet > Comptes de service > Générer une clé privée)
+- `MAIL_FROM` : expéditeur, ex. `Banderas <adresse@gmail.com>`
+- `SMTP_URL` (ex. Gmail avec un mot de passe d'application) **ou** `RESEND_API_KEY` (nécessite un domaine vérifié chez Resend)
+
 ### Firestore
 
 Les règles de sécurité sont dans `firestore.rules` (validation des scores, pseudo de 20 caractères maximum). Pour les déployer :

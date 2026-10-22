@@ -129,6 +129,20 @@ export async function loginWithEmail(email, password) {
   }
 }
 
+/** Demande l'e-mail de validation personnalisé à la fonction serverless (api/send-verification.js). */
+async function sendBrandedVerification(user, pseudo) {
+  try {
+    const res = await fetch('/api/send-verification', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${await user.getIdToken()}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pseudo }),
+    })
+    return res.ok && (await res.json()).ok === true
+  } catch {
+    return false
+  }
+}
+
 export async function registerWithEmail(email, password, pseudo) {
   registering = true
   try {
@@ -145,7 +159,10 @@ export async function registerWithEmail(email, password, pseudo) {
       lastLogin: serverTimestamp(),
       stats: { totalGames: 0, totalPlayTime: 0 },
     })
-    await sendEmailVerification(user, { url: window.location.origin, handleCodeInApp: false })
+    // E-mail aux couleurs de Banderas ; à défaut, e-mail standard de Firebase
+    if (!(await sendBrandedVerification(user, pseudo))) {
+      await sendEmailVerification(user, { url: window.location.origin, handleCodeInApp: false })
+    }
   } finally {
     // On déconnecte pour forcer la validation de l'e-mail
     await signOut(auth).catch(() => {})
