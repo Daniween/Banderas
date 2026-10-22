@@ -68,9 +68,9 @@ const close = (value) => dialog.value?.resolve(value)
   padding: 0.75rem 1.1rem;
   border-radius: var(--radius-md);
   background: var(--bg-elevated);
-  border: 1px solid var(--border-strong);
+  border: 2px solid var(--border);
   box-shadow: var(--shadow-md);
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.95rem;
 }
 

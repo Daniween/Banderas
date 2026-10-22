@@ -127,10 +127,10 @@ const deselectVisible = () => update((s) => filteredCountries.value.forEach((c) 
   min-height: 36px;
   padding: 0.35rem 0.9rem;
   border-radius: var(--radius-full);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface);
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 800;
   font-size: 0.9rem;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
@@ -142,8 +142,8 @@ const deselectVisible = () => update((s) => filteredCountries.value.forEach((c) 
 
 .chip.active {
   background: var(--accent-soft);
-  border-color: rgba(79, 172, 254, 0.5);
-  color: var(--text);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .bulk {
@@ -181,7 +181,7 @@ const deselectVisible = () => update((s) => filteredCountries.value.forEach((c) 
   width: 100%;
   padding: 0.55rem 0.7rem;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface);
   text-align: left;
   transition: background-color 0.15s, border-color 0.15s;
@@ -196,7 +196,7 @@ const deselectVisible = () => update((s) => filteredCountries.value.forEach((c) 
 
 .country.selected {
   background: var(--accent-soft);
-  border-color: rgba(79, 172, 254, 0.5);
+  border-color: var(--accent);
 }
 
 .country img {

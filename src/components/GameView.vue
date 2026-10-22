@@ -314,7 +314,7 @@ const handleFinishMap = async () => {
   padding: 0.6rem;
   border-radius: var(--radius-lg);
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
 }
 
 .game-title {
@@ -343,11 +343,13 @@ const handleFinishMap = async () => {
   padding: 0.15rem 0.6rem;
   font-size: 0.8rem;
   color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .streak {
-  color: var(--warning) !important;
-  animation: fade-in 0.3s;
+  color: #c2410c !important;
+  background: var(--warning-soft) !important;
+  animation: pop 0.35s var(--ease-bounce);
 }
 
 .header-actions {
@@ -369,8 +371,7 @@ const handleFinishMap = async () => {
 
 .country-name {
   text-align: center;
-  font-size: clamp(1.4rem, 5vw, 1.9rem);
-  font-weight: 800;
+  font-size: clamp(1.5rem, 5vw, 2rem);
 }
 
 .hint {
@@ -398,7 +399,7 @@ const handleFinishMap = async () => {
 }
 
 .play-actions .finish {
-  --btn-color: var(--warning);
+  --btn-color: #b45309;
 }
 
 .chances {
@@ -408,7 +409,7 @@ const handleFinishMap = async () => {
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   color: var(--text-muted);
   font-size: 0.92rem;
 }
@@ -466,12 +467,11 @@ const handleFinishMap = async () => {
   border-radius: 50%;
   color: var(--warning);
   background: var(--warning-soft);
-  border: 1px solid rgba(251, 191, 36, 0.3);
+  box-shadow: 0 4px 0 #f3d38a;
 }
 
 .results h2 {
-  font-size: clamp(1.6rem, 5vw, 2.1rem);
-  font-weight: 800;
+  font-size: clamp(1.7rem, 5vw, 2.2rem);
 }
 
 .results-score {
@@ -481,9 +481,9 @@ const handleFinishMap = async () => {
 }
 
 .results-score strong {
-  font-size: clamp(3rem, 12vw, 4rem);
-  font-weight: 800;
-  color: var(--text);
+  font-size: clamp(3rem, 12vw, 4.2rem);
+  font-weight: 900;
+  color: var(--accent);
   letter-spacing: -0.03em;
 }
 
@@ -500,6 +500,7 @@ const handleFinishMap = async () => {
   padding: 0.75rem 0.5rem;
   border-radius: var(--radius-md);
   background: var(--surface-2);
+  border: 2px solid var(--border);
 }
 
 .stats dt {
@@ -511,8 +512,8 @@ const handleFinishMap = async () => {
 
 .stats dd {
   margin: 0.15rem 0 0;
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 900;
   font-variant-numeric: tabular-nums;
 }
 
@@ -553,8 +554,9 @@ const handleFinishMap = async () => {
 
 .answer-text {
   margin: 0.5rem 0 0;
-  font-size: clamp(1.8rem, 7vw, 2.4rem);
-  font-weight: 800;
+  font-size: clamp(1.9rem, 7vw, 2.5rem);
+  font-weight: 900;
+  color: var(--accent);
   letter-spacing: -0.02em;
   text-wrap: balance;
 }

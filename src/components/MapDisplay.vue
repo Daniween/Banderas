@@ -32,14 +32,14 @@ const nonClickableCountries = computed(() =>
     .sort((a, b) => a.localeCompare(b, 'fr')),
 )
 
-const BASE = { weight: 0.8, opacity: 1, color: 'rgba(148, 163, 214, 0.45)', fillOpacity: 1, fillColor: '#222b48' }
+const BASE = { weight: 0.8, opacity: 1, color: '#aab4c9', fillOpacity: 1, fillColor: '#ffffff' }
 const STYLES = {
-  highlight: { fillColor: '#4facfe', weight: 2.5, color: '#ffffff' },
-  correct: { fillColor: '#1f9d74', color: 'rgba(255,255,255,0.7)' },
-  missed: { fillColor: '#c2662a', color: 'rgba(255,255,255,0.7)' },
-  last: { fillColor: '#dc4a4a', weight: 2, color: '#ffffff' },
-  hover: { fillColor: '#3b6fb0' },
-  click: { fillColor: '#fbbf24' },
+  highlight: { fillColor: '#4f6bff', weight: 2.5, color: '#2a3fb8' },
+  correct: { fillColor: '#4ade80', color: '#15803d' },
+  missed: { fillColor: '#fdba74', color: '#c2410c' },
+  last: { fillColor: '#f87171', weight: 2, color: '#b91c1c' },
+  hover: { fillColor: '#c7d0ff' },
+  click: { fillColor: '#fcd34d' },
 }
 
 const getCountryStyle = (feature) => {
@@ -190,7 +190,7 @@ onUnmounted(() => {
   min-height: 320px;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   box-shadow: var(--shadow-md);
   isolation: isolate;
 }
@@ -198,7 +198,7 @@ onUnmounted(() => {
 .map-container {
   width: 100%;
   height: 100%;
-  background: #0c1430;
+  background: #d7e7fb;
 }
 
 .map-overlay {
@@ -210,7 +210,7 @@ onUnmounted(() => {
   padding: 2rem;
   text-align: center;
   color: var(--text-muted);
-  background: rgba(11, 16, 32, 0.6);
+  background: rgba(245, 247, 252, 0.7);
 }
 
 .map-hint {
@@ -221,8 +221,8 @@ onUnmounted(() => {
   z-index: 1000;
   padding: 0.45rem 0.9rem;
   border-radius: var(--radius-full);
-  background: rgba(11, 16, 32, 0.75);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid var(--border);
   color: var(--text-muted);
   font-size: 0.85rem;
   white-space: nowrap;
@@ -241,7 +241,7 @@ onUnmounted(() => {
 }
 
 .info-btn {
-  background: rgba(11, 16, 32, 0.8);
+  background: var(--surface);
 }
 
 .info-panel {
@@ -249,7 +249,7 @@ onUnmounted(() => {
   padding: 1.1rem 1.2rem;
   border-radius: var(--radius-lg);
   background: var(--bg-elevated);
-  border: 1px solid var(--border-strong);
+  border: 2px solid var(--border);
   box-shadow: var(--shadow-lg);
   animation: fade-up 0.25s var(--ease-out);
 }
@@ -274,7 +274,7 @@ onUnmounted(() => {
 
 :deep(.leaflet-container) {
   font-family: var(--font);
-  background: #0c1430;
+  background: #d7e7fb;
 }
 
 :deep(.leaflet-bar a) {
@@ -284,15 +284,15 @@ onUnmounted(() => {
 }
 
 :deep(.leaflet-bar a:hover) {
-  background: #1b2547;
+  background: var(--surface-2);
 }
 
 :deep(.map-tooltip) {
-  background: rgba(11, 16, 32, 0.92);
-  border: 1px solid var(--border-strong);
-  color: var(--text);
+  background: var(--text);
+  border: 2px solid var(--border);
+  color: #fff;
   border-radius: var(--radius-sm);
-  font-weight: 600;
+  font-weight: 800;
   box-shadow: var(--shadow-md);
 }
 

@@ -212,6 +212,7 @@ const showCguFromAuth = () => {
   padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
   color: var(--text-subtle);
   font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .app-footer .link-btn {

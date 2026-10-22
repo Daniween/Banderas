@@ -112,6 +112,7 @@ watch(mode, () => fetchScores(), { immediate: true })
 }
 
 .row {
+  border: 2px solid var(--border);
   display: grid;
   grid-template-columns: 36px 1fr auto 64px;
   align-items: center;
@@ -130,10 +131,11 @@ watch(mode, () => fetchScores(), { immediate: true })
 
 .podium {
   background: var(--surface-2);
+  font-weight: 800;
 }
 
 .me {
-  outline: 1.5px solid rgba(79, 172, 254, 0.6);
+  outline: 2px solid var(--accent);
   background: var(--accent-soft);
 }
 

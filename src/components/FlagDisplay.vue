@@ -44,9 +44,9 @@ watch(
   aspect-ratio: 3 / 2;
   border-radius: var(--radius-xl);
   background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
-  transition: border-color 0.25s, box-shadow 0.25s;
+  border: 2px solid var(--border);
+  box-shadow: var(--lift) var(--border-strong);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .flag.compact {
@@ -68,7 +68,7 @@ watch(
   opacity: 0;
   transform: scale(0.98);
   transition: opacity 0.25s, transform 0.35s var(--ease-out);
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 2px 6px rgba(28, 34, 54, 0.18));
 }
 
 .flag img.visible {
@@ -77,13 +77,14 @@ watch(
 }
 
 .flag--correct {
-  border-color: rgba(52, 211, 153, 0.6);
-  box-shadow: 0 0 0 4px var(--success-soft), var(--shadow-md);
+  border-color: var(--success);
+  box-shadow: var(--lift) var(--success), 0 0 0 6px var(--success-soft);
+  animation: pop 0.35s var(--ease-bounce);
 }
 
 .flag--wrong {
-  border-color: rgba(248, 113, 113, 0.6);
-  box-shadow: 0 0 0 4px var(--danger-soft), var(--shadow-md);
+  border-color: var(--danger);
+  box-shadow: var(--lift) var(--danger), 0 0 0 6px var(--danger-soft);
   animation: shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97);
 }
 </style>

@@ -146,14 +146,7 @@ onMounted(async () => {
 }
 
 .google {
-  --btn-bg: #fff;
-  --btn-color: #1f2937;
-  --btn-border: transparent;
-}
-
-.google:hover:not(:disabled) {
-  background: #f3f4f6;
-  border-color: transparent;
+  --btn-color: var(--text);
 }
 
 .divider {
@@ -227,8 +220,9 @@ onMounted(async () => {
   padding: 0.75rem 0.9rem;
   border-radius: var(--radius-sm);
   background: var(--danger-soft);
-  border: 1px solid rgba(248, 113, 113, 0.3);
-  color: #fecaca;
+  border: 2px solid #f7c4c5;
+  color: #b42318;
+  font-weight: 700;
   font-size: 0.9rem;
 }
 
@@ -236,7 +230,7 @@ onMounted(async () => {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.45);
   border-top-color: #fff;
   animation: spin 0.8s linear infinite;
 }

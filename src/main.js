@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import '@fontsource-variable/outfit'
+import '@fontsource-variable/nunito'
 import './style.css'
 import App from './App.vue'
 import { confirmDialog } from './composables/useDialog'

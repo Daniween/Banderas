@@ -172,18 +172,18 @@ const onMode = (id) => (id === 'custom' ? emit('select-custom') : emit('start', 
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  height: 42px;
-  padding: 0 0.9rem 0 0.35rem;
+  height: 44px;
+  padding: 0 0.95rem 0 0.35rem;
   border-radius: var(--radius-full);
-  border: 1px solid var(--border);
-  background: var(--surface-2);
-  font-weight: 600;
-  transition: background-color 0.2s, border-color 0.2s;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  font-weight: 800;
+  box-shadow: 0 3px 0 var(--border-strong);
+  transition: background-color 0.15s;
 }
 
 .account-chip:hover {
-  background: var(--surface-3);
-  border-color: var(--border-strong);
+  background: var(--surface-2);
 }
 
 .account-chip img {
@@ -204,9 +204,8 @@ const onMode = (id) => (id === 'custom' ? emit('select-custom') : emit('start', 
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 7vw, 3.25rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.1rem, 7.5vw, 3.4rem);
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
@@ -222,16 +221,17 @@ const onMode = (id) => (id === 'custom' ? emit('select-custom') : emit('start', 
   color: var(--text-muted);
 }
 
+/* Pastille d'icône pleine, à la couleur du mode */
 .mode-icon {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-md);
-  color: var(--c);
-  background: color-mix(in srgb, var(--c) 16%, transparent);
-  border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+  color: #fff;
+  background: var(--c);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 70%, #000);
 }
 
 .learn-card,
@@ -239,35 +239,59 @@ const onMode = (id) => (id === 'custom' ? emit('select-custom') : emit('start', 
   position: relative;
   text-align: left;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface);
-  transition: background-color 0.2s, border-color 0.2s, transform 0.25s var(--ease-out), box-shadow 0.25s;
+  box-shadow: var(--lift) var(--border-strong);
+  transition: border-color 0.15s, transform 0.2s var(--ease-bounce), box-shadow 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
 
-.learn-card:hover,
 .mode-card:not(.continent-card):hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--c, var(--accent)) 45%, transparent);
-  background: color-mix(in srgb, var(--c, var(--accent)) 7%, var(--surface));
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: var(--c);
+  box-shadow: 0 7px 0 var(--c);
 }
 
+.mode-card:not(.continent-card):active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--c);
+}
+
+/* Carte principale : grand aplat de couleur */
 .learn-card {
   --c: var(--mode-learning);
   display: flex;
   align-items: center;
   gap: 1.1rem;
-  padding: 1.35rem 1.4rem;
-  background:
-    linear-gradient(135deg, rgba(79, 172, 254, 0.12), rgba(109, 93, 252, 0.08)),
-    var(--surface);
-  border-color: rgba(79, 172, 254, 0.25);
+  padding: 1.4rem 1.5rem;
+  color: #fff;
+  background: var(--accent-gradient);
+  border-color: transparent;
+  box-shadow: 0 6px 0 var(--accent-strong);
+}
+
+.learn-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 0 var(--accent-strong);
+}
+
+.learn-card:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--accent-strong);
 }
 
 .learn-card .mode-icon {
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
+  color: var(--accent);
+  background: #fff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.learn-card .learn-desc,
+.learn-card .learn-count,
+.learn-card .chev {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .learn-body {
@@ -279,8 +303,8 @@ const onMode = (id) => (id === 'custom' ? emit('select-custom') : emit('start', 
 }
 
 .learn-title {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 900;
 }
 
 .learn-desc,
@@ -309,13 +333,17 @@ const onMode = (id) => (id === 'custom' ? emit('select-custom') : emit('start', 
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: var(--accent-gradient);
+  background: #fff;
   transition: width 0.6s var(--ease-out);
+}
+
+.learn-card .learn-bar {
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .learn-count {
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--text-muted);
   font-variant-numeric: tabular-nums;
 }
@@ -328,7 +356,7 @@ const onMode = (id) => (id === 'custom' ? emit('select-custom') : emit('start', 
 
 .learn-card:hover .chev {
   transform: translateX(3px);
-  color: var(--text);
+  color: #fff;
 }
 
 .modes {
@@ -346,8 +374,8 @@ const onMode = (id) => (id === 'custom' ? emit('select-custom') : emit('start', 
 }
 
 .mode-title {
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 900;
   margin-top: 0.25rem;
 }
 

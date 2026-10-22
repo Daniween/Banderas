@@ -255,7 +255,7 @@ onMounted(fetchPersonalStats)
   padding: 0.75rem 0.9rem;
   border-radius: var(--radius-md);
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
 }
 
 .record-icon {
