@@ -22,23 +22,28 @@ Ce projet est né de ma volonté personnelle d'apprendre à identifier tous les 
 ## Objectifs
 
 - **Apprendre** : Identifier les 197 drapeaux (Membres ONU + Observateurs + Kosovo + Taïwan).
-- **Progresser** : Suivre ses connaissances grâce à une persistance locale.
+- **Progresser** : Suivre ses connaissances grâce à une persistance locale, et ses records grâce à un compte.
 - **S'amuser** : Plusieurs modes de jeu (Apprentissage infini, Survie "One-pass", par Continent, etc.).
 
 ## Stack Technique
 
-- **Vue.js 3** (Composition API)
-- **Vite** (Build tool rapide)
-- **CSS Vanilla** (Design premium Glassmorphism)
-- **RestCountries API** (Données en temps réel)
+- **Vue.js 3** (Composition API, composants chargés à la demande)
+- **Vite 8** + **vite-plugin-pwa** (installable, fonctionne hors ligne)
+- **Firebase** (Auth + Firestore Lite, chargé en différé) pour les comptes et le classement
+- **Leaflet** (mode Carte, rendu Canvas)
+- **CSS Vanilla** (design system à base de variables CSS, responsive)
+- **Vitest** (tests unitaires)
 - **Docker** (Conteneurisation)
+
+Les données des pays sont **embarquées** dans l'application (`src/data/`) : aucun appel d'API au démarrage.
+Elles sont générées à partir de [mledoze/countries](https://github.com/mledoze/countries) (noms, alias), [Wikidata](https://www.wikidata.org) (noms français des capitales) et [world.geo.json](https://github.com/johan/world.geo.json) (contours). Les drapeaux sont servis par [flagcdn](https://flagcdn.com).
 
 ---
 
 ## Modes de jeux
 - Mode apprentissage : Les pays passent un par un jusqu'à ce que vous les connaissiez tous.
 - Mode survie one-pass : Les pays passent un par un sans revenir en arrière.
-- Mode capitale : Deviner la capitale du pays.
+- Mode capitale : Deviner la capitale du pays (en français ou en anglais : « Londres » comme « London »).
 - Mode carte : Placer les pays sur la carte du monde.
 - Mode entrainement : Entrainer vous sur les drapeaux que vous ne connaissez pas.
 - Mode continent : Apprendre les drapeaux par continent.
@@ -91,7 +96,13 @@ Idéal pour le développement local.
 
    L'application sera accessible sur `http://localhost:5173`.
 
-3. **Compiler pour la production** :
+3. **Lancer les tests** :
+
+   ```bash
+   npm test
+   ```
+
+4. **Compiler pour la production** :
    ```bash
    npm run build
    # Pour prévisualiser le build :
@@ -113,6 +124,24 @@ Idéal pour lancer l'application dans un environnement isolé et propre (contene
    docker run -p 8080:80 banderas-quiz
    ```
    L'application sera accessible sur `http://localhost:8080`.
+
+### Mettre à jour les données des pays
+
+```bash
+npm run data
+```
+
+Régénère `src/data/countries.json` et `src/data/world.geo.json` depuis les sources (à committer ensuite).
+
+### Firestore
+
+Les règles de sécurité sont dans `firestore.rules` (validation des scores, pseudo de 20 caractères maximum). Pour les déployer :
+
+```bash
+firebase deploy --only firestore:rules
+```
+
+Index composites requis : `scores` (`mode` ↑, `score` ↓, `timeSeconds` ↑) pour le classement, et `scores` (`userId` ↑, `timestamp` ↓) pour le profil.
 
 ---
 

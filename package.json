@@ -1,20 +1,31 @@
 {
   "name": "banderas-quiz",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "data": "node tools/generate-data.mjs",
+    "test": "vitest run"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.3",
-    "vite": "^7.2.4",
-    "vue": "^3.5.26"
+    "@vitejs/plugin-vue": "^6.0.10",
+    "vite": "^8.3.5",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.0.5"
   },
   "dependencies": {
-    "firebase": "^12.10.0",
-    "leaflet": "^1.9.4"
+    "@fontsource-variable/outfit": "^5.3.0",
+    "firebase": "^13.1.0",
+    "leaflet": "^1.9.4",
+    "vue": "^3.5.44"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "^1.14.3"
+  },
+  "engines": {
+    "node": ">=22.12"
   }
 }

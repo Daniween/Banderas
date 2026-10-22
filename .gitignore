@@ -28,3 +28,6 @@ dist-ssr
 
 
 /scripts/*
+# Firebase CLI
+.firebase/
+firebase-debug.log
