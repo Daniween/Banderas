@@ -24,6 +24,13 @@ const EXTRA_CODES = ['VAT', 'PSE', 'UNK', 'TWN', 'GNB']
 // Codes qui diffèrent entre mledoze (cca3) et le GeoJSON
 const GEO_CODE_MAPPING = { 'CS-KM': 'UNK', PS: 'PSE' }
 
+// Zones sans code dans le GeoJSON, rattachées au pays reconnu par l'ONU
+const GEO_NAME_MAPPING = { Somaliland: 'SOM', 'Northern Cyprus': 'CYP' }
+
+// En dessous de cette emprise (en degrés²), un pays est trop petit pour être cliqué
+// à l'échelle du monde : il reçoit une pastille ronde en plus de son contour.
+const TINY_AREA = 1.5
+
 // Alias usuels acceptés en plus des noms officiels
 const CUSTOM_ALIASES = {
   COD: ['rd congo', 'rdc', 'congo kinshasa'],
@@ -97,7 +104,26 @@ function frenchCapital(cca3, capitalEn, wikidata) {
   return match?.fr ?? null
 }
 
-const geoCode = (f) => f.id || f.properties?.id || f.properties?.iso_a3
+const rawGeoCode = (f) => f.id || f.properties?.id || f.properties?.iso_a3
+const geoCode = (f) => GEO_NAME_MAPPING[f.properties?.name] ?? GEO_CODE_MAPPING[rawGeoCode(f)] ?? rawGeoCode(f)
+
+/** Emprise (degrés²) de chaque pays du GeoJSON, toutes parties confondues. */
+function areasByCode(features) {
+  const boxes = {}
+  const visit = (coords, box) => {
+    if (typeof coords[0] === 'number') {
+      box[0] = Math.min(box[0], coords[0])
+      box[1] = Math.min(box[1], coords[1])
+      box[2] = Math.max(box[2], coords[0])
+      box[3] = Math.max(box[3], coords[1])
+    } else coords.forEach((c) => visit(c, box))
+  }
+  for (const f of features) {
+    const box = (boxes[geoCode(f)] ??= [Infinity, Infinity, -Infinity, -Infinity])
+    visit(f.geometry.coordinates, box)
+  }
+  return Object.fromEntries(Object.entries(boxes).map(([code, b]) => [code, (b[2] - b[0]) * (b[3] - b[1])]))
+}
 
 async function main() {
   console.log('Téléchargement des sources...')
@@ -107,7 +133,7 @@ async function main() {
     fetchFrenchCapitals(),
   ])
 
-  const geoCodes = new Set(geo.features.map((f) => GEO_CODE_MAPPING[geoCode(f)] ?? geoCode(f)))
+  const areas = areasByCode(geo.features)
   const missingCapitals = []
 
   const countries = all
@@ -139,7 +165,8 @@ async function main() {
         region: c.region,
         capitals,
         aliases: [...new Set(aliases.map(normalize).filter(Boolean))],
-        onMap: geoCodes.has(c.cca3),
+        // Pastille cliquable pour les pays absents de la carte ou trop petits
+        ...(!(areas[c.cca3] >= TINY_AREA) && { point: c.latlng.map((n) => Math.round(n * 100) / 100) }),
       }
     })
     .sort((a, b) => a.name.localeCompare(b.name, 'fr'))
@@ -149,7 +176,7 @@ async function main() {
     type: 'FeatureCollection',
     features: geo.features.map((f) => ({
       type: 'Feature',
-      id: GEO_CODE_MAPPING[geoCode(f)] ?? geoCode(f),
+      id: geoCode(f),
       properties: { name: f.properties?.name },
       geometry: f.geometry,
     })),
@@ -160,7 +187,8 @@ async function main() {
   await writeFile(new URL('world.geo.json', OUT_DIR), JSON.stringify(slimGeo))
 
   console.log(`${countries.length} pays écrits dans ${fileURLToPath(OUT_DIR)}`)
-  console.log(`${countries.filter((c) => !c.onMap).length} pays absents de la carte`)
+  const points = countries.filter((c) => c.point)
+  console.log(`${points.length} pays représentés par une pastille : ${points.map((c) => c.code).join(', ')}`)
   if (missingCapitals.length) {
     console.warn(`Capitales sans nom français (nom anglais conservé) :\n  ${missingCapitals.join('\n  ')}`)
   }

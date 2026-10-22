@@ -3,7 +3,6 @@ import { onMounted, onUnmounted, ref, watch, computed } from 'vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import geoUrl from '../data/world.geo.json?url'
-import AppIcon from './AppIcon.vue'
 
 const props = defineProps({
   countries: { type: Array, default: () => [] },
@@ -19,20 +18,16 @@ const emit = defineEmits(['submit'])
 const mapContainer = ref(null)
 const loading = ref(true)
 const loadError = ref(false)
-const showInfo = ref(false)
 let map = null
-let geojsonLayer = null
+// Contours des pays + pastilles des petits pays : mêmes styles, mêmes interactions
+let countryLayers = []
 
 const countryByCode = computed(() => new Map(props.countries.map((c) => [c.code, c])))
 
-const nonClickableCountries = computed(() =>
-  props.countries
-    .filter((c) => !c.onMap)
-    .map((c) => c.name)
-    .sort((a, b) => a.localeCompare(b, 'fr')),
-)
-
 const BASE = { weight: 0.8, opacity: 1, color: '#aab4c9', fillOpacity: 1, fillColor: '#ffffff' }
+// Pastille : contour plus marqué pour rester visible sur l'océan comme sur les terres
+const POINT_BASE = { ...BASE, weight: 2, color: '#6b7896' }
+const POINT_RADIUS = 7
 const STYLES = {
   highlight: { fillColor: '#4f6bff', weight: 2.5, color: '#2a3fb8' },
   correct: { fillColor: '#4ade80', color: '#15803d' },
@@ -42,15 +37,17 @@ const STYLES = {
   click: { fillColor: '#fcd34d' },
 }
 
-const getCountryStyle = (feature) => {
-  const code = feature.id
-  if (code === props.highlightedCountryCode) return { ...BASE, ...STYLES.highlight }
-  if (props.correctSessionCountries.has(code)) return { ...BASE, ...STYLES.correct }
-  if (props.isFinished) return { ...BASE, ...STYLES.missed }
-  if (code === props.redSessionCountry) return { ...BASE, ...STYLES.last }
-  if (props.revealedSessionCountries.has(code)) return { ...BASE, ...STYLES.missed }
-  return BASE
+const stateStyle = (code) => {
+  if (code === props.highlightedCountryCode) return STYLES.highlight
+  if (props.correctSessionCountries.has(code)) return STYLES.correct
+  if (props.isFinished) return STYLES.missed
+  if (code === props.redSessionCountry) return STYLES.last
+  if (props.revealedSessionCountries.has(code)) return STYLES.missed
+  return null
 }
+
+const styleOf = (layer) => ({ ...(layer.isPoint ? POINT_BASE : BASE), ...stateStyle(layer.feature.id) })
+const restyle = (layer) => layer.setStyle(styleOf(layer))
 
 const isDiscovered = (code) =>
   props.isFinished ||
@@ -60,6 +57,33 @@ const isDiscovered = (code) =>
 
 const nameOf = (feature) => countryByCode.value.get(feature.id)?.name ?? feature.properties?.name ?? 'Pays inconnu'
 
+function bindCountryEvents(layer) {
+  const { feature } = layer
+  layer.on({
+    mouseover: () => {
+      if (isDiscovered(feature.id)) {
+        layer.bindTooltip(nameOf(feature), { sticky: true, className: 'map-tooltip' }).openTooltip()
+      }
+      layer.setStyle(STYLES.hover)
+    },
+    mouseout: () => {
+      layer.unbindTooltip()
+      restyle(layer)
+    },
+    click: (e) => {
+      if (props.isFinished) {
+        // Sur mobile (pas de survol) : un appui affiche le nom
+        layer.bindTooltip(nameOf(feature), { className: 'map-tooltip' }).openTooltip(e.latlng)
+        return
+      }
+      layer.setStyle(STYLES.click)
+      setTimeout(() => restyle(layer), 300)
+      emit('submit', feature.id)
+    },
+  })
+  countryLayers.push(layer)
+}
+
 watch(
   () => [
     props.correctSessionCountries,
@@ -68,19 +92,19 @@ watch(
     props.highlightedCountryCode,
     props.isFinished,
   ],
-  () => geojsonLayer?.setStyle(getCountryStyle),
+  () => countryLayers.forEach(restyle),
 )
 
 // Zoom sur le pays recherché
 watch(
   () => props.highlightedCountryCode,
   (code) => {
-    if (!code || !geojsonLayer || !map) return
-    geojsonLayer.eachLayer((layer) => {
-      if (layer.feature.id === code) {
-        map.flyToBounds(layer.getBounds(), { padding: [60, 60], maxZoom: 6, duration: 1.2 })
-      }
-    })
+    if (!code || !map) return
+    const point = countryByCode.value.get(code)?.point
+    if (point) return map.flyTo(point, 6, { duration: 1.2 })
+    const bounds = L.latLngBounds([])
+    countryLayers.filter((l) => l.feature.id === code).forEach((l) => bounds.extend(l.getBounds()))
+    if (bounds.isValid()) map.flyToBounds(bounds, { padding: [60, 60], maxZoom: 6, duration: 1.2 })
   },
 )
 
@@ -97,7 +121,8 @@ onMounted(async () => {
       [85, 190],
     ],
     maxBoundsViscosity: 1.0,
-    preferCanvas: true, // rendu Canvas : bien plus fluide que SVG pour ~180 polygones
+    // Rendu Canvas unique (bien plus fluide que SVG) avec une petite marge de clic
+    renderer: L.canvas({ tolerance: 3 }),
     zoomSnap: 0.5,
     attributionControl: false,
   })
@@ -112,33 +137,20 @@ onMounted(async () => {
     const data = await (await fetch(geoUrl)).json()
     if (!map) return
 
-    geojsonLayer = L.geoJSON(data, {
-      style: getCountryStyle,
-      onEachFeature: (feature, layer) => {
-        layer.on({
-          mouseover: (e) => {
-            if (isDiscovered(feature.id)) {
-              e.target.bindTooltip(nameOf(feature), { sticky: true, className: 'map-tooltip' }).openTooltip()
-            }
-            e.target.setStyle(STYLES.hover)
-          },
-          mouseout: (e) => {
-            e.target.unbindTooltip()
-            geojsonLayer.resetStyle(e.target)
-          },
-          click: (e) => {
-            if (props.isFinished) {
-              // Sur mobile (pas de survol) : un appui affiche le nom
-              e.target.bindTooltip(nameOf(feature), { className: 'map-tooltip' }).openTooltip(e.latlng)
-              return
-            }
-            e.target.setStyle(STYLES.click)
-            setTimeout(() => geojsonLayer?.resetStyle(e.target), 300)
-            emit('submit', feature.id)
-          },
-        })
-      },
+    L.geoJSON(data, {
+      style: (feature) => ({ ...BASE, ...stateStyle(feature.id) }),
+      onEachFeature: (feature, layer) => bindCountryEvents(layer),
     }).addTo(map)
+
+    // Pastilles ajoutées après les contours : dessinées et cliquables par-dessus
+    for (const country of props.countries.filter((c) => c.point)) {
+      const marker = L.circleMarker(country.point, { radius: POINT_RADIUS })
+      marker.feature = { id: country.code, properties: { name: country.name } }
+      marker.isPoint = true
+      marker.setStyle(styleOf(marker))
+      bindCountryEvents(marker)
+      marker.addTo(map)
+    }
   } catch (err) {
     console.error('Chargement de la carte impossible :', err)
     loadError.value = true
@@ -150,7 +162,7 @@ onMounted(async () => {
 onUnmounted(() => {
   map?.remove()
   map = null
-  geojsonLayer = null
+  countryLayers = []
 })
 </script>
 
@@ -161,24 +173,7 @@ onUnmounted(() => {
     <div v-if="loading" class="map-overlay"><div class="spinner"></div></div>
     <div v-else-if="loadError" class="map-overlay">Impossible de charger la carte. Vérifiez votre connexion.</div>
 
-    <p v-if="!isFinished" class="map-hint">Cliquez sur le pays correspondant au drapeau</p>
-
-    <div v-if="nonClickableCountries.length" class="map-info">
-      <button
-        class="icon-btn info-btn"
-        :aria-expanded="showInfo"
-        aria-controls="map-info-panel"
-        aria-label="Pays absents de la carte"
-        @click="showInfo = !showInfo"
-      >
-        <AppIcon name="info" :size="20" />
-      </button>
-      <div v-if="showInfo" id="map-info-panel" class="info-panel">
-        <h4>{{ nonClickableCountries.length }} pays absents de la carte</h4>
-        <p>Trop petits pour cette carte, ils sont exclus du mode Carte :</p>
-        <p class="countries-list">{{ nonClickableCountries.join(', ') }}</p>
-      </div>
-    </div>
+    <p v-if="!isFinished" class="map-hint">Cliquez sur le pays du drapeau · les plus petits sont des pastilles <span class="dot"></span></p>
   </div>
 </template>
 
@@ -213,6 +208,17 @@ onUnmounted(() => {
   background: rgba(245, 247, 252, 0.7);
 }
 
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 2px;
+  vertical-align: -1px;
+  border-radius: 50%;
+  border: 2px solid #6b7896;
+  background: #fff;
+}
+
 .map-hint {
   position: absolute;
   bottom: 1rem;
@@ -227,49 +233,6 @@ onUnmounted(() => {
   font-size: 0.85rem;
   white-space: nowrap;
   pointer-events: none;
-}
-
-.map-info {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-}
-
-.info-btn {
-  background: var(--surface);
-}
-
-.info-panel {
-  width: min(320px, calc(100vw - 4rem));
-  padding: 1.1rem 1.2rem;
-  border-radius: var(--radius-lg);
-  background: var(--bg-elevated);
-  border: 2px solid var(--border);
-  box-shadow: var(--shadow-lg);
-  animation: fade-up 0.25s var(--ease-out);
-}
-
-.info-panel h4 {
-  color: var(--accent);
-  margin-bottom: 0.4rem;
-}
-
-.info-panel p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.countries-list {
-  margin-top: 0.5rem;
-  max-height: 180px;
-  overflow-y: auto;
-  color: var(--text) !important;
-  line-height: 1.6;
 }
 
 :deep(.leaflet-container) {
