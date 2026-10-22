@@ -118,7 +118,6 @@ export function useGame({ onFinish } = {}) {
     let queue = []
     if (SESSION_MODES.includes(mode)) {
       let candidates = region ? countries.filter((c) => c.region === region) : countries
-      if (mode === 'map') candidates = candidates.filter((c) => c.onMap)
       if (mode === 'custom') candidates = candidates.filter((c) => selectedCodes.value.has(c.code))
       queue = shuffle(candidates)
       if (queue.length === 0) return
