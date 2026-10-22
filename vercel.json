@@ -18,7 +18,19 @@
             ]
         },
         {
-            "source": "/(sw.js|workbox-(.*).js|manifest.webmanifest|index.html)",
+            "source": "/",
+            "headers": [
+                { "key": "Cache-Control", "value": "no-cache" }
+            ]
+        },
+        {
+            "source": "/(sw\\.js|manifest\\.webmanifest|index\\.html)",
+            "headers": [
+                { "key": "Cache-Control", "value": "no-cache" }
+            ]
+        },
+        {
+            "source": "/workbox-(.*)",
             "headers": [
                 { "key": "Cache-Control", "value": "no-cache" }
             ]
