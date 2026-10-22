@@ -1,0 +1,4091 @@
+[
+ {
+  "code": "AFG",
+  "iso2": "af",
+  "name": "Afghanistan",
+  "nameEn": "Afghanistan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Kaboul",
+    "en": "Kabul"
+   }
+  ],
+  "aliases": [
+   "afghanistan",
+   "islamic republic of afghanistan",
+   "republique islamique d afghanistan",
+   "afganistan"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ZAF",
+  "iso2": "za",
+  "name": "Afrique du Sud",
+  "nameEn": "South Africa",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Pretoria",
+    "en": "Pretoria"
+   },
+   {
+    "fr": "Bloemfontein",
+    "en": "Bloemfontein"
+   },
+   {
+    "fr": "Le Cap",
+    "en": "Cape Town"
+   }
+  ],
+  "aliases": [
+   "south africa",
+   "republic of south africa",
+   "afrique du sud",
+   "republique d afrique du sud",
+   "rsa",
+   "suid afrika"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ALB",
+  "iso2": "al",
+  "name": "Albanie",
+  "nameEn": "Albania",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Tirana",
+    "en": "Tirana"
+   }
+  ],
+  "aliases": [
+   "albania",
+   "republic of albania",
+   "albanie",
+   "republique d albanie",
+   "shqiperi",
+   "shqiperia",
+   "shqipnia"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "DZA",
+  "iso2": "dz",
+  "name": "Algérie",
+  "nameEn": "Algeria",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Alger",
+    "en": "Algiers"
+   }
+  ],
+  "aliases": [
+   "algeria",
+   "people s democratic republic of algeria",
+   "algerie",
+   "republique democratique et populaire d algerie",
+   "dzayer"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "DEU",
+  "iso2": "de",
+  "name": "Allemagne",
+  "nameEn": "Germany",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Berlin",
+    "en": "Berlin"
+   }
+  ],
+  "aliases": [
+   "germany",
+   "federal republic of germany",
+   "allemagne",
+   "republique federale d allemagne",
+   "bundesrepublik deutschland"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "AND",
+  "iso2": "ad",
+  "name": "Andorre",
+  "nameEn": "Andorra",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Andorre-la-Vieille",
+    "en": "Andorra la Vella"
+   }
+  ],
+  "aliases": [
+   "andorra",
+   "principality of andorra",
+   "andorre",
+   "principaute d andorre",
+   "principat d andorra"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "AGO",
+  "iso2": "ao",
+  "name": "Angola",
+  "nameEn": "Angola",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Luanda",
+    "en": "Luanda"
+   }
+  ],
+  "aliases": [
+   "angola",
+   "republic of angola",
+   "republique d angola",
+   "republica de angola",
+   "publika de an la"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ATG",
+  "iso2": "ag",
+  "name": "Antigua-et-Barbuda",
+  "nameEn": "Antigua and Barbuda",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Saint John's",
+    "en": "Saint John's"
+   }
+  ],
+  "aliases": [
+   "antigua and barbuda",
+   "antigua et barbuda"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "SAU",
+  "iso2": "sa",
+  "name": "Arabie Saoudite",
+  "nameEn": "Saudi Arabia",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Riyad",
+    "en": "Riyadh"
+   }
+  ],
+  "aliases": [
+   "saudi arabia",
+   "kingdom of saudi arabia",
+   "arabie saoudite",
+   "royaume d arabie saoudite",
+   "saudi",
+   "al mamlakah al arabiyyah as su udiyyah"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ARG",
+  "iso2": "ar",
+  "name": "Argentine",
+  "nameEn": "Argentina",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Buenos Aires",
+    "en": "Buenos Aires"
+   }
+  ],
+  "aliases": [
+   "argentina",
+   "argentine republic",
+   "argentine",
+   "republique argentine",
+   "republica argentina"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ARM",
+  "iso2": "am",
+  "name": "Arménie",
+  "nameEn": "Armenia",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Erevan",
+    "en": "Yerevan"
+   }
+  ],
+  "aliases": [
+   "armenia",
+   "republic of armenia",
+   "armenie",
+   "republique d armenie",
+   "hayastan"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "AUS",
+  "iso2": "au",
+  "name": "Australie",
+  "nameEn": "Australia",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Canberra",
+    "en": "Canberra"
+   }
+  ],
+  "aliases": [
+   "australia",
+   "commonwealth of australia",
+   "australie"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "AUT",
+  "iso2": "at",
+  "name": "Autriche",
+  "nameEn": "Austria",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Vienne",
+    "en": "Vienna"
+   }
+  ],
+  "aliases": [
+   "austria",
+   "republic of austria",
+   "autriche",
+   "republique d autriche",
+   "osterreich",
+   "oesterreich"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "AZE",
+  "iso2": "az",
+  "name": "Azerbaïdjan",
+  "nameEn": "Azerbaijan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Bakou",
+    "en": "Baku"
+   }
+  ],
+  "aliases": [
+   "azerbaijan",
+   "republic of azerbaijan",
+   "azerbaidjan",
+   "republique d azerbaidjan",
+   "az rbaycan respublikas"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BHS",
+  "iso2": "bs",
+  "name": "Bahamas",
+  "nameEn": "Bahamas",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Nassau",
+    "en": "Nassau"
+   }
+  ],
+  "aliases": [
+   "bahamas",
+   "commonwealth of the bahamas",
+   "commonwealth des bahamas"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BHR",
+  "iso2": "bh",
+  "name": "Bahreïn",
+  "nameEn": "Bahrain",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Manama",
+    "en": "Manama"
+   }
+  ],
+  "aliases": [
+   "bahrain",
+   "kingdom of bahrain",
+   "bahrein",
+   "royaume de bahrein",
+   "mamlakat al bahrayn"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "BGD",
+  "iso2": "bd",
+  "name": "Bangladesh",
+  "nameEn": "Bangladesh",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Dacca",
+    "en": "Dhaka"
+   }
+  ],
+  "aliases": [
+   "bangladesh",
+   "people s republic of bangladesh",
+   "la republique populaire du bangladesh",
+   "gonoprojatontri bangladesh"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BRB",
+  "iso2": "bb",
+  "name": "Barbade",
+  "nameEn": "Barbados",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Bridgetown",
+    "en": "Bridgetown"
+   }
+  ],
+  "aliases": [
+   "barbados",
+   "barbade"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "BEL",
+  "iso2": "be",
+  "name": "Belgique",
+  "nameEn": "Belgium",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Bruxelles",
+    "en": "Brussels"
+   }
+  ],
+  "aliases": [
+   "belgium",
+   "kingdom of belgium",
+   "belgique",
+   "royaume de belgique",
+   "belgie",
+   "belgien",
+   "koninkrijk belgie",
+   "konigreich belgien"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BLZ",
+  "iso2": "bz",
+  "name": "Belize",
+  "nameEn": "Belize",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Belmopan",
+    "en": "Belmopan"
+   }
+  ],
+  "aliases": [
+   "belize"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BEN",
+  "iso2": "bj",
+  "name": "Bénin",
+  "nameEn": "Benin",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Porto-Novo",
+    "en": "Porto-Novo"
+   }
+  ],
+  "aliases": [
+   "benin",
+   "republic of benin",
+   "republique du benin"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BTN",
+  "iso2": "bt",
+  "name": "Bhoutan",
+  "nameEn": "Bhutan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Thimphou",
+    "en": "Thimphu"
+   }
+  ],
+  "aliases": [
+   "bhutan",
+   "kingdom of bhutan",
+   "bhoutan",
+   "royaume du bhoutan"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BLR",
+  "iso2": "by",
+  "name": "Biélorussie",
+  "nameEn": "Belarus",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Minsk",
+    "en": "Minsk"
+   }
+  ],
+  "aliases": [
+   "belarus",
+   "republic of belarus",
+   "bielorussie",
+   "republique de bielorussie",
+   "bielarus"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MMR",
+  "iso2": "mm",
+  "name": "Birmanie",
+  "nameEn": "Myanmar",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Naypyidaw",
+    "en": "Naypyidaw"
+   }
+  ],
+  "aliases": [
+   "myanmar",
+   "republic of the union of myanmar",
+   "birmanie",
+   "republique de l union du myanmar",
+   "burma",
+   "pyidaunzu thanmada myama nainngandaw"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BOL",
+  "iso2": "bo",
+  "name": "Bolivie",
+  "nameEn": "Bolivia",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Sucre",
+    "en": "Sucre"
+   }
+  ],
+  "aliases": [
+   "bolivia",
+   "plurinational state of bolivia",
+   "bolivie",
+   "etat plurinational de bolivie",
+   "buliwya",
+   "wuliwya",
+   "bolivia plurinational state of",
+   "estado plurinacional de bolivia",
+   "buliwya mamallaqta",
+   "wuliwya suyu",
+   "teta volivia"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BIH",
+  "iso2": "ba",
+  "name": "Bosnie-Herzégovine",
+  "nameEn": "Bosnia and Herzegovina",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Sarajevo",
+    "en": "Sarajevo"
+   }
+  ],
+  "aliases": [
+   "bosnia and herzegovina",
+   "bosnie herzegovine",
+   "bosnie et herzegovine",
+   "bosnia herzegovina"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BWA",
+  "iso2": "bw",
+  "name": "Botswana",
+  "nameEn": "Botswana",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Gaborone",
+    "en": "Gaborone"
+   }
+  ],
+  "aliases": [
+   "botswana",
+   "republic of botswana",
+   "republique du botswana",
+   "lefatshe la botswana"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BRA",
+  "iso2": "br",
+  "name": "Brésil",
+  "nameEn": "Brazil",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Brasilia",
+    "en": "Brasília"
+   }
+  ],
+  "aliases": [
+   "brazil",
+   "federative republic of brazil",
+   "bresil",
+   "republique federative du bresil",
+   "brasil",
+   "republica federativa do brasil"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BRN",
+  "iso2": "bn",
+  "name": "Brunei",
+  "nameEn": "Brunei",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Bandar Seri Begawan",
+    "en": "Bandar Seri Begawan"
+   }
+  ],
+  "aliases": [
+   "brunei",
+   "nation of brunei abode of peace",
+   "etat de brunei darussalam",
+   "brunei darussalam",
+   "nation of brunei",
+   "the abode of peace"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BGR",
+  "iso2": "bg",
+  "name": "Bulgarie",
+  "nameEn": "Bulgaria",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Sofia",
+    "en": "Sofia"
+   }
+  ],
+  "aliases": [
+   "bulgaria",
+   "republic of bulgaria",
+   "bulgarie",
+   "republique de bulgarie"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BFA",
+  "iso2": "bf",
+  "name": "Burkina Faso",
+  "nameEn": "Burkina Faso",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Ouagadougou",
+    "en": "Ouagadougou"
+   }
+  ],
+  "aliases": [
+   "burkina faso",
+   "republique du burkina"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "BDI",
+  "iso2": "bi",
+  "name": "Burundi",
+  "nameEn": "Burundi",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Gitega",
+    "en": "Gitega"
+   }
+  ],
+  "aliases": [
+   "burundi",
+   "republic of burundi",
+   "republique du burundi",
+   "republika y uburundi"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "KHM",
+  "iso2": "kh",
+  "name": "Cambodge",
+  "nameEn": "Cambodia",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Phnom Penh",
+    "en": "Phnom Penh"
+   }
+  ],
+  "aliases": [
+   "cambodia",
+   "kingdom of cambodia",
+   "cambodge",
+   "royaume du cambodge"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CMR",
+  "iso2": "cm",
+  "name": "Cameroun",
+  "nameEn": "Cameroon",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Yaoundé",
+    "en": "Yaoundé"
+   }
+  ],
+  "aliases": [
+   "cameroon",
+   "republic of cameroon",
+   "cameroun",
+   "republique du cameroun"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CAN",
+  "iso2": "ca",
+  "name": "Canada",
+  "nameEn": "Canada",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Ottawa",
+    "en": "Ottawa"
+   }
+  ],
+  "aliases": [
+   "canada"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CHL",
+  "iso2": "cl",
+  "name": "Chili",
+  "nameEn": "Chile",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Santiago",
+    "en": "Santiago"
+   }
+  ],
+  "aliases": [
+   "chile",
+   "republic of chile",
+   "chili",
+   "republique du chili",
+   "republica de chile"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CHN",
+  "iso2": "cn",
+  "name": "Chine",
+  "nameEn": "China",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Pékin",
+    "en": "Beijing"
+   }
+  ],
+  "aliases": [
+   "china",
+   "people s republic of china",
+   "chine",
+   "republique populaire de chine",
+   "zhongguo",
+   "zhonghua",
+   "zhonghua renmin gongheguo"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CYP",
+  "iso2": "cy",
+  "name": "Chypre",
+  "nameEn": "Cyprus",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Nicosie",
+    "en": "Nicosia"
+   }
+  ],
+  "aliases": [
+   "cyprus",
+   "republic of cyprus",
+   "chypre",
+   "republique de chypre",
+   "kypros",
+   "k br s",
+   "k br s cumhuriyeti"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "VAT",
+  "iso2": "va",
+  "name": "Cité du Vatican",
+  "nameEn": "Vatican City",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Vatican",
+    "en": "Vatican City"
+   }
+  ],
+  "aliases": [
+   "vatican city",
+   "vatican city state",
+   "cite du vatican",
+   "holy see vatican city state",
+   "vatican",
+   "stato della citta del vaticano"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "COL",
+  "iso2": "co",
+  "name": "Colombie",
+  "nameEn": "Colombia",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Bogota",
+    "en": "Bogotá"
+   }
+  ],
+  "aliases": [
+   "colombia",
+   "republic of colombia",
+   "colombie",
+   "republique de colombie",
+   "republica de colombia"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "COM",
+  "iso2": "km",
+  "name": "Comores",
+  "nameEn": "Comoros",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Moroni",
+    "en": "Moroni"
+   }
+  ],
+  "aliases": [
+   "comoros",
+   "union of the comoros",
+   "comores",
+   "union des comores",
+   "udzima wa komori",
+   "al ittihad al qumuri"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "COG",
+  "iso2": "cg",
+  "name": "Congo",
+  "nameEn": "Congo",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Brazzaville",
+    "en": "Brazzaville"
+   }
+  ],
+  "aliases": [
+   "congo",
+   "republic of the congo",
+   "republique du congo",
+   "congo brazzaville"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "COD",
+  "iso2": "cd",
+  "name": "Congo (Rép. dém.)",
+  "nameEn": "DR Congo",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Kinshasa",
+    "en": "Kinshasa"
+   }
+  ],
+  "aliases": [
+   "dr congo",
+   "democratic republic of the congo",
+   "congo rep dem",
+   "republique democratique du congo",
+   "congo kinshasa",
+   "congo the democratic republic of the",
+   "democratic republic of congo",
+   "drc",
+   "rd congo",
+   "rdc"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "PRK",
+  "iso2": "kp",
+  "name": "Corée du Nord",
+  "nameEn": "North Korea",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Pyongyang",
+    "en": "Pyongyang"
+   }
+  ],
+  "aliases": [
+   "north korea",
+   "democratic people s republic of korea",
+   "coree du nord",
+   "republique populaire democratique de coree",
+   "dprk",
+   "choson minjujuui inmin konghwaguk",
+   "korea democratic people s republic of"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "KOR",
+  "iso2": "kr",
+  "name": "Corée du Sud",
+  "nameEn": "South Korea",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Séoul",
+    "en": "Seoul"
+   }
+  ],
+  "aliases": [
+   "south korea",
+   "republic of korea",
+   "coree du sud",
+   "republique de coree",
+   "korea republic of"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CRI",
+  "iso2": "cr",
+  "name": "Costa Rica",
+  "nameEn": "Costa Rica",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "San José",
+    "en": "San José"
+   }
+  ],
+  "aliases": [
+   "costa rica",
+   "republic of costa rica",
+   "republique du costa rica",
+   "republica de costa rica"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CIV",
+  "iso2": "ci",
+  "name": "Côte d'Ivoire",
+  "nameEn": "Ivory Coast",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Yamoussoukro",
+    "en": "Yamoussoukro"
+   }
+  ],
+  "aliases": [
+   "ivory coast",
+   "republic of cote d ivoire",
+   "cote d ivoire",
+   "republique de cote d ivoire"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "HRV",
+  "iso2": "hr",
+  "name": "Croatie",
+  "nameEn": "Croatia",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Zagreb",
+    "en": "Zagreb"
+   }
+  ],
+  "aliases": [
+   "croatia",
+   "republic of croatia",
+   "croatie",
+   "republique de croatie",
+   "hrvatska",
+   "republika hrvatska"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CUB",
+  "iso2": "cu",
+  "name": "Cuba",
+  "nameEn": "Cuba",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "La Havane",
+    "en": "Havana"
+   }
+  ],
+  "aliases": [
+   "cuba",
+   "republic of cuba",
+   "republique de cuba",
+   "republica de cuba"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "DNK",
+  "iso2": "dk",
+  "name": "Danemark",
+  "nameEn": "Denmark",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Copenhague",
+    "en": "Copenhagen"
+   }
+  ],
+  "aliases": [
+   "denmark",
+   "kingdom of denmark",
+   "danemark",
+   "royaume du danemark",
+   "danmark",
+   "kongeriget danmark"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "DJI",
+  "iso2": "dj",
+  "name": "Djibouti",
+  "nameEn": "Djibouti",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Djibouti",
+    "en": "Djibouti"
+   }
+  ],
+  "aliases": [
+   "djibouti",
+   "republic of djibouti",
+   "republique de djibouti",
+   "jabuuti",
+   "gabuuti",
+   "gabuutih ummuuno",
+   "jamhuuriyadda jabuuti"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "DMA",
+  "iso2": "dm",
+  "name": "Dominique",
+  "nameEn": "Dominica",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Roseau",
+    "en": "Roseau"
+   }
+  ],
+  "aliases": [
+   "dominica",
+   "commonwealth of dominica",
+   "dominique",
+   "commonwealth de la dominique",
+   "wai tu kubuli"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "EGY",
+  "iso2": "eg",
+  "name": "Égypte",
+  "nameEn": "Egypt",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Le Caire",
+    "en": "Cairo"
+   }
+  ],
+  "aliases": [
+   "egypt",
+   "arab republic of egypt",
+   "egypte",
+   "republique arabe d egypte"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ARE",
+  "iso2": "ae",
+  "name": "Émirats arabes unis",
+  "nameEn": "United Arab Emirates",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Abou Dabi",
+    "en": "Abu Dhabi"
+   }
+  ],
+  "aliases": [
+   "united arab emirates",
+   "emirats arabes unis",
+   "uae",
+   "emirates",
+   "eau",
+   "emirats"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ECU",
+  "iso2": "ec",
+  "name": "Équateur",
+  "nameEn": "Ecuador",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Quito",
+    "en": "Quito"
+   }
+  ],
+  "aliases": [
+   "ecuador",
+   "republic of ecuador",
+   "equateur",
+   "republique de l equateur",
+   "republica del ecuador"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ERI",
+  "iso2": "er",
+  "name": "Érythrée",
+  "nameEn": "Eritrea",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Asmara",
+    "en": "Asmara"
+   }
+  ],
+  "aliases": [
+   "eritrea",
+   "state of eritrea",
+   "erythree",
+   "etat d erythree",
+   "dawlat iritriya",
+   "ertra",
+   "iritriya"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ESP",
+  "iso2": "es",
+  "name": "Espagne",
+  "nameEn": "Spain",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Madrid",
+    "en": "Madrid"
+   }
+  ],
+  "aliases": [
+   "spain",
+   "kingdom of spain",
+   "espagne",
+   "royaume d espagne",
+   "reino de espana"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "EST",
+  "iso2": "ee",
+  "name": "Estonie",
+  "nameEn": "Estonia",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Tallinn",
+    "en": "Tallinn"
+   }
+  ],
+  "aliases": [
+   "estonia",
+   "republic of estonia",
+   "estonie",
+   "republique d estonie",
+   "eesti",
+   "eesti vabariik"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SWZ",
+  "iso2": "sz",
+  "name": "Eswatini",
+  "nameEn": "Eswatini",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Lobamba",
+    "en": "Lobamba"
+   }
+  ],
+  "aliases": [
+   "eswatini",
+   "kingdom of eswatini",
+   "royaume d eswatini",
+   "swaziland",
+   "weswatini",
+   "swatini",
+   "ngwane",
+   "umbuso weswatini"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "USA",
+  "iso2": "us",
+  "name": "États-Unis",
+  "nameEn": "United States",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Washington",
+    "en": "Washington D.C."
+   }
+  ],
+  "aliases": [
+   "united states",
+   "united states of america",
+   "etats unis",
+   "les etats unis d amerique",
+   "usa",
+   "etats unis d amerique",
+   "amerique"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ETH",
+  "iso2": "et",
+  "name": "Éthiopie",
+  "nameEn": "Ethiopia",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Addis-Abeba",
+    "en": "Addis Ababa"
+   }
+  ],
+  "aliases": [
+   "ethiopia",
+   "federal democratic republic of ethiopia",
+   "ethiopie",
+   "republique federale democratique d ethiopie",
+   "ityoppya"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "FJI",
+  "iso2": "fj",
+  "name": "Fidji",
+  "nameEn": "Fiji",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Suva",
+    "en": "Suva"
+   }
+  ],
+  "aliases": [
+   "fiji",
+   "republic of fiji",
+   "fidji",
+   "republique des fidji",
+   "viti",
+   "matanitu ko viti",
+   "fiji ganarajya"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "FIN",
+  "iso2": "fi",
+  "name": "Finlande",
+  "nameEn": "Finland",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Helsinki",
+    "en": "Helsinki"
+   }
+  ],
+  "aliases": [
+   "finland",
+   "republic of finland",
+   "finlande",
+   "republique de finlande",
+   "suomi",
+   "suomen tasavalta",
+   "republiken finland"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "FRA",
+  "iso2": "fr",
+  "name": "France",
+  "nameEn": "France",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Paris",
+    "en": "Paris"
+   }
+  ],
+  "aliases": [
+   "france",
+   "french republic",
+   "republique francaise"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GAB",
+  "iso2": "ga",
+  "name": "Gabon",
+  "nameEn": "Gabon",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Libreville",
+    "en": "Libreville"
+   }
+  ],
+  "aliases": [
+   "gabon",
+   "gabonese republic",
+   "republique gabonaise"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GMB",
+  "iso2": "gm",
+  "name": "Gambie",
+  "nameEn": "Gambia",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Banjul",
+    "en": "Banjul"
+   }
+  ],
+  "aliases": [
+   "gambia",
+   "republic of the gambia",
+   "gambie",
+   "republique de gambie"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GEO",
+  "iso2": "ge",
+  "name": "Géorgie",
+  "nameEn": "Georgia",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Tbilissi",
+    "en": "Tbilisi"
+   }
+  ],
+  "aliases": [
+   "georgia",
+   "georgie",
+   "republique de georgie",
+   "sakartvelo"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GHA",
+  "iso2": "gh",
+  "name": "Ghana",
+  "nameEn": "Ghana",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Accra",
+    "en": "Accra"
+   }
+  ],
+  "aliases": [
+   "ghana",
+   "republic of ghana",
+   "republique du ghana"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GRC",
+  "iso2": "gr",
+  "name": "Grèce",
+  "nameEn": "Greece",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Athènes",
+    "en": "Athens"
+   }
+  ],
+  "aliases": [
+   "greece",
+   "hellenic republic",
+   "grece",
+   "republique hellenique",
+   "ellada"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GRD",
+  "iso2": "gd",
+  "name": "Grenade",
+  "nameEn": "Grenada",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Saint-Georges",
+    "en": "St. George's"
+   }
+  ],
+  "aliases": [
+   "grenada",
+   "grenade"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "GTM",
+  "iso2": "gt",
+  "name": "Guatemala",
+  "nameEn": "Guatemala",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Guatemala",
+    "en": "Guatemala City"
+   }
+  ],
+  "aliases": [
+   "guatemala",
+   "republic of guatemala",
+   "republique du guatemala"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GIN",
+  "iso2": "gn",
+  "name": "Guinée",
+  "nameEn": "Guinea",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Conakry",
+    "en": "Conakry"
+   }
+  ],
+  "aliases": [
+   "guinea",
+   "republic of guinea",
+   "guinee",
+   "republique de guinee"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GNQ",
+  "iso2": "gq",
+  "name": "Guinée équatoriale",
+  "nameEn": "Equatorial Guinea",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Ciudad de la Paz",
+    "en": "Ciudad de la Paz"
+   }
+  ],
+  "aliases": [
+   "equatorial guinea",
+   "republic of equatorial guinea",
+   "guinee equatoriale",
+   "republique de guinee equatoriale",
+   "republica de guinea ecuatorial",
+   "republica da guine equatorial"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GNB",
+  "iso2": "gw",
+  "name": "Guinée-Bissau",
+  "nameEn": "Guinea-Bissau",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Bissau",
+    "en": "Bissau"
+   }
+  ],
+  "aliases": [
+   "guinea bissau",
+   "republic of guinea bissau",
+   "guinee bissau",
+   "republique de guinee bissau",
+   "republica da guine bissau"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GUY",
+  "iso2": "gy",
+  "name": "Guyana",
+  "nameEn": "Guyana",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Georgetown",
+    "en": "Georgetown"
+   }
+  ],
+  "aliases": [
+   "guyana",
+   "co operative republic of guyana",
+   "republique cooperative de guyana"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "HTI",
+  "iso2": "ht",
+  "name": "Haïti",
+  "nameEn": "Haiti",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Port-au-Prince",
+    "en": "Port-au-Prince"
+   }
+  ],
+  "aliases": [
+   "haiti",
+   "republic of haiti",
+   "republique d haiti",
+   "repiblik ayiti"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "HND",
+  "iso2": "hn",
+  "name": "Honduras",
+  "nameEn": "Honduras",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Tegucigalpa",
+    "en": "Tegucigalpa"
+   }
+  ],
+  "aliases": [
+   "honduras",
+   "republic of honduras",
+   "republique du honduras",
+   "republica de honduras"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "HUN",
+  "iso2": "hu",
+  "name": "Hongrie",
+  "nameEn": "Hungary",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Budapest",
+    "en": "Budapest"
+   }
+  ],
+  "aliases": [
+   "hungary",
+   "hongrie"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MUS",
+  "iso2": "mu",
+  "name": "Île Maurice",
+  "nameEn": "Mauritius",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Port-Louis",
+    "en": "Port Louis"
+   }
+  ],
+  "aliases": [
+   "mauritius",
+   "republic of mauritius",
+   "ile maurice",
+   "republique de maurice"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "CPV",
+  "iso2": "cv",
+  "name": "Îles du Cap-Vert",
+  "nameEn": "Cape Verde",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Praia",
+    "en": "Praia"
+   }
+  ],
+  "aliases": [
+   "cape verde",
+   "republic of cabo verde",
+   "iles du cap vert",
+   "republique du cap vert",
+   "republica de cabo verde"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "MHL",
+  "iso2": "mh",
+  "name": "Îles Marshall",
+  "nameEn": "Marshall Islands",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Majuro",
+    "en": "Majuro"
+   }
+  ],
+  "aliases": [
+   "marshall islands",
+   "republic of the marshall islands",
+   "iles marshall",
+   "republique des iles marshall",
+   "aolepan aorokin majel"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "SLB",
+  "iso2": "sb",
+  "name": "Îles Salomon",
+  "nameEn": "Solomon Islands",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Honiara",
+    "en": "Honiara"
+   }
+  ],
+  "aliases": [
+   "solomon islands",
+   "iles salomon"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "IND",
+  "iso2": "in",
+  "name": "Inde",
+  "nameEn": "India",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "New Delhi",
+    "en": "New Delhi"
+   }
+  ],
+  "aliases": [
+   "india",
+   "republic of india",
+   "inde",
+   "republique de l inde",
+   "bharat",
+   "bharat ganrajya"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "IDN",
+  "iso2": "id",
+  "name": "Indonésie",
+  "nameEn": "Indonesia",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Jakarta",
+    "en": "Jakarta"
+   }
+  ],
+  "aliases": [
+   "indonesia",
+   "republic of indonesia",
+   "indonesie",
+   "republique d indonesie",
+   "republik indonesia"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "IRQ",
+  "iso2": "iq",
+  "name": "Irak",
+  "nameEn": "Iraq",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Bagdad",
+    "en": "Baghdad"
+   }
+  ],
+  "aliases": [
+   "iraq",
+   "republic of iraq",
+   "irak",
+   "republique d irak",
+   "jumhuriyyat al iraq"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "IRN",
+  "iso2": "ir",
+  "name": "Iran",
+  "nameEn": "Iran",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Téhéran",
+    "en": "Tehran"
+   }
+  ],
+  "aliases": [
+   "iran",
+   "islamic republic of iran",
+   "republique islamique d iran",
+   "iran islamic republic of",
+   "jomhuri ye eslami ye iran"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "IRL",
+  "iso2": "ie",
+  "name": "Irlande",
+  "nameEn": "Ireland",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Dublin",
+    "en": "Dublin"
+   }
+  ],
+  "aliases": [
+   "ireland",
+   "republic of ireland",
+   "irlande",
+   "republique d irlande",
+   "eire",
+   "poblacht na heireann"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ISL",
+  "iso2": "is",
+  "name": "Islande",
+  "nameEn": "Iceland",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Reykjavik",
+    "en": "Reykjavik"
+   }
+  ],
+  "aliases": [
+   "iceland",
+   "islande",
+   "republique d islande",
+   "island",
+   "republic of iceland",
+   "ly veldi island"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ISR",
+  "iso2": "il",
+  "name": "Israël",
+  "nameEn": "Israel",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Jérusalem",
+    "en": "Jerusalem"
+   }
+  ],
+  "aliases": [
+   "israel",
+   "state of israel",
+   "etat d israel",
+   "medinat yisra el"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ITA",
+  "iso2": "it",
+  "name": "Italie",
+  "nameEn": "Italy",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Rome",
+    "en": "Rome"
+   }
+  ],
+  "aliases": [
+   "italy",
+   "italian republic",
+   "italie",
+   "republique italienne",
+   "repubblica italiana"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "JAM",
+  "iso2": "jm",
+  "name": "Jamaïque",
+  "nameEn": "Jamaica",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Kingston",
+    "en": "Kingston"
+   }
+  ],
+  "aliases": [
+   "jamaica",
+   "jamaique"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "JPN",
+  "iso2": "jp",
+  "name": "Japon",
+  "nameEn": "Japan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Tokyo",
+    "en": "Tokyo"
+   }
+  ],
+  "aliases": [
+   "japan",
+   "japon",
+   "nippon",
+   "nihon"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "JOR",
+  "iso2": "jo",
+  "name": "Jordanie",
+  "nameEn": "Jordan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Amman",
+    "en": "Amman"
+   }
+  ],
+  "aliases": [
+   "jordan",
+   "hashemite kingdom of jordan",
+   "jordanie",
+   "royaume hachemite de jordanie",
+   "al mamlakah al urduniyah al hashimiyah"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "KAZ",
+  "iso2": "kz",
+  "name": "Kazakhstan",
+  "nameEn": "Kazakhstan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Astana",
+    "en": "Astana"
+   }
+  ],
+  "aliases": [
+   "kazakhstan",
+   "republic of kazakhstan",
+   "republique du kazakhstan",
+   "qazaqstan",
+   "qazaqstan respublikas",
+   "respublika kazakhstan"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "KEN",
+  "iso2": "ke",
+  "name": "Kenya",
+  "nameEn": "Kenya",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Nairobi",
+    "en": "Nairobi"
+   }
+  ],
+  "aliases": [
+   "kenya",
+   "republic of kenya",
+   "republique du kenya",
+   "jamhuri ya kenya"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "KGZ",
+  "iso2": "kg",
+  "name": "Kirghizistan",
+  "nameEn": "Kyrgyzstan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Bichkek",
+    "en": "Bishkek"
+   }
+  ],
+  "aliases": [
+   "kyrgyzstan",
+   "kyrgyz republic",
+   "kirghizistan",
+   "republique kirghize",
+   "kyrgyz respublikasy"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "KIR",
+  "iso2": "ki",
+  "name": "Kiribati",
+  "nameEn": "Kiribati",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Tarawa-Sud",
+    "en": "South Tarawa"
+   }
+  ],
+  "aliases": [
+   "kiribati",
+   "independent and sovereign republic of kiribati",
+   "republique de kiribati",
+   "republic of kiribati",
+   "ribaberiki kiribati"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "UNK",
+  "iso2": "xk",
+  "name": "Kosovo",
+  "nameEn": "Kosovo",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Pristina",
+    "en": "Pristina"
+   }
+  ],
+  "aliases": [
+   "kosovo",
+   "republic of kosovo",
+   "republique du kosovo"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "KWT",
+  "iso2": "kw",
+  "name": "Koweït",
+  "nameEn": "Kuwait",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Koweït",
+    "en": "Kuwait City"
+   }
+  ],
+  "aliases": [
+   "kuwait",
+   "state of kuwait",
+   "koweit",
+   "etat du koweit",
+   "dawlat al kuwait"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "LAO",
+  "iso2": "la",
+  "name": "Laos",
+  "nameEn": "Laos",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Vientiane",
+    "en": "Vientiane"
+   }
+  ],
+  "aliases": [
+   "laos",
+   "lao people s democratic republic",
+   "republique democratique populaire lao",
+   "lao",
+   "sathalanalat paxathipatai paxaxon lao"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "LSO",
+  "iso2": "ls",
+  "name": "Lesotho",
+  "nameEn": "Lesotho",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Maseru",
+    "en": "Maseru"
+   }
+  ],
+  "aliases": [
+   "lesotho",
+   "kingdom of lesotho",
+   "royaume du lesotho",
+   "muso oa lesotho"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "LVA",
+  "iso2": "lv",
+  "name": "Lettonie",
+  "nameEn": "Latvia",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Riga",
+    "en": "Riga"
+   }
+  ],
+  "aliases": [
+   "latvia",
+   "republic of latvia",
+   "lettonie",
+   "republique de lettonie",
+   "latvijas republika"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "LBN",
+  "iso2": "lb",
+  "name": "Liban",
+  "nameEn": "Lebanon",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Beyrouth",
+    "en": "Beirut"
+   }
+  ],
+  "aliases": [
+   "lebanon",
+   "lebanese republic",
+   "liban",
+   "republique libanaise",
+   "al jumhuriyah al libnaniyah"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "LBR",
+  "iso2": "lr",
+  "name": "Liberia",
+  "nameEn": "Liberia",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Monrovia",
+    "en": "Monrovia"
+   }
+  ],
+  "aliases": [
+   "liberia",
+   "republic of liberia",
+   "republique du liberia"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "LBY",
+  "iso2": "ly",
+  "name": "Libye",
+  "nameEn": "Libya",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Tripoli",
+    "en": "Tripoli"
+   }
+  ],
+  "aliases": [
+   "libya",
+   "state of libya",
+   "libye",
+   "grande republique arabe libyenne populaire et socialiste",
+   "dawlat libya"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "LIE",
+  "iso2": "li",
+  "name": "Liechtenstein",
+  "nameEn": "Liechtenstein",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Vaduz",
+    "en": "Vaduz"
+   }
+  ],
+  "aliases": [
+   "liechtenstein",
+   "principality of liechtenstein",
+   "principaute du liechtenstein",
+   "furstentum liechtenstein"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "LTU",
+  "iso2": "lt",
+  "name": "Lituanie",
+  "nameEn": "Lithuania",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Vilnius",
+    "en": "Vilnius"
+   }
+  ],
+  "aliases": [
+   "lithuania",
+   "republic of lithuania",
+   "lituanie",
+   "republique de lituanie",
+   "lietuvos respublika"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "LUX",
+  "iso2": "lu",
+  "name": "Luxembourg",
+  "nameEn": "Luxembourg",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Luxembourg",
+    "en": "Luxembourg"
+   }
+  ],
+  "aliases": [
+   "luxembourg",
+   "grand duchy of luxembourg",
+   "grand duche de luxembourg",
+   "gro herzogtum luxemburg",
+   "groussherzogtum letzebuerg"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MKD",
+  "iso2": "mk",
+  "name": "Macédoine du Nord",
+  "nameEn": "North Macedonia",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Skopje",
+    "en": "Skopje"
+   }
+  ],
+  "aliases": [
+   "north macedonia",
+   "republic of north macedonia",
+   "macedoine du nord",
+   "republique de macedoine du nord",
+   "the former yugoslav republic of macedonia",
+   "macedonia the former yugoslav republic of",
+   "macedonia",
+   "macedoine"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MDG",
+  "iso2": "mg",
+  "name": "Madagascar",
+  "nameEn": "Madagascar",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Antananarivo",
+    "en": "Antananarivo"
+   }
+  ],
+  "aliases": [
+   "madagascar",
+   "republic of madagascar",
+   "republique de madagascar",
+   "repoblikan i madagasikara"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MYS",
+  "iso2": "my",
+  "name": "Malaisie",
+  "nameEn": "Malaysia",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Kuala Lumpur",
+    "en": "Kuala Lumpur"
+   }
+  ],
+  "aliases": [
+   "malaysia",
+   "malaisie",
+   "federation de malaisie"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MWI",
+  "iso2": "mw",
+  "name": "Malawi",
+  "nameEn": "Malawi",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Lilongwe",
+    "en": "Lilongwe"
+   }
+  ],
+  "aliases": [
+   "malawi",
+   "republic of malawi",
+   "republique du malawi"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MDV",
+  "iso2": "mv",
+  "name": "Maldives",
+  "nameEn": "Maldives",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Malé",
+    "en": "Malé"
+   }
+  ],
+  "aliases": [
+   "maldives",
+   "republic of the maldives",
+   "republique des maldives",
+   "maldive islands",
+   "dhivehi raajjeyge jumhooriyya"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "MLI",
+  "iso2": "ml",
+  "name": "Mali",
+  "nameEn": "Mali",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Bamako",
+    "en": "Bamako"
+   }
+  ],
+  "aliases": [
+   "mali",
+   "republic of mali",
+   "republique du mali"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MLT",
+  "iso2": "mt",
+  "name": "Malte",
+  "nameEn": "Malta",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "La Valette",
+    "en": "Valletta"
+   }
+  ],
+  "aliases": [
+   "malta",
+   "republic of malta",
+   "malte",
+   "republique de malte",
+   "repubblika ta malta"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MAR",
+  "iso2": "ma",
+  "name": "Maroc",
+  "nameEn": "Morocco",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Rabat",
+    "en": "Rabat"
+   }
+  ],
+  "aliases": [
+   "morocco",
+   "kingdom of morocco",
+   "maroc",
+   "royaume du maroc",
+   "al mamlakah al magribiyah"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MRT",
+  "iso2": "mr",
+  "name": "Mauritanie",
+  "nameEn": "Mauritania",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Nouakchott",
+    "en": "Nouakchott"
+   }
+  ],
+  "aliases": [
+   "mauritania",
+   "islamic republic of mauritania",
+   "mauritanie",
+   "republique islamique de mauritanie",
+   "al jumhuriyyah al islamiyyah al muritaniyyah"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MEX",
+  "iso2": "mx",
+  "name": "Mexique",
+  "nameEn": "Mexico",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Mexico",
+    "en": "Mexico City"
+   }
+  ],
+  "aliases": [
+   "mexico",
+   "united mexican states",
+   "mexique",
+   "etats unis du mexique",
+   "mexicanos",
+   "estados unidos mexicanos"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "FSM",
+  "iso2": "fm",
+  "name": "Micronésie",
+  "nameEn": "Micronesia",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Palikir",
+    "en": "Palikir"
+   }
+  ],
+  "aliases": [
+   "micronesia",
+   "federated states of micronesia",
+   "micronesie",
+   "etats federes de micronesie",
+   "micronesia federated states of"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "MDA",
+  "iso2": "md",
+  "name": "Moldavie",
+  "nameEn": "Moldova",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Chișinău",
+    "en": "Chișinău"
+   }
+  ],
+  "aliases": [
+   "moldova",
+   "republic of moldova",
+   "moldavie",
+   "republique de moldavie",
+   "moldova republic of",
+   "republica moldova"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MCO",
+  "iso2": "mc",
+  "name": "Monaco",
+  "nameEn": "Monaco",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Monaco",
+    "en": "Monaco"
+   }
+  ],
+  "aliases": [
+   "monaco",
+   "principality of monaco",
+   "principaute de monaco"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "MNG",
+  "iso2": "mn",
+  "name": "Mongolie",
+  "nameEn": "Mongolia",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Oulan-Bator",
+    "en": "Ulan Bator"
+   }
+  ],
+  "aliases": [
+   "mongolia",
+   "mongolie"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MNE",
+  "iso2": "me",
+  "name": "Monténégro",
+  "nameEn": "Montenegro",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Podgorica",
+    "en": "Podgorica"
+   }
+  ],
+  "aliases": [
+   "montenegro",
+   "crna gora"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "MOZ",
+  "iso2": "mz",
+  "name": "Mozambique",
+  "nameEn": "Mozambique",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Maputo",
+    "en": "Maputo"
+   }
+  ],
+  "aliases": [
+   "mozambique",
+   "republic of mozambique",
+   "republique du mozambique",
+   "republica de mocambique"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "NAM",
+  "iso2": "na",
+  "name": "Namibie",
+  "nameEn": "Namibia",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Windhoek",
+    "en": "Windhoek"
+   }
+  ],
+  "aliases": [
+   "namibia",
+   "republic of namibia",
+   "namibie",
+   "republique de namibie"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "NRU",
+  "iso2": "nr",
+  "name": "Nauru",
+  "nameEn": "Nauru",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Yaren",
+    "en": "Yaren"
+   }
+  ],
+  "aliases": [
+   "nauru",
+   "republic of nauru",
+   "republique de nauru",
+   "naoero",
+   "pleasant island",
+   "ripublik naoero"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "NPL",
+  "iso2": "np",
+  "name": "Népal",
+  "nameEn": "Nepal",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Katmandou",
+    "en": "Kathmandu"
+   }
+  ],
+  "aliases": [
+   "nepal",
+   "federal democratic republic of nepal",
+   "republique du nepal",
+   "loktantrik ganatantra nepal"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "NIC",
+  "iso2": "ni",
+  "name": "Nicaragua",
+  "nameEn": "Nicaragua",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Managua",
+    "en": "Managua"
+   }
+  ],
+  "aliases": [
+   "nicaragua",
+   "republic of nicaragua",
+   "republique du nicaragua",
+   "republica de nicaragua"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "NER",
+  "iso2": "ne",
+  "name": "Niger",
+  "nameEn": "Niger",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Niamey",
+    "en": "Niamey"
+   }
+  ],
+  "aliases": [
+   "niger",
+   "republic of niger",
+   "republique du niger",
+   "nijar"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "NGA",
+  "iso2": "ng",
+  "name": "Nigéria",
+  "nameEn": "Nigeria",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Abuja",
+    "en": "Abuja"
+   }
+  ],
+  "aliases": [
+   "nigeria",
+   "federal republic of nigeria",
+   "republique federale du nigeria",
+   "nijeriya",
+   "naijiria"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "NOR",
+  "iso2": "no",
+  "name": "Norvège",
+  "nameEn": "Norway",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Oslo",
+    "en": "Oslo"
+   }
+  ],
+  "aliases": [
+   "norway",
+   "kingdom of norway",
+   "norvege",
+   "royaume de norvege",
+   "norge",
+   "noreg",
+   "kongeriket norge",
+   "kongeriket noreg"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "NZL",
+  "iso2": "nz",
+  "name": "Nouvelle-Zélande",
+  "nameEn": "New Zealand",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Wellington",
+    "en": "Wellington"
+   }
+  ],
+  "aliases": [
+   "new zealand",
+   "nouvelle zelande",
+   "aotearoa"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "OMN",
+  "iso2": "om",
+  "name": "Oman",
+  "nameEn": "Oman",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Mascate",
+    "en": "Muscat"
+   }
+  ],
+  "aliases": [
+   "oman",
+   "sultanate of oman",
+   "sultanat d oman",
+   "saltanat uman"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "UGA",
+  "iso2": "ug",
+  "name": "Ouganda",
+  "nameEn": "Uganda",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Kampala",
+    "en": "Kampala"
+   }
+  ],
+  "aliases": [
+   "uganda",
+   "republic of uganda",
+   "ouganda",
+   "republique de l ouganda",
+   "jamhuri ya uganda"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "UZB",
+  "iso2": "uz",
+  "name": "Ouzbékistan",
+  "nameEn": "Uzbekistan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Tachkent",
+    "en": "Tashkent"
+   }
+  ],
+  "aliases": [
+   "uzbekistan",
+   "republic of uzbekistan",
+   "ouzbekistan",
+   "republique d ouzbekistan",
+   "o zbekiston respublikasi"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "PAK",
+  "iso2": "pk",
+  "name": "Pakistan",
+  "nameEn": "Pakistan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Islamabad",
+    "en": "Islamabad"
+   }
+  ],
+  "aliases": [
+   "pakistan",
+   "islamic republic of pakistan",
+   "republique islamique du pakistan",
+   "islami jumhuriya eh pakistan"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "PLW",
+  "iso2": "pw",
+  "name": "Palaos (Palau)",
+  "nameEn": "Palau",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Ngerulmud",
+    "en": "Ngerulmud"
+   }
+  ],
+  "aliases": [
+   "palau",
+   "republic of palau",
+   "palaos palau",
+   "republique des palaos palau",
+   "beluu er a belau"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "PSE",
+  "iso2": "ps",
+  "name": "Palestine",
+  "nameEn": "Palestine",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Ramallah",
+    "en": "Ramallah"
+   }
+  ],
+  "aliases": [
+   "palestine",
+   "state of palestine",
+   "etat de palestine",
+   "palestine state of",
+   "dawlat filastin"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "PAN",
+  "iso2": "pa",
+  "name": "Panama",
+  "nameEn": "Panama",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Panama",
+    "en": "Panama City"
+   }
+  ],
+  "aliases": [
+   "panama",
+   "republic of panama",
+   "republique du panama",
+   "republica de panama"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "PNG",
+  "iso2": "pg",
+  "name": "Papouasie-Nouvelle-Guinée",
+  "nameEn": "Papua New Guinea",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Port Moresby",
+    "en": "Port Moresby"
+   }
+  ],
+  "aliases": [
+   "papua new guinea",
+   "independent state of papua new guinea",
+   "papouasie nouvelle guinee",
+   "etat independant de papouasie nouvelle guinee",
+   "independen stet bilong papua niugini"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "PRY",
+  "iso2": "py",
+  "name": "Paraguay",
+  "nameEn": "Paraguay",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Asuncion",
+    "en": "Asunción"
+   }
+  ],
+  "aliases": [
+   "paraguay",
+   "republic of paraguay",
+   "republique du paraguay",
+   "republica del paraguay",
+   "teta paraguai"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "NLD",
+  "iso2": "nl",
+  "name": "Pays-Bas",
+  "nameEn": "Netherlands",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Amsterdam",
+    "en": "Amsterdam"
+   }
+  ],
+  "aliases": [
+   "netherlands",
+   "kingdom of the netherlands",
+   "pays bas",
+   "holland",
+   "nederland",
+   "the netherlands",
+   "hollande"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "PER",
+  "iso2": "pe",
+  "name": "Pérou",
+  "nameEn": "Peru",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Lima",
+    "en": "Lima"
+   }
+  ],
+  "aliases": [
+   "peru",
+   "republic of peru",
+   "perou",
+   "republique du perou",
+   "republica del peru"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "PHL",
+  "iso2": "ph",
+  "name": "Philippines",
+  "nameEn": "Philippines",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Manille",
+    "en": "Manila"
+   }
+  ],
+  "aliases": [
+   "philippines",
+   "republic of the philippines",
+   "republique des philippines",
+   "republika ng pilipinas"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "POL",
+  "iso2": "pl",
+  "name": "Pologne",
+  "nameEn": "Poland",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Varsovie",
+    "en": "Warsaw"
+   }
+  ],
+  "aliases": [
+   "poland",
+   "republic of poland",
+   "pologne",
+   "republique de pologne",
+   "rzeczpospolita polska"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "PRT",
+  "iso2": "pt",
+  "name": "Portugal",
+  "nameEn": "Portugal",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Lisbonne",
+    "en": "Lisbon"
+   }
+  ],
+  "aliases": [
+   "portugal",
+   "portuguese republic",
+   "republique portugaise",
+   "portuguesa",
+   "republica portuguesa"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "QAT",
+  "iso2": "qa",
+  "name": "Qatar",
+  "nameEn": "Qatar",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Doha",
+    "en": "Doha"
+   }
+  ],
+  "aliases": [
+   "qatar",
+   "state of qatar",
+   "etat du qatar",
+   "dawlat qatar"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CAF",
+  "iso2": "cf",
+  "name": "République centrafricaine",
+  "nameEn": "Central African Republic",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Bangui",
+    "en": "Bangui"
+   }
+  ],
+  "aliases": [
+   "central african republic",
+   "republique centrafricaine",
+   "rca",
+   "centrafrique"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "DOM",
+  "iso2": "do",
+  "name": "République dominicaine",
+  "nameEn": "Dominican Republic",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Saint-Domingue",
+    "en": "Santo Domingo"
+   }
+  ],
+  "aliases": [
+   "dominican republic",
+   "republique dominicaine"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ROU",
+  "iso2": "ro",
+  "name": "Roumanie",
+  "nameEn": "Romania",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Bucarest",
+    "en": "Bucharest"
+   }
+  ],
+  "aliases": [
+   "romania",
+   "roumanie",
+   "rumania",
+   "roumania"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "GBR",
+  "iso2": "gb",
+  "name": "Royaume-Uni",
+  "nameEn": "United Kingdom",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Londres",
+    "en": "London"
+   }
+  ],
+  "aliases": [
+   "united kingdom",
+   "united kingdom of great britain and northern ireland",
+   "royaume uni",
+   "royaume uni de grande bretagne et d irlande du nord",
+   "great britain",
+   "uk",
+   "angleterre",
+   "grande bretagne"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "RUS",
+  "iso2": "ru",
+  "name": "Russie",
+  "nameEn": "Russia",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Moscou",
+    "en": "Moscow"
+   }
+  ],
+  "aliases": [
+   "russia",
+   "russian federation",
+   "russie",
+   "federation de russie"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "RWA",
+  "iso2": "rw",
+  "name": "Rwanda",
+  "nameEn": "Rwanda",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Kigali",
+    "en": "Kigali"
+   }
+  ],
+  "aliases": [
+   "rwanda",
+   "republic of rwanda",
+   "republique rwandaise",
+   "repubulika y u rwanda",
+   "republique du rwanda"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "KNA",
+  "iso2": "kn",
+  "name": "Saint-Christophe-et-Niévès",
+  "nameEn": "Saint Kitts and Nevis",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Basseterre",
+    "en": "Basseterre"
+   }
+  ],
+  "aliases": [
+   "saint kitts and nevis",
+   "federation of saint christopher and nevis",
+   "saint christophe et nieves",
+   "federation de saint christophe et nieves"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "SMR",
+  "iso2": "sm",
+  "name": "Saint-Marin",
+  "nameEn": "San Marino",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Saint-Marin",
+    "en": "City of San Marino"
+   }
+  ],
+  "aliases": [
+   "san marino",
+   "most serene republic of san marino",
+   "saint marin",
+   "republique de saint marin",
+   "republic of san marino",
+   "repubblica di san marino"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "VCT",
+  "iso2": "vc",
+  "name": "Saint-Vincent-et-les-Grenadines",
+  "nameEn": "Saint Vincent and the Grenadines",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Kingstown",
+    "en": "Kingstown"
+   }
+  ],
+  "aliases": [
+   "saint vincent and the grenadines",
+   "saint vincent et les grenadines"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "LCA",
+  "iso2": "lc",
+  "name": "Sainte-Lucie",
+  "nameEn": "Saint Lucia",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Castries",
+    "en": "Castries"
+   }
+  ],
+  "aliases": [
+   "saint lucia",
+   "sainte lucie"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "SLV",
+  "iso2": "sv",
+  "name": "Salvador",
+  "nameEn": "El Salvador",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "San Salvador",
+    "en": "San Salvador"
+   }
+  ],
+  "aliases": [
+   "el salvador",
+   "republic of el salvador",
+   "salvador",
+   "republique du salvador",
+   "republica de el salvador"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "WSM",
+  "iso2": "ws",
+  "name": "Samoa",
+  "nameEn": "Samoa",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Apia",
+    "en": "Apia"
+   }
+  ],
+  "aliases": [
+   "samoa",
+   "independent state of samoa",
+   "malo sa oloto tuto atasi o samoa"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "STP",
+  "iso2": "st",
+  "name": "São Tomé et Príncipe",
+  "nameEn": "São Tomé and Príncipe",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "São Tomé",
+    "en": "São Tomé"
+   }
+  ],
+  "aliases": [
+   "sao tome and principe",
+   "democratic republic of sao tome and principe",
+   "sao tome et principe",
+   "republique democratique de sao tome et principe",
+   "republica democratica de sao tome e principe"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "SEN",
+  "iso2": "sn",
+  "name": "Sénégal",
+  "nameEn": "Senegal",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Dakar",
+    "en": "Dakar"
+   }
+  ],
+  "aliases": [
+   "senegal",
+   "republic of senegal",
+   "republique du senegal"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SRB",
+  "iso2": "rs",
+  "name": "Serbie",
+  "nameEn": "Serbia",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Belgrade",
+    "en": "Belgrade"
+   }
+  ],
+  "aliases": [
+   "serbia",
+   "republic of serbia",
+   "serbie",
+   "republique de serbie",
+   "srbija",
+   "republika srbija"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SYC",
+  "iso2": "sc",
+  "name": "Seychelles",
+  "nameEn": "Seychelles",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Victoria",
+    "en": "Victoria"
+   }
+  ],
+  "aliases": [
+   "seychelles",
+   "republic of seychelles",
+   "republique des seychelles",
+   "repiblik sesel"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "SLE",
+  "iso2": "sl",
+  "name": "Sierra Leone",
+  "nameEn": "Sierra Leone",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Freetown",
+    "en": "Freetown"
+   }
+  ],
+  "aliases": [
+   "sierra leone",
+   "republic of sierra leone",
+   "republique de sierra leone"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SGP",
+  "iso2": "sg",
+  "name": "Singapour",
+  "nameEn": "Singapore",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Singapour",
+    "en": "Singapore"
+   }
+  ],
+  "aliases": [
+   "singapore",
+   "republic of singapore",
+   "singapour",
+   "republique de singapour",
+   "singapura",
+   "republik singapura"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "SVK",
+  "iso2": "sk",
+  "name": "Slovaquie",
+  "nameEn": "Slovakia",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Bratislava",
+    "en": "Bratislava"
+   }
+  ],
+  "aliases": [
+   "slovakia",
+   "slovak republic",
+   "slovaquie",
+   "republique slovaque",
+   "slovenska republika"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SVN",
+  "iso2": "si",
+  "name": "Slovénie",
+  "nameEn": "Slovenia",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Ljubljana",
+    "en": "Ljubljana"
+   }
+  ],
+  "aliases": [
+   "slovenia",
+   "republic of slovenia",
+   "slovenie",
+   "republique de slovenie",
+   "republika slovenija"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SOM",
+  "iso2": "so",
+  "name": "Somalie",
+  "nameEn": "Somalia",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Mogadiscio",
+    "en": "Mogadishu"
+   }
+  ],
+  "aliases": [
+   "somalia",
+   "federal republic of somalia",
+   "somalie",
+   "republique federale de somalie",
+   "as sumal",
+   "jamhuuriyadda federaalka soomaaliya",
+   "jumhuriyyat as sumal al fideraliyya"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SDN",
+  "iso2": "sd",
+  "name": "Soudan",
+  "nameEn": "Sudan",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Khartoum",
+    "en": "Khartoum"
+   }
+  ],
+  "aliases": [
+   "sudan",
+   "republic of the sudan",
+   "soudan",
+   "republique du soudan",
+   "jumhuriyat as sudan"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SSD",
+  "iso2": "ss",
+  "name": "Soudan du Sud",
+  "nameEn": "South Sudan",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Djouba",
+    "en": "Juba"
+   }
+  ],
+  "aliases": [
+   "south sudan",
+   "republic of south sudan",
+   "soudan du sud",
+   "republique du soudan du sud"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "LKA",
+  "iso2": "lk",
+  "name": "Sri Lanka",
+  "nameEn": "Sri Lanka",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Colombo",
+    "en": "Colombo"
+   }
+  ],
+  "aliases": [
+   "sri lanka",
+   "democratic socialist republic of sri lanka",
+   "republique democratique socialiste du sri lanka",
+   "ilankai"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SWE",
+  "iso2": "se",
+  "name": "Suède",
+  "nameEn": "Sweden",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Stockholm",
+    "en": "Stockholm"
+   }
+  ],
+  "aliases": [
+   "sweden",
+   "kingdom of sweden",
+   "suede",
+   "royaume de suede",
+   "konungariket sverige"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CHE",
+  "iso2": "ch",
+  "name": "Suisse",
+  "nameEn": "Switzerland",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Berne",
+    "en": "Bern"
+   }
+  ],
+  "aliases": [
+   "switzerland",
+   "swiss confederation",
+   "suisse",
+   "confederation suisse",
+   "schweiz",
+   "svizzera",
+   "svizra"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SUR",
+  "iso2": "sr",
+  "name": "Surinam",
+  "nameEn": "Suriname",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Paramaribo",
+    "en": "Paramaribo"
+   }
+  ],
+  "aliases": [
+   "suriname",
+   "republic of suriname",
+   "surinam",
+   "republique du suriname",
+   "sarnam",
+   "sranangron",
+   "republiek suriname"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "SYR",
+  "iso2": "sy",
+  "name": "Syrie",
+  "nameEn": "Syria",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Damas",
+    "en": "Damascus"
+   }
+  ],
+  "aliases": [
+   "syria",
+   "syrian arab republic",
+   "syrie",
+   "republique arabe syrienne",
+   "al jumhuriyah al arabiyah as suriyah"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TJK",
+  "iso2": "tj",
+  "name": "Tadjikistan",
+  "nameEn": "Tajikistan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Douchanbé",
+    "en": "Dushanbe"
+   }
+  ],
+  "aliases": [
+   "tajikistan",
+   "republic of tajikistan",
+   "tadjikistan",
+   "republique du tadjikistan",
+   "tocikiston",
+   "cumhuriyi tocikiston"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TWN",
+  "iso2": "tw",
+  "name": "Taïwan",
+  "nameEn": "Taiwan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Taipei",
+    "en": "Taipei"
+   }
+  ],
+  "aliases": [
+   "taiwan",
+   "republic of china taiwan",
+   "republique de chine taiwan",
+   "republic of china",
+   "zhonghua minguo",
+   "chinese taipei"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TZA",
+  "iso2": "tz",
+  "name": "Tanzanie",
+  "nameEn": "Tanzania",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Dodoma",
+    "en": "Dodoma"
+   }
+  ],
+  "aliases": [
+   "tanzania",
+   "united republic of tanzania",
+   "tanzanie",
+   "republique unie de tanzanie",
+   "tanzania united republic of",
+   "jamhuri ya muungano wa tanzania"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TCD",
+  "iso2": "td",
+  "name": "Tchad",
+  "nameEn": "Chad",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "N'Djaména",
+    "en": "N'Djamena"
+   }
+  ],
+  "aliases": [
+   "chad",
+   "republic of chad",
+   "tchad",
+   "republique du tchad"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "CZE",
+  "iso2": "cz",
+  "name": "Tchéquie",
+  "nameEn": "Czechia",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Prague",
+    "en": "Prague"
+   }
+  ],
+  "aliases": [
+   "czechia",
+   "czech republic",
+   "tchequie",
+   "republique tcheque",
+   "ceska republika",
+   "cesko"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "THA",
+  "iso2": "th",
+  "name": "Thaïlande",
+  "nameEn": "Thailand",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Bangkok",
+    "en": "Bangkok"
+   }
+  ],
+  "aliases": [
+   "thailand",
+   "kingdom of thailand",
+   "thailande",
+   "royaume de thailande",
+   "prathet",
+   "thai",
+   "ratcha anachak thai"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TLS",
+  "iso2": "tl",
+  "name": "Timor oriental",
+  "nameEn": "Timor-Leste",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Dili",
+    "en": "Dili"
+   }
+  ],
+  "aliases": [
+   "timor leste",
+   "democratic republic of timor leste",
+   "timor oriental",
+   "republique democratique du timor oriental",
+   "east timor",
+   "timor",
+   "republica democratica de timor leste",
+   "republika demokratika timor leste",
+   "timor lorosa e",
+   "timor lorosae"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TGO",
+  "iso2": "tg",
+  "name": "Togo",
+  "nameEn": "Togo",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Lomé",
+    "en": "Lomé"
+   }
+  ],
+  "aliases": [
+   "togo",
+   "togolese republic",
+   "republique togolaise",
+   "togolese"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TON",
+  "iso2": "to",
+  "name": "Tonga",
+  "nameEn": "Tonga",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Nukuʻalofa",
+    "en": "Nuku'alofa"
+   }
+  ],
+  "aliases": [
+   "tonga",
+   "kingdom of tonga",
+   "royaume des tonga"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "TTO",
+  "iso2": "tt",
+  "name": "Trinité-et-Tobago",
+  "nameEn": "Trinidad and Tobago",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Port-d'Espagne",
+    "en": "Port of Spain"
+   }
+  ],
+  "aliases": [
+   "trinidad and tobago",
+   "republic of trinidad and tobago",
+   "trinite et tobago",
+   "republique de trinite et tobago"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TUN",
+  "iso2": "tn",
+  "name": "Tunisie",
+  "nameEn": "Tunisia",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Tunis",
+    "en": "Tunis"
+   }
+  ],
+  "aliases": [
+   "tunisia",
+   "tunisian republic",
+   "tunisie",
+   "republique tunisienne",
+   "republic of tunisia",
+   "al jumhuriyyah at tunisiyyah"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TKM",
+  "iso2": "tm",
+  "name": "Turkménistan",
+  "nameEn": "Turkmenistan",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Achgabat",
+    "en": "Ashgabat"
+   }
+  ],
+  "aliases": [
+   "turkmenistan"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TUR",
+  "iso2": "tr",
+  "name": "Turquie",
+  "nameEn": "Türkiye",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Ankara",
+    "en": "Ankara"
+   }
+  ],
+  "aliases": [
+   "turkiye",
+   "republic of turkiye",
+   "turquie",
+   "republique de turquie",
+   "republic of turkey",
+   "turkiye cumhuriyeti"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "TUV",
+  "iso2": "tv",
+  "name": "Tuvalu",
+  "nameEn": "Tuvalu",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Funafuti",
+    "en": "Funafuti"
+   }
+  ],
+  "aliases": [
+   "tuvalu"
+  ],
+  "onMap": false
+ },
+ {
+  "code": "UKR",
+  "iso2": "ua",
+  "name": "Ukraine",
+  "nameEn": "Ukraine",
+  "region": "Europe",
+  "capitals": [
+   {
+    "fr": "Kiev",
+    "en": "Kyiv"
+   }
+  ],
+  "aliases": [
+   "ukraine",
+   "ukrayina"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "URY",
+  "iso2": "uy",
+  "name": "Uruguay",
+  "nameEn": "Uruguay",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Montevideo",
+    "en": "Montevideo"
+   }
+  ],
+  "aliases": [
+   "uruguay",
+   "oriental republic of uruguay",
+   "republique orientale de l uruguay",
+   "republica oriental del uruguay"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "VUT",
+  "iso2": "vu",
+  "name": "Vanuatu",
+  "nameEn": "Vanuatu",
+  "region": "Oceania",
+  "capitals": [
+   {
+    "fr": "Port-Vila",
+    "en": "Port Vila"
+   }
+  ],
+  "aliases": [
+   "vanuatu",
+   "republic of vanuatu",
+   "republique de vanuatu",
+   "ripablik blong vanuatu"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "VEN",
+  "iso2": "ve",
+  "name": "Venezuela",
+  "nameEn": "Venezuela",
+  "region": "Americas",
+  "capitals": [
+   {
+    "fr": "Caracas",
+    "en": "Caracas"
+   }
+  ],
+  "aliases": [
+   "venezuela",
+   "bolivarian republic of venezuela",
+   "republique bolivarienne du venezuela",
+   "venezuela bolivarian republic of",
+   "republica bolivariana de venezuela"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "VNM",
+  "iso2": "vn",
+  "name": "Viêt Nam",
+  "nameEn": "Vietnam",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Hanoï",
+    "en": "Hanoi"
+   }
+  ],
+  "aliases": [
+   "vietnam",
+   "socialist republic of vietnam",
+   "viet nam",
+   "republique socialiste du viet nam",
+   "cong hoa xa hoi chu nghia viet nam"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "YEM",
+  "iso2": "ye",
+  "name": "Yémen",
+  "nameEn": "Yemen",
+  "region": "Asia",
+  "capitals": [
+   {
+    "fr": "Sanaa",
+    "en": "Sana'a"
+   }
+  ],
+  "aliases": [
+   "yemen",
+   "republic of yemen",
+   "republique du yemen",
+   "yemeni republic",
+   "al jumhuriyyah al yamaniyyah"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ZMB",
+  "iso2": "zm",
+  "name": "Zambie",
+  "nameEn": "Zambia",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Lusaka",
+    "en": "Lusaka"
+   }
+  ],
+  "aliases": [
+   "zambia",
+   "republic of zambia",
+   "zambie",
+   "republique de zambie"
+  ],
+  "onMap": true
+ },
+ {
+  "code": "ZWE",
+  "iso2": "zw",
+  "name": "Zimbabwe",
+  "nameEn": "Zimbabwe",
+  "region": "Africa",
+  "capitals": [
+   {
+    "fr": "Harare",
+    "en": "Harare"
+   }
+  ],
+  "aliases": [
+   "zimbabwe",
+   "republic of zimbabwe",
+   "republique du zimbabwe"
+  ],
+  "onMap": true
+ }
+]

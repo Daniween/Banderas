@@ -2,259 +2,307 @@
 import { onMounted, onUnmounted, ref, watch, computed } from 'vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import geoUrl from '../data/world.geo.json?url'
+import AppIcon from './AppIcon.vue'
 
 const props = defineProps({
-  currentCountry: Object,
-  countries: Array,
-  correctSessionCountries: {
-    type: Object,
-    default: () => new Set()
-  },
-  revealedSessionCountries: {
-    type: Object,
-    default: () => new Set()
-  },
+  countries: { type: Array, default: () => [] },
+  correctSessionCountries: { type: Set, default: () => new Set() },
+  revealedSessionCountries: { type: Set, default: () => new Set() },
   redSessionCountry: String,
   highlightedCountryCode: String,
-  isFinished: {
-    type: Boolean,
-    default: false
-  }
+  isFinished: Boolean,
 })
 
 const emit = defineEmits(['submit'])
 
 const mapContainer = ref(null)
-const geoCodes = ref(new Set())
+const loading = ref(true)
+const loadError = ref(false)
+const showInfo = ref(false)
 let map = null
 let geojsonLayer = null
 
-// Map codes that differ between API (REST Countries) and GeoJSON
-const CODE_MAPPING = {
-  'UNK': 'CS-KM', // Kosovo
-  'PSE': 'PS',    // Palestine (Some GeoJSON use 'PS', others 'PSE')
+const countryByCode = computed(() => new Map(props.countries.map((c) => [c.code, c])))
+
+const nonClickableCountries = computed(() =>
+  props.countries
+    .filter((c) => !c.onMap)
+    .map((c) => c.name)
+    .sort((a, b) => a.localeCompare(b, 'fr')),
+)
+
+const BASE = { weight: 0.8, opacity: 1, color: '#aab4c9', fillOpacity: 1, fillColor: '#ffffff' }
+const STYLES = {
+  highlight: { fillColor: '#4f6bff', weight: 2.5, color: '#2a3fb8' },
+  correct: { fillColor: '#4ade80', color: '#15803d' },
+  missed: { fillColor: '#fdba74', color: '#c2410c' },
+  last: { fillColor: '#f87171', weight: 2, color: '#b91c1c' },
+  hover: { fillColor: '#c7d0ff' },
+  click: { fillColor: '#fcd34d' },
 }
-
-// Helper to get consistent code for comparison
-const getNormalizedCode = (feature) => {
-  const code = feature.id || feature.properties.id || feature.properties.iso_a3 || feature.properties.ISO_A3 || feature.properties.cca3 || feature.properties.CCA3
-  // Reverse lookup: find if this GeoJSON code corresponds to an API code we use
-  for (const [apiCode, geoCode] of Object.entries(CODE_MAPPING)) {
-    if (code === geoCode) return apiCode
-  }
-  return code
-}
-
-const GEOJSON_URL = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json'
-
-const nonClickableCountries = computed(() => {
-  if (!props.countries || !geoCodes.value.size) return []
-  return props.countries
-    .filter(c => !geoCodes.value.has(c.cca3))
-    .map(c => c.translations?.fra?.common || c.name.common)
-    .sort((a, b) => a.localeCompare(b))
-})
 
 const getCountryStyle = (feature) => {
-  const code = getNormalizedCode(feature)
-  if (code === props.highlightedCountryCode) {
-    return {
-      fillColor: '#2ecc71', // Vert émeraude brillant
-      fillOpacity: 0.9,
-      weight: 3,
-      color: '#ffffff',
-      dashArray: ''
-    }
-  }
-
-  if (props.isFinished) {
-    if (props.correctSessionCountries.has(code)) {
-      return {
-        fillColor: '#27ae60', // Vert (trouvé)
-        fillOpacity: 0.6,
-        weight: 1,
-        color: '#ffffff'
-      }
-    } else {
-      return {
-        fillColor: '#e67e22', // Orange (non trouvé)
-        fillOpacity: 0.6,
-        weight: 1,
-        color: '#ffffff'
-      }
-    }
-  }
-
-  if (code === props.redSessionCountry) {
-    return {
-      fillColor: '#e74c3c', // Rouge
-      fillOpacity: 0.8,
-      weight: 2,
-      color: '#ffffff'
-    }
-  }
-
-  if (props.correctSessionCountries.has(code)) {
-    return {
-      fillColor: '#27ae60', // Vert
-      fillOpacity: 0.6,
-      weight: 1,
-      color: '#ffffff'
-    }
-  }
-  
-  if (props.revealedSessionCountries.has(code)) {
-    return {
-      fillColor: '#e67e22', // Orange
-      fillOpacity: 0.6,
-      weight: 1,
-      color: '#ffffff'
-    }
-  }
-
-  return {
-    fillColor: '#ffffff',
-    weight: 1,
-    opacity: 1,
-    color: '#666',
-    fillOpacity: 0.1
-  }
+  const code = feature.id
+  if (code === props.highlightedCountryCode) return { ...BASE, ...STYLES.highlight }
+  if (props.correctSessionCountries.has(code)) return { ...BASE, ...STYLES.correct }
+  if (props.isFinished) return { ...BASE, ...STYLES.missed }
+  if (code === props.redSessionCountry) return { ...BASE, ...STYLES.last }
+  if (props.revealedSessionCountries.has(code)) return { ...BASE, ...STYLES.missed }
+  return BASE
 }
 
-// Watch for changes in discovered countries to update the map
-watch([
-  () => props.correctSessionCountries, 
-  () => props.revealedSessionCountries,
-  () => props.redSessionCountry,
+const isDiscovered = (code) =>
+  props.isFinished ||
+  props.correctSessionCountries.has(code) ||
+  props.revealedSessionCountries.has(code) ||
+  code === props.redSessionCountry
+
+const nameOf = (feature) => countryByCode.value.get(feature.id)?.name ?? feature.properties?.name ?? 'Pays inconnu'
+
+watch(
+  () => [
+    props.correctSessionCountries,
+    props.revealedSessionCountries,
+    props.redSessionCountry,
+    props.highlightedCountryCode,
+    props.isFinished,
+  ],
+  () => geojsonLayer?.setStyle(getCountryStyle),
+)
+
+// Zoom sur le pays recherché
+watch(
   () => props.highlightedCountryCode,
-  () => props.isFinished
-], () => {
-  if (geojsonLayer) {
-    geojsonLayer.setStyle(getCountryStyle)
-  }
-}, { deep: true })
-
-// Auto-zoom and pan to highlighted country
-watch(() => props.highlightedCountryCode, (newCode) => {
-  if (!newCode || !geojsonLayer || !map) return
-
-  geojsonLayer.eachLayer(layer => {
-    const feature = layer.feature
-    const code = getNormalizedCode(feature)
-    
-    if (code === newCode) {
-      const bounds = layer.getBounds()
-      map.flyToBounds(bounds, {
-        padding: [100, 100],
-        maxZoom: 6,
-        duration: 1.5
-      })
-    }
-  })
-})
+  (code) => {
+    if (!code || !geojsonLayer || !map) return
+    geojsonLayer.eachLayer((layer) => {
+      if (layer.feature.id === code) {
+        map.flyToBounds(layer.getBounds(), { padding: [60, 60], maxZoom: 6, duration: 1.2 })
+      }
+    })
+  },
+)
 
 onMounted(async () => {
+  // Pas de fond de carte tuilé : les contours suffisent pour le quiz (un fond avec
+  // libellés donnerait les réponses), et la carte reste instantanée et hors ligne.
   map = L.map(mapContainer.value, {
     center: [20, 0],
     zoom: 2,
-    minZoom: 2,
-    maxBounds: [[-90, -180], [90, 180]],
-    maxBoundsViscosity: 1.0
+    minZoom: 1,
+    maxZoom: 8,
+    maxBounds: [
+      [-85, -190],
+      [85, 190],
+    ],
+    maxBoundsViscosity: 1.0,
+    preferCanvas: true, // rendu Canvas : bien plus fluide que SVG pour ~180 polygones
+    zoomSnap: 0.5,
+    attributionControl: false,
   })
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd',
-  }).addTo(map)
+  // Ajuste le zoom initial à la taille du conteneur (mobile comme desktop)
+  map.fitBounds([
+    [-50, -160],
+    [75, 175],
+  ])
 
   try {
-    const response = await fetch(GEOJSON_URL)
-    const data = await response.json()
-
-    // Collect all available codes in the GeoJSON
-    const codes = new Set()
-    data.features.forEach(f => codes.add(getNormalizedCode(f)))
-    geoCodes.value = codes
+    const data = await (await fetch(geoUrl)).json()
+    if (!map) return
 
     geojsonLayer = L.geoJSON(data, {
       style: getCountryStyle,
       onEachFeature: (feature, layer) => {
-        const propsData = feature.properties
-        const code = getNormalizedCode(feature)
-        
-        // Find French name from API data
-        const countryData = (props.countries || []).find(c => c.cca3 === code)
-        const countryName = countryData?.translations?.fra?.common || propsData.name || propsData.NAME || 'Pays inconnu'
-        
         layer.on({
           mouseover: (e) => {
-            const l = e.target
-            
-            // Show tooltip ALWAYS if finished, otherwise only if discovered
-            if (props.isFinished || props.correctSessionCountries.has(code) || props.revealedSessionCountries.has(code) || code === props.redSessionCountry) {
-              l.bindTooltip(countryName, { sticky: true, className: 'map-tooltip' }).openTooltip()
+            if (isDiscovered(feature.id)) {
+              e.target.bindTooltip(nameOf(feature), { sticky: true, className: 'map-tooltip' }).openTooltip()
             }
-
-            l.setStyle({
-              fillOpacity: 0.5,
-              fillColor: '#4facfe'
-            })
+            e.target.setStyle(STYLES.hover)
           },
           mouseout: (e) => {
-            const l = e.target
-            l.unbindTooltip()
-            geojsonLayer.resetStyle(l)
+            e.target.unbindTooltip()
+            geojsonLayer.resetStyle(e.target)
           },
           click: (e) => {
-            if (props.isFinished) return
-
-            const code = getNormalizedCode(feature)
-            
-            // Visual feedback
-            const l = e.target
-            l.setStyle({ fillColor: '#f1c40f', fillOpacity: 0.8 })
-            setTimeout(() => {
-              if (geojsonLayer) geojsonLayer.resetStyle(l)
-            }, 300)
-
-            emit('submit', code)
-          }
+            if (props.isFinished) {
+              // Sur mobile (pas de survol) : un appui affiche le nom
+              e.target.bindTooltip(nameOf(feature), { className: 'map-tooltip' }).openTooltip(e.latlng)
+              return
+            }
+            e.target.setStyle(STYLES.click)
+            setTimeout(() => geojsonLayer?.resetStyle(e.target), 300)
+            emit('submit', feature.id)
+          },
         })
-      }
+      },
     }).addTo(map)
-  } catch (e) {
-    console.error('Failed to load map data:', e)
+  } catch (err) {
+    console.error('Chargement de la carte impossible :', err)
+    loadError.value = true
+  } finally {
+    loading.value = false
   }
 })
 
 onUnmounted(() => {
-  if (map) {
-    map.remove()
-  }
+  map?.remove()
+  map = null
+  geojsonLayer = null
 })
-
-// Focus or highlight could be added here if needed
 </script>
 
 <template>
   <div class="map-wrapper">
-    <div ref="mapContainer" class="map-container"></div>
-    <div class="map-hint">Cliquez sur le pays correspondant au drapeau</div>
-    
-    <!-- Info Note for non-clickable countries -->
-    <div class="map-info-note" v-if="nonClickableCountries.length > 0">
-      <div class="info-icon" title="Pourquoi certains pays ne sont pas cliquables ?">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-      </div>
-      <div class="info-tooltip">
-        <h4>{{ nonClickableCountries.length }} pays non cliquables</h4>
-        <p>Ces pays sont trop petits pour la carte actuelle (amélioration en cours) :</p>
-        <div class="countries-list">
-          {{ nonClickableCountries.join(', ') }}
-        </div>
+    <div ref="mapContainer" class="map-container" role="application" aria-label="Carte du monde : cliquez sur le pays correspondant au drapeau"></div>
+
+    <div v-if="loading" class="map-overlay"><div class="spinner"></div></div>
+    <div v-else-if="loadError" class="map-overlay">Impossible de charger la carte. Vérifiez votre connexion.</div>
+
+    <p v-if="!isFinished" class="map-hint">Cliquez sur le pays correspondant au drapeau</p>
+
+    <div v-if="nonClickableCountries.length" class="map-info">
+      <button
+        class="icon-btn info-btn"
+        :aria-expanded="showInfo"
+        aria-controls="map-info-panel"
+        aria-label="Pays absents de la carte"
+        @click="showInfo = !showInfo"
+      >
+        <AppIcon name="info" :size="20" />
+      </button>
+      <div v-if="showInfo" id="map-info-panel" class="info-panel">
+        <h4>{{ nonClickableCountries.length }} pays absents de la carte</h4>
+        <p>Trop petits pour cette carte, ils sont exclus du mode Carte :</p>
+        <p class="countries-list">{{ nonClickableCountries.join(', ') }}</p>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped src="../styles/MapDisplay.css"></style>
+<style scoped>
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-md);
+  isolation: isolate;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  background: #d7e7fb;
+}
+
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  background: rgba(245, 247, 252, 0.7);
+}
+
+.map-hint {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.map-info {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.info-btn {
+  background: var(--surface);
+}
+
+.info-panel {
+  width: min(320px, calc(100vw - 4rem));
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  animation: fade-up 0.25s var(--ease-out);
+}
+
+.info-panel h4 {
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.info-panel p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.countries-list {
+  margin-top: 0.5rem;
+  max-height: 180px;
+  overflow-y: auto;
+  color: var(--text) !important;
+  line-height: 1.6;
+}
+
+:deep(.leaflet-container) {
+  font-family: var(--font);
+  background: #d7e7fb;
+}
+
+:deep(.leaflet-bar a) {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+:deep(.leaflet-bar a:hover) {
+  background: var(--surface-2);
+}
+
+:deep(.map-tooltip) {
+  background: var(--text);
+  border: 2px solid var(--border);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  box-shadow: var(--shadow-md);
+}
+
+:deep(.map-tooltip::before) {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .map-hint {
+    display: none;
+  }
+}
+</style>

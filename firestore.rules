@@ -2,33 +2,45 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    
-    // Règles pour les profils utilisateurs
-    match /users/{userId} {
-      // Lecture : Un utilisateur ne peut lire que son propre profil
-      allow read: if request.auth != null && request.auth.uid == userId;
-      
-      // Écriture : Création et modification de son propre profil
-      // On valide également que le pseudo ne dépasse pas 20 caractères
-      allow write: if request.auth != null && request.auth.uid == userId
-                   && (!request.resource.data.keys().hasAll(['pseudo']) 
-                       || request.resource.data.pseudo.size() <= 20);
+
+    function signedIn() {
+      return request.auth != null;
     }
-    
-    // Règles pour les scores
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function validPseudo(data) {
+      return !data.keys().hasAny(['pseudo'])
+        || (data.pseudo is string && data.pseudo.size() > 0 && data.pseudo.size() <= 20);
+    }
+
+    // Un score doit être cohérent : on ne peut pas publier 500/197 ou un temps négatif
+    function validScore(data) {
+      return data.keys().hasOnly(['userId', 'pseudo', 'mode', 'region', 'score', 'total', 'timeSeconds', 'formattedTime', 'timestamp'])
+        && data.userId == request.auth.uid
+        && validPseudo(data)
+        && data.mode in ['survival', 'capital', 'map', 'custom']
+        && data.region is string
+        && data.score is int && data.total is int
+        && data.score >= 0 && data.total > 0 && data.score <= data.total && data.total <= 197
+        && data.timeSeconds is int && data.timeSeconds >= 0
+        && data.timestamp == request.time;
+    }
+
+    // Profils utilisateurs : chacun ne lit et n'écrit que le sien
+    match /users/{userId} {
+      allow read, delete: if isOwner(userId);
+      allow create, update: if isOwner(userId) && validPseudo(request.resource.data);
+    }
+
+    // Scores : lecture publique (classement), création validée, jamais modifiés
     match /scores/{scoreId} {
-      // Lecture : Tout le monde peut lire les scores (pour le classement mondial public)
       allow read: if true;
-      
-      // Création : Seulement si authentifié et si le score est assigné à son propre UID, 
-      // tout en vérifiant que le pseudo de la ressource limite la taille.
-      allow create: if request.auth != null 
-                    && request.resource.data.userId == request.auth.uid
-                    && (!request.resource.data.keys().hasAll(['pseudo']) 
-                        || request.resource.data.pseudo.size() <= 20);
-      
-      // Modification/Suppression : On restreint aux propres scores
-      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if signedIn() && validScore(request.resource.data);
+      allow update: if false;
+      allow delete: if signedIn() && request.auth.uid == resource.data.userId;
     }
   }
 }

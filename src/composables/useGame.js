@@ -1,463 +1,333 @@
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { collection, addDoc, serverTimestamp, doc, updateDoc, increment } from 'firebase/firestore'
-import { db } from '../firebase'
+import { ref, shallowRef, computed, onMounted, onUnmounted } from 'vue'
+import {
+  COUNTRIES,
+  SESSION_MODES,
+  MAP_MAX_FAILURES,
+  shuffle,
+  isCorrectAnswer,
+  answerFor,
+  formatDuration,
+  flagUrl,
+  preloadImage,
+} from '../lib/quiz'
+import { readJson, writeJson, remove } from '../lib/storage'
 
 const STORAGE_KEY = 'banderas-known-countries'
 const VISITED_KEY = 'banderas-visited-countries'
 const SETTINGS_KEY = 'banderas-settings'
 
-export function useGame() {
-    const countries = ref([])
-    const knownCountries = ref(new Set())
-    const visitedCountries = ref(new Set())
-    const loading = ref(true)
-    const error = ref(null)
-    const currentCountry = ref(null)
-    const showCapitals = ref(false)
-    const mapClickableCodes = ref(new Set())
+const randomItem = (items) => items[Math.floor(Math.random() * items.length)]
 
-    const gameMode = ref('learning') // 'learning' | 'survival' | 'capital' | 'custom'
-    const regionFilter = ref(null)
-    const sessionQueue = ref([])
-    const sessionScore = ref(0)
-    const gameStatus = ref('menu') // 'menu' | 'playing' | 'finished' | 'selecting'
-    const selectedCodes = ref(new Set())
-    const correctSessionCountries = ref(new Set())
-    const revealedSessionCountries = ref(new Set())
-    const redSessionCountry = ref(null)
-    const timerSeconds = ref(0)
-    const mapFailures = ref(0)
-    let timerInterval = null
+/**
+ * État et règles du jeu.
+ * @param {{ onFinish?: (result: object) => void }} options appelé une fois par partie terminée
+ */
+export function useGame({ onFinish } = {}) {
+  const countries = COUNTRIES
 
-    const sessionTotal = ref(0)
+  // Progression persistée (mode apprentissage)
+  const savedKnown = readJson(STORAGE_KEY, [])
+  const knownCountries = ref(new Set(savedKnown))
+  const visitedCountries = ref(new Set(readJson(VISITED_KEY, savedKnown)))
+  const showCapitals = ref(!!readJson(SETTINGS_KEY, {}).showCapitals)
 
-    const score = computed(() => {
-        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) return sessionScore.value
-        return knownCountries.value.size
-    })
+  // 'menu' | 'selecting' | 'playing' | 'finished' | 'leaderboard' | 'profile' | 'cgu'
+  const gameStatus = ref('menu')
+  const gameMode = ref('learning') // 'learning' | 'survival' | 'capital' | 'map' | 'custom'
+  const regionFilter = ref(null)
 
-    const total = computed(() => {
-        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) return sessionTotal.value
-        if (regionFilter.value) return countries.value.filter(c => c.region === regionFilter.value).length
-        return countries.value.length
-    })
+  const currentCountry = shallowRef(null)
+  const sessionQueue = shallowRef([])
+  const sessionTotal = ref(0)
+  const sessionScore = ref(0)
+  const streak = ref(0)
+  const bestStreak = ref(0)
+  const selectedCodes = ref(new Set())
 
-    const progress = computed(() => {
-        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
-            return sessionTotal.value ? Math.round((sessionScore.value / sessionTotal.value) * 100) : 0
-        }
-        return total.value ? Math.round((knownCountries.value.size / total.value) * 100) : 0
-    })
+  // Mode carte
+  const correctSessionCountries = ref(new Set())
+  const revealedSessionCountries = ref(new Set())
+  const redSessionCountry = ref(null)
+  const mapFailures = ref(0)
 
-    const formattedTime = computed(() => {
-        const mins = Math.floor(timerSeconds.value / 60)
-        const secs = timerSeconds.value % 60
-        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
-    })
+  // Prochain pays du mode apprentissage, tiré à l'avance pour précharger son drapeau
+  let learningNext = null
 
-    const visitedCount = computed(() => {
-        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
-            return sessionTotal.value - sessionQueue.value.length
-        }
-        return visitedCountries.value.size
-    })
+  const isSessionMode = computed(() => SESSION_MODES.includes(gameMode.value))
 
-    const progressVisited = computed(() => {
-        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
-            // In survival/custom/map, visited is just how many we've gone through (total - remaining)
-            const played = sessionTotal.value - sessionQueue.value.length
-            return sessionTotal.value ? Math.round((played / sessionTotal.value) * 100) : 0
-        }
-        return total.value ? Math.round((visitedCountries.value.size / total.value) * 100) : 0
-    })
+  const pool = computed(() =>
+    regionFilter.value ? countries.filter((c) => c.region === regionFilter.value) : countries,
+  )
 
-    // Sécurité: Empêcher la fermeture accidentelle de la page en pleine partie
-    const handleBeforeUnload = (e) => {
-        if (gameStatus.value === 'playing') {
-            e.preventDefault()
-            e.returnValue = '' // Trigger browser's default prompt
-        }
+  const score = computed(() => {
+    if (isSessionMode.value) return sessionScore.value
+    return pool.value.filter((c) => knownCountries.value.has(c.code)).length
+  })
+
+  const total = computed(() => (isSessionMode.value ? sessionTotal.value : pool.value.length))
+
+  const visitedCount = computed(() => {
+    if (isSessionMode.value) return sessionTotal.value - sessionQueue.value.length
+    return pool.value.filter((c) => visitedCountries.value.has(c.code)).length
+  })
+
+  // ---------- Chronomètre (basé sur l'horloge : insensible au ralentissement des onglets inactifs) ----------
+
+  const elapsed = ref(0)
+  let startedAt = 0
+  let timerId = null
+
+  const tick = () => {
+    elapsed.value = Math.floor((Date.now() - startedAt) / 1000)
+  }
+
+  const startTimer = () => {
+    stopTimer()
+    startedAt = Date.now()
+    elapsed.value = 0
+    timerId = setInterval(tick, 500)
+  }
+
+  const stopTimer = () => {
+    if (!timerId) return
+    clearInterval(timerId)
+    timerId = null
+    tick()
+  }
+
+  const formattedTime = computed(() => formatDuration(elapsed.value))
+
+  // ---------- Protection contre la fermeture accidentelle ----------
+
+  const handleBeforeUnload = (e) => {
+    if (gameStatus.value === 'playing') {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+  }
+
+  onMounted(() => window.addEventListener('beforeunload', handleBeforeUnload))
+  onUnmounted(() => {
+    window.removeEventListener('beforeunload', handleBeforeUnload)
+    stopTimer()
+  })
+
+  // ---------- Déroulement ----------
+
+  const startGame = (mode = 'learning', region = null) => {
+    let queue = []
+    if (SESSION_MODES.includes(mode)) {
+      let candidates = region ? countries.filter((c) => c.region === region) : countries
+      if (mode === 'map') candidates = candidates.filter((c) => c.onMap)
+      if (mode === 'custom') candidates = candidates.filter((c) => selectedCodes.value.has(c.code))
+      queue = shuffle(candidates)
+      if (queue.length === 0) return
     }
 
-    onMounted(() => {
-        window.addEventListener('beforeunload', handleBeforeUnload)
-    })
+    gameMode.value = mode
+    regionFilter.value = region
+    sessionQueue.value = queue
+    sessionTotal.value = queue.length
+    sessionScore.value = 0
+    streak.value = 0
+    bestStreak.value = 0
+    correctSessionCountries.value = new Set()
+    revealedSessionCountries.value = new Set()
+    redSessionCountry.value = null
+    mapFailures.value = 0
+    currentCountry.value = null
+    learningNext = null
 
-    onUnmounted(() => {
-        window.removeEventListener('beforeunload', handleBeforeUnload)
-    })
+    visitedCountries.value = new Set()
+    remove(VISITED_KEY)
 
-    // Fetch DATA
-    const fetchCountries = async () => {
-        loading.value = true
-        try {
-            const savedKnown = localStorage.getItem(STORAGE_KEY)
-            if (savedKnown) {
-                knownCountries.value = new Set(JSON.parse(savedKnown))
-            }
+    gameStatus.value = 'playing'
+    startTimer()
+    pickNextCountry()
+  }
 
-            const savedVisited = localStorage.getItem(VISITED_KEY)
-            if (savedVisited) {
-                visitedCountries.value = new Set(JSON.parse(savedVisited))
-            } else {
-                // Backwards compatibility: if no visited history, assume known are visited
-                visitedCountries.value = new Set(JSON.parse(savedKnown || '[]'))
-            }
+  const returnToMenu = () => {
+    stopTimer()
+    gameStatus.value = 'menu'
+    gameMode.value = 'learning'
+    regionFilter.value = null
+    currentCountry.value = null
+    redSessionCountry.value = null
+    elapsed.value = 0
+  }
 
-            const savedSettings = localStorage.getItem(SETTINGS_KEY)
-            if (savedSettings) {
-                const settings = JSON.parse(savedSettings)
-                showCapitals.value = !!settings.showCapitals
-            }
+  const pickNextCountry = () => {
+    mapFailures.value = 0
 
-            const res = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,cca3,unMember,translations,region,capital,latlng')
-            const data = await res.json()
-
-            // Filter for 197 countries: UN Members + Observers + Kosovo + Taiwan + GNB (fix for API)
-            const extraCodes = ['VAT', 'PSE', 'UNK', 'TWN', 'GNB']
-            countries.value = data.filter(c => c.unMember || extraCodes.includes(c.cca3))
-
-            // Fetch Map GeoJSON to know which countries are clickable
-            try {
-                const mapRes = await fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
-                const mapData = await mapRes.json()
-                const codes = new Set()
-                const CODE_MAPPING = { 'UNK': 'CS-KM', 'PSE': 'PS' }
-
-                mapData.features.forEach(f => {
-                    const id = f.id || f.properties.id || f.properties.iso_a3 || f.properties.ISO_A3 || f.properties.cca3
-                    codes.add(id)
-                })
-
-                // Add the API codes that map to these GeoJSON codes
-                Object.entries(CODE_MAPPING).forEach(([apiCode, geoCode]) => {
-                    if (codes.has(geoCode)) codes.add(apiCode)
-                })
-
-                mapClickableCodes.value = codes
-            } catch (err) {
-                console.warn("Could not load Map GeoJSON for filtering:", err)
-            }
-        } catch (e) {
-            error.value = "Failed to load countries. Please refresh."
-            console.error(e)
-        } finally {
-            loading.value = false
-        }
+    if (isSessionMode.value) {
+      const [next, ...rest] = sessionQueue.value
+      if (!next) return finishGame()
+      currentCountry.value = next
+      sessionQueue.value = rest
+      if (rest[0]) preloadImage(flagUrl(rest[0]))
+      return
     }
 
-    const startGame = (mode = 'learning', region = null) => {
-        gameMode.value = mode
-        regionFilter.value = region
-        gameStatus.value = 'playing'
-        sessionScore.value = 0
-        correctSessionCountries.value = new Set()
-        revealedSessionCountries.value = new Set()
-        redSessionCountry.value = null
-        hasSaved.value = false
-        mapFailures.value = 0
+    const unknown = pool.value.filter((c) => !knownCountries.value.has(c.code))
+    if (unknown.length === 0) return finishGame()
 
-        // Timer logic
-        resetTimer()
-        startTimer()
+    // Évite de reproposer immédiatement le même drapeau quand c'est possible
+    const others = unknown.filter((c) => c !== currentCountry.value)
+    const candidates = others.length ? others : unknown
+    const next = candidates.includes(learningNext) ? learningNext : randomItem(candidates)
+    currentCountry.value = next
 
-        // Reset visited for the new session
-        visitedCountries.value = new Set()
-        localStorage.removeItem(VISITED_KEY)
+    const afterNext = unknown.filter((c) => c !== next)
+    learningNext = afterNext.length ? randomItem(afterNext) : null
+    if (learningNext) preloadImage(flagUrl(learningNext))
+  }
 
-        let pool = countries.value
-        if (region) {
-            pool = pool.filter(c => c.region === region)
+  const finishGame = () => {
+    if (gameStatus.value !== 'playing') return
+    stopTimer()
+    gameStatus.value = 'finished'
+    currentCountry.value = null
+    onFinish?.({
+      mode: gameMode.value,
+      region: regionFilter.value || 'world',
+      score: sessionScore.value,
+      total: sessionTotal.value,
+      timeSeconds: elapsed.value,
+      formattedTime: formattedTime.value,
+      bestStreak: bestStreak.value,
+    })
+  }
+
+  // ---------- Réponses ----------
+
+  const addTo = (setRef, code) => {
+    const next = new Set(setRef.value)
+    next.add(code)
+    setRef.value = next
+  }
+
+  const registerVisited = () => {
+    if (!currentCountry.value) return
+    addTo(visitedCountries, currentCountry.value.code)
+    writeJson(VISITED_KEY, [...visitedCountries.value])
+  }
+
+  const registerKnown = () => {
+    addTo(knownCountries, currentCountry.value.code)
+    writeJson(STORAGE_KEY, [...knownCountries.value])
+  }
+
+  // Sur la carte, le pays « raté » le plus récent est en rouge, les précédents passent en orange
+  const markMissedOnMap = (code) => {
+    if (redSessionCountry.value) addTo(revealedSessionCountries, redSessionCountry.value)
+    redSessionCountry.value = code
+  }
+
+  const onCorrect = () => {
+    streak.value++
+    bestStreak.value = Math.max(bestStreak.value, streak.value)
+  }
+
+  /** Soumet une réponse (texte, ou code pays en mode carte). Renvoie `true` si elle est juste. */
+  const submitAnswer = (input) => {
+    const country = currentCountry.value
+    if (!country) return false
+
+    if (gameMode.value === 'map') {
+      if (input === country.code) {
+        sessionScore.value++
+        onCorrect()
+        if (redSessionCountry.value) {
+          addTo(revealedSessionCountries, redSessionCountry.value)
+          redSessionCountry.value = null
         }
-
-        if (mode === 'survival' || mode === 'capital' || mode === 'map') {
-            if (mode === 'map' && mapClickableCodes.value.size > 0) {
-                pool = pool.filter(c => mapClickableCodes.value.has(c.cca3))
-            }
-            // Shuffle pool
-            sessionQueue.value = [...pool].sort(() => Math.random() - 0.5)
-            sessionTotal.value = sessionQueue.value.length
-        } else if (mode === 'custom') {
-            pool = pool.filter(c => selectedCodes.value.has(c.cca3))
-            sessionQueue.value = [...pool].sort(() => Math.random() - 0.5)
-            sessionTotal.value = sessionQueue.value.length
-        }
-
+        addTo(correctSessionCountries, country.code)
         pickNextCountry()
-    }
-
-    const returnToMenu = () => {
-        gameStatus.value = 'menu'
-        gameMode.value = 'learning'
-        currentCountry.value = null
-        redSessionCountry.value = null
-        stopTimer()
-        timerSeconds.value = 0
-    }
-
-    // Choose next country
-    const pickNextCountry = () => {
-        mapFailures.value = 0
-        if (['survival', 'capital', 'custom', 'map'].includes(gameMode.value)) {
-            if (sessionQueue.value.length === 0) {
-                finishGame()
-                return
-            }
-            currentCountry.value = sessionQueue.value.shift()
-            return
-        }
-
-        // Learning Mode logic
-        let pool = countries.value
-        if (regionFilter.value) {
-            pool = pool.filter(c => c.region === regionFilter.value)
-        }
-
-        const unknown = pool.filter(c => !knownCountries.value.has(c.cca3))
-        if (unknown.length === 0) {
-            gameStatus.value = 'finished'
-            currentCountry.value = null
-            return
-        }
-        // Random pick
-        const randomIndex = Math.floor(Math.random() * unknown.length)
-        currentCountry.value = unknown[randomIndex]
-    }
-
-    const checkAnswer = (input, onResult) => {
-        if (!currentCountry.value) return
-
-        if (gameMode.value === 'map') {
-            if (input === currentCountry.value.cca3) {
-                sessionScore.value++
-
-                // Move previous red to orange if it exists
-                if (redSessionCountry.value) {
-                    const nextRevealed = new Set(revealedSessionCountries.value)
-                    nextRevealed.add(redSessionCountry.value)
-                    revealedSessionCountries.value = nextRevealed
-                    redSessionCountry.value = null
-                }
-
-                const nextCorrect = new Set(correctSessionCountries.value)
-                nextCorrect.add(currentCountry.value.cca3)
-                correctSessionCountries.value = nextCorrect
-                if (onResult) onResult(true)
-                pickNextCountry()
-            } else {
-                mapFailures.value++
-                if (mapFailures.value >= 3) {
-                    if (onResult) onResult(false)
-                    registerVisited()
-                    
-                    if (redSessionCountry.value) {
-                        const nextRevealed = new Set(revealedSessionCountries.value)
-                        nextRevealed.add(redSessionCountry.value)
-                        revealedSessionCountries.value = nextRevealed
-                    }
-                    redSessionCountry.value = currentCountry.value.cca3
-                    pickNextCountry()
-                } else {
-                    if (onResult) onResult(false)
-                }
-            }
-            return
-        }
-
-        // Normalize input and names
-        const normalize = (str) => {
-            if (!str) return ""
-            return str
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "") // Remove accents
-                .toLowerCase()
-                .replace(/[^a-z0-9]/g, " ") // Replace non-alphanumeric with spaces
-                .replace(/\s+/g, " ")       // Collapse spaces
-                .trim()
-        }
-
-        const guess = normalize(input)
-
-        const customAliases = {
-            'COD': ['rd congo', 'rdc'],
-            'GBR': ['uk', 'royaume uni', 'angleterre'],
-            'USA': ['usa', 'etats unis'],
-            'ARE': ['uae', 'emirats arabes unis'],
-            'CAF': ['rca', 'republique centrafricaine']
-        }
-
-        const countryCode = currentCountry.value.cca3
-        const aliases = customAliases[countryCode] || []
-
-        const names = [
-            currentCountry.value.name.common,
-            currentCountry.value.name.official,
-            ...(currentCountry.value.altSpellings || []),
-            ...(currentCountry.value.translations?.fra ? [currentCountry.value.translations.fra.common, currentCountry.value.translations.fra.official] : []),
-            ...aliases
-        ].map(normalize)
-
-        if (gameMode.value === 'capital') {
-            const capitals = (currentCountry.value.capital || []).map(normalize)
-            if (capitals.includes(guess)) {
-                sessionScore.value++
-                registerVisited()
-                if (onResult) onResult(true)
-                pickNextCountry()
-                return
-            }
-        } else if (names.includes(guess)) {
-            if (gameMode.value === 'learning') {
-                registerCorrect()
-                registerVisited()
-                if (onResult) onResult(true)
-            } else {
-                sessionScore.value++
-                const nextCorrect = new Set(correctSessionCountries.value)
-                nextCorrect.add(currentCountry.value.cca3)
-                correctSessionCountries.value = nextCorrect
-                if (onResult) onResult(true)
-                pickNextCountry()
-            }
-            return
-        }
-
-        if (onResult) onResult(false)
+        return true
+      }
+      streak.value = 0
+      mapFailures.value++
+      if (mapFailures.value >= MAP_MAX_FAILURES) {
         registerVisited()
-    }
-
-    const skipCountry = () => {
-        registerVisited()
+        markMissedOnMap(country.code)
         pickNextCountry()
+      }
+      return false
     }
 
-    const revealAnswer = () => {
-        if (!currentCountry.value) return ''
-        if (gameMode.value === 'capital') {
-            return (currentCountry.value.capital || [])[0] || 'N/A'
-        }
-        return currentCountry.value.translations?.fra?.common || currentCountry.value.name.common
+    if (!isCorrectAnswer(country, input, gameMode.value)) {
+      streak.value = 0
+      registerVisited()
+      return false
     }
 
-    const registerCorrect = () => {
-        const nextSet = new Set(knownCountries.value)
-        nextSet.add(currentCountry.value.cca3)
-        knownCountries.value = nextSet
-        localStorage.setItem(STORAGE_KEY, JSON.stringify([...knownCountries.value]))
-        pickNextCountry()
+    onCorrect()
+    registerVisited()
+    if (gameMode.value === 'learning') {
+      registerKnown()
+    } else {
+      sessionScore.value++
+      addTo(correctSessionCountries, country.code)
     }
+    pickNextCountry()
+    return true
+  }
 
-    const registerVisited = () => {
-        if (!currentCountry.value) return
-        const nextSet = new Set(visitedCountries.value)
-        nextSet.add(currentCountry.value.cca3)
-        visitedCountries.value = nextSet
-        localStorage.setItem(VISITED_KEY, JSON.stringify([...visitedCountries.value]))
-    }
+  const skipCountry = () => {
+    streak.value = 0
+    registerVisited()
+    pickNextCountry()
+  }
 
-    const toggleCapitals = () => {
-        showCapitals.value = !showCapitals.value
-        localStorage.setItem(SETTINGS_KEY, JSON.stringify({ showCapitals: showCapitals.value }))
-    }
+  /** Renvoie la solution du drapeau courant (le joueur passera ensuite au suivant). */
+  const revealAnswer = () => {
+    const country = currentCountry.value
+    if (!country) return ''
+    streak.value = 0
+    if (gameMode.value === 'map') markMissedOnMap(country.code)
+    return answerFor(country, gameMode.value)
+  }
 
-    const resetProgress = () => {
-        if (!confirm('Voulez-vous vraiment réinitialiser votre progression ?')) return
-        knownCountries.value = new Set()
-        visitedCountries.value = new Set()
-        localStorage.removeItem(STORAGE_KEY)
-        localStorage.removeItem(VISITED_KEY)
-        if (gameStatus.value === 'playing') {
-            // Restart the current game session (this will reset the timer and score)
-            startGame(gameMode.value, regionFilter.value)
-        }
-    }
+  const toggleCapitals = () => {
+    showCapitals.value = !showCapitals.value
+    writeJson(SETTINGS_KEY, { showCapitals: showCapitals.value })
+  }
 
-    const hasSaved = ref(false)
+  const resetProgress = () => {
+    knownCountries.value = new Set()
+    visitedCountries.value = new Set()
+    remove(STORAGE_KEY)
+    remove(VISITED_KEY)
+    if (gameStatus.value === 'playing') startGame(gameMode.value, regionFilter.value)
+  }
 
-    const finishGame = async (user = null) => {
-        gameStatus.value = 'finished'
-        currentCountry.value = null
-        stopTimer()
-
-        // Si l'utilisateur est connecté et qu'on n'a pas encore sauvé ce tour
-        if (user && user.uid && sessionTotal.value > 0 && !hasSaved.value) {
-            console.log("Saving game...", { score: sessionScore.value, time: timerSeconds.value });
-            hasSaved.value = true
-            try {
-                await addDoc(collection(db, 'scores'), {
-                    userId: user.uid,
-                    pseudo: user.pseudo || user.displayName,
-                    mode: gameMode.value,
-                    region: regionFilter.value || 'world',
-                    score: sessionScore.value,
-                    total: sessionTotal.value,
-                    timeSeconds: timerSeconds.value,
-                    formattedTime: formattedTime.value,
-                    timestamp: serverTimestamp()
-                })
-
-                // Mettre à jour les stats de l'utilisateur (cumul)
-                const userRef = doc(db, 'users', user.uid)
-                await updateDoc(userRef, {
-                    "stats.totalGames": increment(1),
-                    "stats.totalPlayTime": increment(timerSeconds.value)
-                })
-            } catch (err) {
-                console.error("Erreur lors de l'enregistrement du score:", err)
-            }
-        }
-    }
-
-    const startTimer = () => {
-        if (timerInterval) clearInterval(timerInterval)
-        timerSeconds.value = 0
-        timerInterval = setInterval(() => {
-            timerSeconds.value++
-        }, 1000)
-    }
-
-    const stopTimer = () => {
-        if (timerInterval) {
-            clearInterval(timerInterval)
-            timerInterval = null
-        }
-    }
-
-    const resetTimer = () => {
-        stopTimer()
-        timerSeconds.value = 0
-    }
-
-    return {
-        countries,
-        currentCountry,
-        knownCountries,
-        visitedCountries,
-        loading,
-        error,
-        score,
-        total,
-        progress,
-        visitedCount,
-        progressVisited,
-        gameStatus,
-        gameMode,
-        selectedCodes,
-        correctSessionCountries,
-        revealedSessionCountries,
-        redSessionCountry,
-        showCapitals,
-        mapFailures,
-        timerSeconds,
-        formattedTime,
-        fetchCountries,
-        checkAnswer,
-        skipCountry,
-        revealAnswer,
-        resetProgress,
-        startGame,
-        returnToMenu,
-        toggleCapitals,
-        finishGame
-    }
+  return {
+    countries,
+    currentCountry,
+    knownCountries,
+    score,
+    total,
+    visitedCount,
+    streak,
+    bestStreak,
+    gameStatus,
+    gameMode,
+    regionFilter,
+    selectedCodes,
+    correctSessionCountries,
+    revealedSessionCountries,
+    redSessionCountry,
+    showCapitals,
+    mapFailures,
+    elapsed,
+    formattedTime,
+    startGame,
+    returnToMenu,
+    finishGame,
+    submitAnswer,
+    skipCountry,
+    revealAnswer,
+    resetProgress,
+    toggleCapitals,
+  }
 }
