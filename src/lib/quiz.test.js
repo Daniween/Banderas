@@ -31,8 +31,13 @@ describe('données pays', () => {
     for (const code of ['UNK', 'TWN', 'PSE', 'VAT']) expect(byCode(code), code).toBeDefined()
   })
 
-  it('la plupart des pays sont présents sur la carte', () => {
-    expect(COUNTRIES.filter((c) => c.onMap).length).toBeGreaterThan(160)
+  it('les petits pays ont une pastille avec des coordonnées valides', () => {
+    const points = COUNTRIES.filter((c) => c.point)
+    for (const code of ['VAT', 'MCO', 'SGP', 'TUV', 'LUX']) expect(points.map((c) => c.code), code).toContain(code)
+    for (const { code, point: [lat, lng] } of points) {
+      expect(Math.abs(lat), code).toBeLessThanOrEqual(90)
+      expect(Math.abs(lng), code).toBeLessThanOrEqual(180)
+    }
   })
 })
 

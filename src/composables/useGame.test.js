@@ -78,7 +78,7 @@ describe('useGame', () => {
   it('mode carte : 3 erreurs passent au pays suivant et le marquent en rouge', () => {
     const game = setup()
     game.startGame('map')
-    expect(game.total.value).toBeLessThan(197) // pays trop petits exclus
+    expect(game.total.value).toBe(197) // tous jouables (petits pays en pastille)
 
     const country = game.currentCountry.value
     for (let i = 0; i < MAP_MAX_FAILURES; i++) game.submitAnswer('XXX')

@@ -59,7 +59,7 @@ watch(
 )
 
 const searchedCountry = computed(() => searchCountry(game.countries, searchQuery.value))
-const searchedCode = computed(() => (searchedCountry.value?.onMap ? searchedCountry.value.code : null))
+const searchedCode = computed(() => searchedCountry.value?.code ?? null)
 
 const flash = (ok) => {
   clearTimeout(feedbackTimer)
@@ -230,7 +230,7 @@ const handleFinishMap = async () => {
             <input id="map-search" v-model="searchQuery" class="input" type="search" placeholder="Ex : France, Pérou…" autocomplete="off" />
           </div>
           <p v-if="searchQuery.length >= 2 && !searchedCode" class="search-empty">
-            {{ searchedCountry ? `${searchedCountry.name} est trop petit pour figurer sur cette carte.` : 'Aucun pays trouvé.' }}
+            Aucun pays trouvé.
           </p>
           <button class="btn btn--block" @click="showScoreModal = true">Voir mon score</button>
         </div>

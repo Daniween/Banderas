@@ -16,8 +16,7 @@
    "islamic republic of afghanistan",
    "republique islamique d afghanistan",
    "afganistan"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ZAF",
@@ -46,8 +45,7 @@
    "republique d afrique du sud",
    "rsa",
    "suid afrika"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ALB",
@@ -69,8 +67,7 @@
    "shqiperi",
    "shqiperia",
    "shqipnia"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "DZA",
@@ -90,8 +87,7 @@
    "algerie",
    "republique democratique et populaire d algerie",
    "dzayer"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "DEU",
@@ -111,8 +107,7 @@
    "allemagne",
    "republique federale d allemagne",
    "bundesrepublik deutschland"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "AND",
@@ -133,7 +128,10 @@
    "principaute d andorre",
    "principat d andorra"
   ],
-  "onMap": false
+  "point": [
+   42.5,
+   1.5
+  ]
  },
  {
   "code": "AGO",
@@ -153,8 +151,7 @@
    "republique d angola",
    "republica de angola",
    "publika de an la"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ATG",
@@ -172,7 +169,10 @@
    "antigua and barbuda",
    "antigua et barbuda"
   ],
-  "onMap": false
+  "point": [
+   17.05,
+   -61.8
+  ]
  },
  {
   "code": "SAU",
@@ -193,8 +193,7 @@
    "royaume d arabie saoudite",
    "saudi",
    "al mamlakah al arabiyyah as su udiyyah"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ARG",
@@ -214,8 +213,7 @@
    "argentine",
    "republique argentine",
    "republica argentina"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ARM",
@@ -235,8 +233,7 @@
    "armenie",
    "republique d armenie",
    "hayastan"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "AUS",
@@ -254,8 +251,7 @@
    "australia",
    "commonwealth of australia",
    "australie"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "AUT",
@@ -276,8 +272,7 @@
    "republique d autriche",
    "osterreich",
    "oesterreich"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "AZE",
@@ -297,8 +292,7 @@
    "azerbaidjan",
    "republique d azerbaidjan",
    "az rbaycan respublikas"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BHS",
@@ -316,8 +310,7 @@
    "bahamas",
    "commonwealth of the bahamas",
    "commonwealth des bahamas"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BHR",
@@ -338,7 +331,10 @@
    "royaume de bahrein",
    "mamlakat al bahrayn"
   ],
-  "onMap": false
+  "point": [
+   26,
+   50.55
+  ]
  },
  {
   "code": "BGD",
@@ -357,8 +353,7 @@
    "people s republic of bangladesh",
    "la republique populaire du bangladesh",
    "gonoprojatontri bangladesh"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BRB",
@@ -376,7 +371,10 @@
    "barbados",
    "barbade"
   ],
-  "onMap": false
+  "point": [
+   13.17,
+   -59.53
+  ]
  },
  {
   "code": "BEL",
@@ -399,8 +397,7 @@
    "belgien",
    "koninkrijk belgie",
    "konigreich belgien"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BLZ",
@@ -416,8 +413,7 @@
   ],
   "aliases": [
    "belize"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BEN",
@@ -435,8 +431,7 @@
    "benin",
    "republic of benin",
    "republique du benin"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BTN",
@@ -455,8 +450,7 @@
    "kingdom of bhutan",
    "bhoutan",
    "royaume du bhoutan"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BLR",
@@ -476,8 +470,7 @@
    "bielorussie",
    "republique de bielorussie",
    "bielarus"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MMR",
@@ -498,8 +491,7 @@
    "republique de l union du myanmar",
    "burma",
    "pyidaunzu thanmada myama nainngandaw"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BOL",
@@ -525,8 +517,7 @@
    "buliwya mamallaqta",
    "wuliwya suyu",
    "teta volivia"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BIH",
@@ -545,8 +536,7 @@
    "bosnie herzegovine",
    "bosnie et herzegovine",
    "bosnia herzegovina"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BWA",
@@ -565,8 +555,7 @@
    "republic of botswana",
    "republique du botswana",
    "lefatshe la botswana"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BRA",
@@ -587,8 +576,7 @@
    "republique federative du bresil",
    "brasil",
    "republica federativa do brasil"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BRN",
@@ -609,8 +597,7 @@
    "brunei darussalam",
    "nation of brunei",
    "the abode of peace"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BGR",
@@ -629,8 +616,7 @@
    "republic of bulgaria",
    "bulgarie",
    "republique de bulgarie"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BFA",
@@ -647,8 +633,7 @@
   "aliases": [
    "burkina faso",
    "republique du burkina"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "BDI",
@@ -667,8 +652,7 @@
    "republic of burundi",
    "republique du burundi",
    "republika y uburundi"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "KHM",
@@ -687,8 +671,7 @@
    "kingdom of cambodia",
    "cambodge",
    "royaume du cambodge"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CMR",
@@ -707,8 +690,7 @@
    "republic of cameroon",
    "cameroun",
    "republique du cameroun"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CAN",
@@ -724,8 +706,7 @@
   ],
   "aliases": [
    "canada"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CHL",
@@ -745,8 +726,7 @@
    "chili",
    "republique du chili",
    "republica de chile"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CHN",
@@ -768,8 +748,7 @@
    "zhongguo",
    "zhonghua",
    "zhonghua renmin gongheguo"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CYP",
@@ -791,8 +770,7 @@
    "kypros",
    "k br s",
    "k br s cumhuriyeti"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "VAT",
@@ -814,7 +792,10 @@
    "vatican",
    "stato della citta del vaticano"
   ],
-  "onMap": false
+  "point": [
+   41.9,
+   12.45
+  ]
  },
  {
   "code": "COL",
@@ -834,8 +815,7 @@
    "colombie",
    "republique de colombie",
    "republica de colombia"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "COM",
@@ -857,7 +837,10 @@
    "udzima wa komori",
    "al ittihad al qumuri"
   ],
-  "onMap": false
+  "point": [
+   -12.17,
+   44.25
+  ]
  },
  {
   "code": "COG",
@@ -876,8 +859,7 @@
    "republic of the congo",
    "republique du congo",
    "congo brazzaville"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "COD",
@@ -902,8 +884,7 @@
    "drc",
    "rd congo",
    "rdc"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "PRK",
@@ -925,8 +906,7 @@
    "dprk",
    "choson minjujuui inmin konghwaguk",
    "korea democratic people s republic of"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "KOR",
@@ -946,8 +926,7 @@
    "coree du sud",
    "republique de coree",
    "korea republic of"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CRI",
@@ -966,8 +945,7 @@
    "republic of costa rica",
    "republique du costa rica",
    "republica de costa rica"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CIV",
@@ -986,8 +964,7 @@
    "republic of cote d ivoire",
    "cote d ivoire",
    "republique de cote d ivoire"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "HRV",
@@ -1008,8 +985,7 @@
    "republique de croatie",
    "hrvatska",
    "republika hrvatska"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CUB",
@@ -1028,8 +1004,7 @@
    "republic of cuba",
    "republique de cuba",
    "republica de cuba"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "DNK",
@@ -1050,8 +1025,7 @@
    "royaume du danemark",
    "danmark",
    "kongeriget danmark"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "DJI",
@@ -1073,8 +1047,7 @@
    "gabuuti",
    "gabuutih ummuuno",
    "jamhuuriyadda jabuuti"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "DMA",
@@ -1095,7 +1068,10 @@
    "commonwealth de la dominique",
    "wai tu kubuli"
   ],
-  "onMap": false
+  "point": [
+   15.42,
+   -61.33
+  ]
  },
  {
   "code": "EGY",
@@ -1114,8 +1090,7 @@
    "arab republic of egypt",
    "egypte",
    "republique arabe d egypte"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ARE",
@@ -1136,8 +1111,7 @@
    "emirates",
    "eau",
    "emirats"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ECU",
@@ -1157,8 +1131,7 @@
    "equateur",
    "republique de l equateur",
    "republica del ecuador"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ERI",
@@ -1180,8 +1153,7 @@
    "dawlat iritriya",
    "ertra",
    "iritriya"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ESP",
@@ -1201,8 +1173,7 @@
    "espagne",
    "royaume d espagne",
    "reino de espana"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "EST",
@@ -1223,8 +1194,7 @@
    "republique d estonie",
    "eesti",
    "eesti vabariik"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SWZ",
@@ -1247,8 +1217,7 @@
    "swatini",
    "ngwane",
    "umbuso weswatini"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "USA",
@@ -1270,8 +1239,7 @@
    "usa",
    "etats unis d amerique",
    "amerique"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ETH",
@@ -1291,8 +1259,7 @@
    "ethiopie",
    "republique federale democratique d ethiopie",
    "ityoppya"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "FJI",
@@ -1314,8 +1281,7 @@
    "viti",
    "matanitu ko viti",
    "fiji ganarajya"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "FIN",
@@ -1337,8 +1303,7 @@
    "suomi",
    "suomen tasavalta",
    "republiken finland"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "FRA",
@@ -1356,8 +1321,7 @@
    "france",
    "french republic",
    "republique francaise"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GAB",
@@ -1375,8 +1339,7 @@
    "gabon",
    "gabonese republic",
    "republique gabonaise"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GMB",
@@ -1395,8 +1358,7 @@
    "republic of the gambia",
    "gambie",
    "republique de gambie"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GEO",
@@ -1415,8 +1377,7 @@
    "georgie",
    "republique de georgie",
    "sakartvelo"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GHA",
@@ -1434,8 +1395,7 @@
    "ghana",
    "republic of ghana",
    "republique du ghana"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GRC",
@@ -1455,8 +1415,7 @@
    "grece",
    "republique hellenique",
    "ellada"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GRD",
@@ -1474,7 +1433,10 @@
    "grenada",
    "grenade"
   ],
-  "onMap": false
+  "point": [
+   12.12,
+   -61.67
+  ]
  },
  {
   "code": "GTM",
@@ -1492,8 +1454,7 @@
    "guatemala",
    "republic of guatemala",
    "republique du guatemala"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GIN",
@@ -1512,8 +1473,7 @@
    "republic of guinea",
    "guinee",
    "republique de guinee"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GNQ",
@@ -1534,8 +1494,7 @@
    "republique de guinee equatoriale",
    "republica de guinea ecuatorial",
    "republica da guine equatorial"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GNB",
@@ -1555,8 +1514,7 @@
    "guinee bissau",
    "republique de guinee bissau",
    "republica da guine bissau"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GUY",
@@ -1574,8 +1532,7 @@
    "guyana",
    "co operative republic of guyana",
    "republique cooperative de guyana"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "HTI",
@@ -1594,8 +1551,7 @@
    "republic of haiti",
    "republique d haiti",
    "repiblik ayiti"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "HND",
@@ -1614,8 +1570,7 @@
    "republic of honduras",
    "republique du honduras",
    "republica de honduras"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "HUN",
@@ -1632,8 +1587,7 @@
   "aliases": [
    "hungary",
    "hongrie"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MUS",
@@ -1653,7 +1607,10 @@
    "ile maurice",
    "republique de maurice"
   ],
-  "onMap": false
+  "point": [
+   -20.28,
+   57.55
+  ]
  },
  {
   "code": "CPV",
@@ -1674,7 +1631,10 @@
    "republique du cap vert",
    "republica de cabo verde"
   ],
-  "onMap": false
+  "point": [
+   16,
+   -24
+  ]
  },
  {
   "code": "MHL",
@@ -1695,7 +1655,10 @@
    "republique des iles marshall",
    "aolepan aorokin majel"
   ],
-  "onMap": false
+  "point": [
+   9,
+   168
+  ]
  },
  {
   "code": "SLB",
@@ -1712,8 +1675,7 @@
   "aliases": [
    "solomon islands",
    "iles salomon"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "IND",
@@ -1734,8 +1696,7 @@
    "republique de l inde",
    "bharat",
    "bharat ganrajya"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "IDN",
@@ -1755,8 +1716,7 @@
    "indonesie",
    "republique d indonesie",
    "republik indonesia"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "IRQ",
@@ -1776,8 +1736,7 @@
    "irak",
    "republique d irak",
    "jumhuriyyat al iraq"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "IRN",
@@ -1797,8 +1756,7 @@
    "republique islamique d iran",
    "iran islamic republic of",
    "jomhuri ye eslami ye iran"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "IRL",
@@ -1819,8 +1777,7 @@
    "republique d irlande",
    "eire",
    "poblacht na heireann"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ISL",
@@ -1841,8 +1798,7 @@
    "island",
    "republic of iceland",
    "ly veldi island"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ISR",
@@ -1861,8 +1817,7 @@
    "state of israel",
    "etat d israel",
    "medinat yisra el"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ITA",
@@ -1882,8 +1837,7 @@
    "italie",
    "republique italienne",
    "repubblica italiana"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "JAM",
@@ -1900,8 +1854,7 @@
   "aliases": [
    "jamaica",
    "jamaique"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "JPN",
@@ -1920,8 +1873,7 @@
    "japon",
    "nippon",
    "nihon"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "JOR",
@@ -1941,8 +1893,7 @@
    "jordanie",
    "royaume hachemite de jordanie",
    "al mamlakah al urduniyah al hashimiyah"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "KAZ",
@@ -1963,8 +1914,7 @@
    "qazaqstan",
    "qazaqstan respublikas",
    "respublika kazakhstan"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "KEN",
@@ -1983,8 +1933,7 @@
    "republic of kenya",
    "republique du kenya",
    "jamhuri ya kenya"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "KGZ",
@@ -2004,8 +1953,7 @@
    "kirghizistan",
    "republique kirghize",
    "kyrgyz respublikasy"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "KIR",
@@ -2026,7 +1974,10 @@
    "republic of kiribati",
    "ribaberiki kiribati"
   ],
-  "onMap": false
+  "point": [
+   1.42,
+   173
+  ]
  },
  {
   "code": "UNK",
@@ -2044,8 +1995,7 @@
    "kosovo",
    "republic of kosovo",
    "republique du kosovo"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "KWT",
@@ -2065,8 +2015,7 @@
    "koweit",
    "etat du koweit",
    "dawlat al kuwait"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "LAO",
@@ -2086,8 +2035,7 @@
    "republique democratique populaire lao",
    "lao",
    "sathalanalat paxathipatai paxaxon lao"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "LSO",
@@ -2106,8 +2054,7 @@
    "kingdom of lesotho",
    "royaume du lesotho",
    "muso oa lesotho"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "LVA",
@@ -2127,8 +2074,7 @@
    "lettonie",
    "republique de lettonie",
    "latvijas republika"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "LBN",
@@ -2148,8 +2094,7 @@
    "liban",
    "republique libanaise",
    "al jumhuriyah al libnaniyah"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "LBR",
@@ -2167,8 +2112,7 @@
    "liberia",
    "republic of liberia",
    "republique du liberia"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "LBY",
@@ -2188,8 +2132,7 @@
    "libye",
    "grande republique arabe libyenne populaire et socialiste",
    "dawlat libya"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "LIE",
@@ -2209,7 +2152,10 @@
    "principaute du liechtenstein",
    "furstentum liechtenstein"
   ],
-  "onMap": false
+  "point": [
+   47.27,
+   9.53
+  ]
  },
  {
   "code": "LTU",
@@ -2229,8 +2175,7 @@
    "lituanie",
    "republique de lituanie",
    "lietuvos respublika"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "LUX",
@@ -2251,7 +2196,10 @@
    "gro herzogtum luxemburg",
    "groussherzogtum letzebuerg"
   ],
-  "onMap": true
+  "point": [
+   49.75,
+   6.17
+  ]
  },
  {
   "code": "MKD",
@@ -2274,8 +2222,7 @@
    "macedonia the former yugoslav republic of",
    "macedonia",
    "macedoine"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MDG",
@@ -2294,8 +2241,7 @@
    "republic of madagascar",
    "republique de madagascar",
    "repoblikan i madagasikara"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MYS",
@@ -2313,8 +2259,7 @@
    "malaysia",
    "malaisie",
    "federation de malaisie"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MWI",
@@ -2332,8 +2277,7 @@
    "malawi",
    "republic of malawi",
    "republique du malawi"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MDV",
@@ -2354,7 +2298,10 @@
    "maldive islands",
    "dhivehi raajjeyge jumhooriyya"
   ],
-  "onMap": false
+  "point": [
+   3.25,
+   73
+  ]
  },
  {
   "code": "MLI",
@@ -2372,8 +2319,7 @@
    "mali",
    "republic of mali",
    "republique du mali"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MLT",
@@ -2394,7 +2340,10 @@
    "republique de malte",
    "repubblika ta malta"
   ],
-  "onMap": true
+  "point": [
+   35.83,
+   14.58
+  ]
  },
  {
   "code": "MAR",
@@ -2414,8 +2363,7 @@
    "maroc",
    "royaume du maroc",
    "al mamlakah al magribiyah"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MRT",
@@ -2435,8 +2383,7 @@
    "mauritanie",
    "republique islamique de mauritanie",
    "al jumhuriyyah al islamiyyah al muritaniyyah"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MEX",
@@ -2457,8 +2404,7 @@
    "etats unis du mexique",
    "mexicanos",
    "estados unidos mexicanos"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "FSM",
@@ -2479,7 +2425,10 @@
    "etats federes de micronesie",
    "micronesia federated states of"
   ],
-  "onMap": false
+  "point": [
+   6.92,
+   158.25
+  ]
  },
  {
   "code": "MDA",
@@ -2500,8 +2449,7 @@
    "republique de moldavie",
    "moldova republic of",
    "republica moldova"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MCO",
@@ -2520,7 +2468,10 @@
    "principality of monaco",
    "principaute de monaco"
   ],
-  "onMap": false
+  "point": [
+   43.73,
+   7.4
+  ]
  },
  {
   "code": "MNG",
@@ -2537,8 +2488,7 @@
   "aliases": [
    "mongolia",
    "mongolie"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MNE",
@@ -2555,8 +2505,7 @@
   "aliases": [
    "montenegro",
    "crna gora"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "MOZ",
@@ -2575,8 +2524,7 @@
    "republic of mozambique",
    "republique du mozambique",
    "republica de mocambique"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "NAM",
@@ -2595,8 +2543,7 @@
    "republic of namibia",
    "namibie",
    "republique de namibie"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "NRU",
@@ -2618,7 +2565,10 @@
    "pleasant island",
    "ripublik naoero"
   ],
-  "onMap": false
+  "point": [
+   -0.53,
+   166.92
+  ]
  },
  {
   "code": "NPL",
@@ -2637,8 +2587,7 @@
    "federal democratic republic of nepal",
    "republique du nepal",
    "loktantrik ganatantra nepal"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "NIC",
@@ -2657,8 +2606,7 @@
    "republic of nicaragua",
    "republique du nicaragua",
    "republica de nicaragua"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "NER",
@@ -2677,8 +2625,7 @@
    "republic of niger",
    "republique du niger",
    "nijar"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "NGA",
@@ -2698,8 +2645,7 @@
    "republique federale du nigeria",
    "nijeriya",
    "naijiria"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "NOR",
@@ -2722,8 +2668,7 @@
    "noreg",
    "kongeriket norge",
    "kongeriket noreg"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "NZL",
@@ -2741,8 +2686,7 @@
    "new zealand",
    "nouvelle zelande",
    "aotearoa"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "OMN",
@@ -2761,8 +2705,7 @@
    "sultanate of oman",
    "sultanat d oman",
    "saltanat uman"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "UGA",
@@ -2782,8 +2725,7 @@
    "ouganda",
    "republique de l ouganda",
    "jamhuri ya uganda"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "UZB",
@@ -2803,8 +2745,7 @@
    "ouzbekistan",
    "republique d ouzbekistan",
    "o zbekiston respublikasi"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "PAK",
@@ -2823,8 +2764,7 @@
    "islamic republic of pakistan",
    "republique islamique du pakistan",
    "islami jumhuriya eh pakistan"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "PLW",
@@ -2845,7 +2785,10 @@
    "republique des palaos palau",
    "beluu er a belau"
   ],
-  "onMap": false
+  "point": [
+   7.5,
+   134.5
+  ]
  },
  {
   "code": "PSE",
@@ -2866,7 +2809,10 @@
    "palestine state of",
    "dawlat filastin"
   ],
-  "onMap": true
+  "point": [
+   31.9,
+   35.2
+  ]
  },
  {
   "code": "PAN",
@@ -2885,8 +2831,7 @@
    "republic of panama",
    "republique du panama",
    "republica de panama"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "PNG",
@@ -2906,8 +2851,7 @@
    "papouasie nouvelle guinee",
    "etat independant de papouasie nouvelle guinee",
    "independen stet bilong papua niugini"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "PRY",
@@ -2927,8 +2871,7 @@
    "republique du paraguay",
    "republica del paraguay",
    "teta paraguai"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "NLD",
@@ -2950,8 +2893,7 @@
    "nederland",
    "the netherlands",
    "hollande"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "PER",
@@ -2971,8 +2913,7 @@
    "perou",
    "republique du perou",
    "republica del peru"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "PHL",
@@ -2991,8 +2932,7 @@
    "republic of the philippines",
    "republique des philippines",
    "republika ng pilipinas"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "POL",
@@ -3012,8 +2952,7 @@
    "pologne",
    "republique de pologne",
    "rzeczpospolita polska"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "PRT",
@@ -3033,8 +2972,7 @@
    "republique portugaise",
    "portuguesa",
    "republica portuguesa"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "QAT",
@@ -3054,7 +2992,10 @@
    "etat du qatar",
    "dawlat qatar"
   ],
-  "onMap": true
+  "point": [
+   25.5,
+   51.25
+  ]
  },
  {
   "code": "CAF",
@@ -3073,8 +3014,7 @@
    "republique centrafricaine",
    "rca",
    "centrafrique"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "DOM",
@@ -3091,8 +3031,7 @@
   "aliases": [
    "dominican republic",
    "republique dominicaine"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ROU",
@@ -3111,8 +3050,7 @@
    "roumanie",
    "rumania",
    "roumania"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "GBR",
@@ -3135,8 +3073,7 @@
    "uk",
    "angleterre",
    "grande bretagne"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "RUS",
@@ -3155,8 +3092,7 @@
    "russian federation",
    "russie",
    "federation de russie"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "RWA",
@@ -3176,8 +3112,7 @@
    "republique rwandaise",
    "repubulika y u rwanda",
    "republique du rwanda"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "KNA",
@@ -3197,7 +3132,10 @@
    "saint christophe et nieves",
    "federation de saint christophe et nieves"
   ],
-  "onMap": false
+  "point": [
+   17.33,
+   -62.75
+  ]
  },
  {
   "code": "SMR",
@@ -3219,7 +3157,10 @@
    "republic of san marino",
    "repubblica di san marino"
   ],
-  "onMap": false
+  "point": [
+   43.77,
+   12.42
+  ]
  },
  {
   "code": "VCT",
@@ -3237,7 +3178,10 @@
    "saint vincent and the grenadines",
    "saint vincent et les grenadines"
   ],
-  "onMap": false
+  "point": [
+   13.25,
+   -61.2
+  ]
  },
  {
   "code": "LCA",
@@ -3255,7 +3199,10 @@
    "saint lucia",
    "sainte lucie"
   ],
-  "onMap": false
+  "point": [
+   13.88,
+   -60.97
+  ]
  },
  {
   "code": "SLV",
@@ -3275,8 +3222,7 @@
    "salvador",
    "republique du salvador",
    "republica de el salvador"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "WSM",
@@ -3295,7 +3241,10 @@
    "independent state of samoa",
    "malo sa oloto tuto atasi o samoa"
   ],
-  "onMap": false
+  "point": [
+   -13.58,
+   -172.33
+  ]
  },
  {
   "code": "STP",
@@ -3316,7 +3265,10 @@
    "republique democratique de sao tome et principe",
    "republica democratica de sao tome e principe"
   ],
-  "onMap": false
+  "point": [
+   1,
+   7
+  ]
  },
  {
   "code": "SEN",
@@ -3334,8 +3286,7 @@
    "senegal",
    "republic of senegal",
    "republique du senegal"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SRB",
@@ -3356,8 +3307,7 @@
    "republique de serbie",
    "srbija",
    "republika srbija"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SYC",
@@ -3377,7 +3327,10 @@
    "republique des seychelles",
    "repiblik sesel"
   ],
-  "onMap": false
+  "point": [
+   -4.58,
+   55.67
+  ]
  },
  {
   "code": "SLE",
@@ -3395,8 +3348,7 @@
    "sierra leone",
    "republic of sierra leone",
    "republique de sierra leone"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SGP",
@@ -3418,7 +3370,10 @@
    "singapura",
    "republik singapura"
   ],
-  "onMap": false
+  "point": [
+   1.37,
+   103.8
+  ]
  },
  {
   "code": "SVK",
@@ -3438,8 +3393,7 @@
    "slovaquie",
    "republique slovaque",
    "slovenska republika"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SVN",
@@ -3459,8 +3413,7 @@
    "slovenie",
    "republique de slovenie",
    "republika slovenija"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SOM",
@@ -3482,8 +3435,7 @@
    "as sumal",
    "jamhuuriyadda federaalka soomaaliya",
    "jumhuriyyat as sumal al fideraliyya"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SDN",
@@ -3503,8 +3455,7 @@
    "soudan",
    "republique du soudan",
    "jumhuriyat as sudan"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SSD",
@@ -3523,8 +3474,7 @@
    "republic of south sudan",
    "soudan du sud",
    "republique du soudan du sud"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "LKA",
@@ -3543,8 +3493,7 @@
    "democratic socialist republic of sri lanka",
    "republique democratique socialiste du sri lanka",
    "ilankai"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SWE",
@@ -3564,8 +3513,7 @@
    "suede",
    "royaume de suede",
    "konungariket sverige"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CHE",
@@ -3587,8 +3535,7 @@
    "schweiz",
    "svizzera",
    "svizra"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SUR",
@@ -3610,8 +3557,7 @@
    "sarnam",
    "sranangron",
    "republiek suriname"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "SYR",
@@ -3631,8 +3577,7 @@
    "syrie",
    "republique arabe syrienne",
    "al jumhuriyah al arabiyah as suriyah"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TJK",
@@ -3653,8 +3598,7 @@
    "republique du tadjikistan",
    "tocikiston",
    "cumhuriyi tocikiston"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TWN",
@@ -3675,8 +3619,7 @@
    "republic of china",
    "zhonghua minguo",
    "chinese taipei"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TZA",
@@ -3697,8 +3640,7 @@
    "republique unie de tanzanie",
    "tanzania united republic of",
    "jamhuri ya muungano wa tanzania"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TCD",
@@ -3717,8 +3659,7 @@
    "republic of chad",
    "tchad",
    "republique du tchad"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "CZE",
@@ -3739,8 +3680,7 @@
    "republique tcheque",
    "ceska republika",
    "cesko"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "THA",
@@ -3762,8 +3702,7 @@
    "prathet",
    "thai",
    "ratcha anachak thai"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TLS",
@@ -3788,8 +3727,7 @@
    "republika demokratika timor leste",
    "timor lorosa e",
    "timor lorosae"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TGO",
@@ -3808,8 +3746,7 @@
    "togolese republic",
    "republique togolaise",
    "togolese"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TON",
@@ -3828,7 +3765,10 @@
    "kingdom of tonga",
    "royaume des tonga"
   ],
-  "onMap": false
+  "point": [
+   -20,
+   -175
+  ]
  },
  {
   "code": "TTO",
@@ -3848,7 +3788,10 @@
    "trinite et tobago",
    "republique de trinite et tobago"
   ],
-  "onMap": true
+  "point": [
+   11,
+   -61
+  ]
  },
  {
   "code": "TUN",
@@ -3869,8 +3812,7 @@
    "republique tunisienne",
    "republic of tunisia",
    "al jumhuriyyah at tunisiyyah"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TKM",
@@ -3886,8 +3828,7 @@
   ],
   "aliases": [
    "turkmenistan"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TUR",
@@ -3908,8 +3849,7 @@
    "republique de turquie",
    "republic of turkey",
    "turkiye cumhuriyeti"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "TUV",
@@ -3926,7 +3866,10 @@
   "aliases": [
    "tuvalu"
   ],
-  "onMap": false
+  "point": [
+   -8,
+   178
+  ]
  },
  {
   "code": "UKR",
@@ -3943,8 +3886,7 @@
   "aliases": [
    "ukraine",
    "ukrayina"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "URY",
@@ -3963,8 +3905,7 @@
    "oriental republic of uruguay",
    "republique orientale de l uruguay",
    "republica oriental del uruguay"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "VUT",
@@ -3983,8 +3924,7 @@
    "republic of vanuatu",
    "republique de vanuatu",
    "ripablik blong vanuatu"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "VEN",
@@ -4004,8 +3944,7 @@
    "republique bolivarienne du venezuela",
    "venezuela bolivarian republic of",
    "republica bolivariana de venezuela"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "VNM",
@@ -4025,8 +3964,7 @@
    "viet nam",
    "republique socialiste du viet nam",
    "cong hoa xa hoi chu nghia viet nam"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "YEM",
@@ -4046,8 +3984,7 @@
    "republique du yemen",
    "yemeni republic",
    "al jumhuriyyah al yamaniyyah"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ZMB",
@@ -4066,8 +4003,7 @@
    "republic of zambia",
    "zambie",
    "republique de zambie"
-  ],
-  "onMap": true
+  ]
  },
  {
   "code": "ZWE",
@@ -4085,7 +4021,6 @@
    "zimbabwe",
    "republic of zimbabwe",
    "republique du zimbabwe"
-  ],
-  "onMap": true
+  ]
  }
 ]
